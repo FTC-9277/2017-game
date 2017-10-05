@@ -16,7 +16,7 @@ public class MainTele extends OpMode {
     public void init() {
         navx = AHRS.getInstance(hardwareMap.deviceInterfaceModule.get("dim"),
                 NAVX_DIM_I2C_PORT,
-                AHRS.DeviceDataType.kProcessedData);
+                AHRS.DeviceDataType.kProcessedData); //can totally be shown in one line
     }
 
     @Override
