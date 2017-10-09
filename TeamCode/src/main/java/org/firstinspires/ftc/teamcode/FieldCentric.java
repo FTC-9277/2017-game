@@ -6,30 +6,28 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-
 /**
  * Created by robotics9277 on 10/4/2017.
  */
-@TeleOp(name = "Main")
-public class MainTele extends OpMode {
+@TeleOp(name = "Field Centric")
+public class FieldCentric extends OpMode {
     private final int NAVX_DIM_I2C_PORT = 0;
     private AHRS navx;
     private boolean navxInitialized;
 
     DcMotor fLeft, fRight, bLeft, bRight, strafe;
     Servo i1,i2;
-    double x, y, z, leftSet, rightSet;
+    double x, y, z, angle, mSet,sSet;
 
     @Override
     public void init() {
-        /*try{
+        try{
             navx = AHRS.getInstance(hardwareMap.deviceInterfaceModule.get("dim"), NAVX_DIM_I2C_PORT, AHRS.DeviceDataType.kProcessedData);
             navxInitialized = true;
         } catch (Exception e){
             telemetry.addData("navX initialization", "failed");
             navxInitialized = false;
-        }*/
+        }
         fLeft = hardwareMap.get(DcMotor.class, "fLeft");
         bLeft = hardwareMap.get(DcMotor.class, "bLeft");
         fRight = hardwareMap.get(DcMotor.class, "fRight");
@@ -46,18 +44,18 @@ public class MainTele extends OpMode {
 
     @Override
     public void loop() {
-        /*if(navxInitialized){
-            telemetry.addData("Yaw", navx.getYaw());
-            telemetry.addData("Roll", navx.getRoll());
-            telemetry.addData("Pitch", navx.getPitch());
-        }*/
-
-
         y = Math.abs(gamepad1.left_stick_y) > 0.1 ? gamepad1.left_stick_y : 0;
         x = Math.abs(gamepad1.left_stick_x) > 0.1 ? gamepad1.left_stick_x : 0;
         z = Math.abs(gamepad1.right_stick_x) > 0.3 ? gamepad1.right_stick_x : 0;
-        rightSet = Math.abs(x-y) > 1 ? 1*((x-y)/Math.abs(x-y)) : x-y;
-        leftSet = Math.abs(y+x) > 1 ? 1*((y+x)/Math.abs(y+x)) : y+x;
+
+        if(navxInitialized){
+            telemetry.addData("Yaw", navx.getYaw());
+            telemetry.addData("Roll", navx.getRoll());
+            telemetry.addData("Pitch", navx.getPitch());
+
+            angle = navx.getYaw();
+
+        }
 
         fRight.setPower(-y - z);
         bRight.setPower(-y - z);
