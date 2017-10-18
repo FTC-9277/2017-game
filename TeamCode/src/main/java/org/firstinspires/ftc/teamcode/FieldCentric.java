@@ -4,6 +4,7 @@ import com.kauailabs.navx.ftc.AHRS;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 /**
@@ -13,11 +14,13 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class FieldCentric extends OpMode {
     private final int NAVX_DIM_I2C_PORT = 0;
     private AHRS navx;
-    private boolean navxInitialized;
+    private boolean navxInitialized, servosInitialized;
 
     DcMotor fLeft, fRight, bLeft, bRight, strafe;
     Servo i1,i2;
     double x, y, z, angle, mSet,sSet;
+
+    int ticks = 0;
 
     @Override
     public void init() {
@@ -34,11 +37,21 @@ public class FieldCentric extends OpMode {
         bRight = hardwareMap.get(DcMotor.class, "bRight");
         strafe = hardwareMap.get(DcMotor.class, "strafe");
 
-        i1 = hardwareMap.get(Servo.class, "intake1");
-        i2 = hardwareMap.get(Servo.class, "intake2");
+        strafe.setDirection(DcMotorSimple.Direction.REVERSE);
+        fRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        bRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        i1.setDirection(Servo.Direction.REVERSE);
-        i2.setDirection(Servo.Direction.FORWARD);
+        try {
+            i1 = hardwareMap.get(Servo.class, "intake1");
+            i2 = hardwareMap.get(Servo.class, "intake2");
+
+            i1.setDirection(Servo.Direction.REVERSE);
+            i2.setDirection(Servo.Direction.FORWARD);
+            servosInitialized = true;
+        } catch(Exception e){
+            telemetry.addData("Servos", "Not Found");
+            servosInitialized = false;
+        }
 
     }
 
@@ -53,26 +66,63 @@ public class FieldCentric extends OpMode {
             telemetry.addData("Roll", navx.getRoll());
             telemetry.addData("Pitch", navx.getPitch());
 
-            angle = navx.getYaw();
+            telemetry.addData("Ticks", ticks);
+            ticks++;
+            telemetry.update();
 
+            angle = Math.toRadians(navx.getYaw());
+            mSet = (y * Math.cos(angle)) - (x * Math.sin(angle))/1.5;
+            sSet = (y * Math.sin(angle)) + (x * Math.cos(angle));
+            telemetry.addData("trig test", Math.cos(180));
         }
 
-        fRight.setPower(-y - z);
-        bRight.setPower(-y - z);
-        fLeft.setPower(y - z);
-        bLeft.setPower(y - z);
-        strafe.setPower(-x);
+        setCapped(mSet - z, mSet + z, sSet);
 
-        if(gamepad1.right_trigger > 0.1){
-            i1.setPosition(0);
-            i2.setPosition(0);
-        } else if(gamepad1.left_trigger > 0.1){
-            i1.setPosition(1);
-            i2.setPosition(1);
+        if(servosInitialized){
+            if(gamepad1.right_trigger > 0.1){
+                i1.setPosition(0);
+                i2.setPosition(0);
+            } else if(gamepad1.left_trigger > 0.1){
+                i1.setPosition(1);
+                i2.setPosition(1);
+            }
+            else{
+                i1.setPosition(0.5);
+                i2.setPosition(0.5);
+            }
         }
-        else{
-            i1.setPosition(0.5);
-            i2.setPosition(0.5);
+
+        if(gamepad1.a){
+            navx.zeroYaw();
         }
+    }
+
+    public void set(double leftPow, double rightPow, double strafePow){
+        fLeft.setPower(leftPow);
+        bLeft.setPower(leftPow);
+        fRight.setPower(rightPow);
+        bRight.setPower(rightPow);
+        strafe.setPower(strafePow);
+    }
+
+    private void setCapped(double leftPower, double rightPower, double strafePower) {
+        double max = maxDouble(leftPower, rightPower, strafePower);
+
+        if (max < 1) {
+            set(leftPower, rightPower, strafePower);
+            return;
+        }
+
+        set(leftPower / max, rightPower / max, strafePower / max);
+    }
+
+    public static double maxDouble(double... nums) {
+        double currMax = Math.abs(nums[0]);
+
+        for (double i : nums) {
+            currMax = Math.abs(i) > currMax ? Math.abs(i) : currMax;
+        }
+
+        return currMax;
     }
 }

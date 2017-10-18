@@ -15,7 +15,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class MainTele extends OpMode {
     private final int NAVX_DIM_I2C_PORT = 0;
     private AHRS navx;
-    private boolean navxInitialized;
+    private boolean navxInitialized, servosInitialized;
 
     DcMotor fLeft, fRight, bLeft, bRight, strafe;
     Servo i1,i2;
@@ -36,11 +36,19 @@ public class MainTele extends OpMode {
         bRight = hardwareMap.get(DcMotor.class, "bRight");
         strafe = hardwareMap.get(DcMotor.class, "strafe");
 
-        i1 = hardwareMap.get(Servo.class, "intake1");
-        i2 = hardwareMap.get(Servo.class, "intake2");
+        try {
+            i1 = hardwareMap.get(Servo.class, "intake1");
+            i2 = hardwareMap.get(Servo.class, "intake2");
 
-        i1.setDirection(Servo.Direction.REVERSE);
-        i2.setDirection(Servo.Direction.FORWARD);
+            i1.setDirection(Servo.Direction.REVERSE);
+            i2.setDirection(Servo.Direction.FORWARD);
+            servosInitialized = true;
+        } catch(Exception e){
+            telemetry.addData("Servos", "Not Found");
+            servosInitialized = false;
+        }
+
+
 
     }
 
@@ -53,7 +61,7 @@ public class MainTele extends OpMode {
         }*/
 
 
-        y = Math.abs(gamepad1.left_stick_y) > 0.1 ? gamepad1.left_stick_y : 0;
+        y = Math.abs(gamepad1.left_stick_y) > 0.1 ? gamepad1.left_stick_y/1.5 : 0;
         x = Math.abs(gamepad1.left_stick_x) > 0.1 ? gamepad1.left_stick_x : 0;
         z = Math.abs(gamepad1.right_stick_x) > 0.3 ? gamepad1.right_stick_x : 0;
         rightSet = Math.abs(x-y) > 1 ? 1*((x-y)/Math.abs(x-y)) : x-y;
@@ -65,16 +73,38 @@ public class MainTele extends OpMode {
         bLeft.setPower(y - z);
         strafe.setPower(-x);
 
-        if(gamepad1.right_trigger > 0.1){
-            i1.setPosition(0);
-            i2.setPosition(0);
-        } else if(gamepad1.left_trigger > 0.1){
-            i1.setPosition(1);
-            i2.setPosition(1);
+        if(servosInitialized){
+            if(gamepad1.right_trigger > 0.1){
+                i1.setPosition(0);
+                i2.setPosition(0);
+            } else if(gamepad1.left_trigger > 0.1){
+                i1.setPosition(1);
+                i2.setPosition(1);
+            }
+            else{
+                i1.setPosition(0.5);
+                i2.setPosition(0.5);
+            }
         }
-        else{
-            i1.setPosition(0.5);
-            i2.setPosition(0.5);
-        }
+
+        /*if(gamepad1.a){
+            fRight.setPower(0.5);
+            bRight.setPower(0.5);
+            fLeft.setPower(-0.5);
+            bLeft.setPower(-0.5);
+            strafe.setPower(0.75);
+        } else{
+            fRight.setPower(0);
+            bRight.setPower(0);
+            fLeft.setPower(0);
+            bLeft.setPower(0);
+            strafe.setPower(0);
+        }*/
+
+        telemetry.addData("fRight", fRight.getCurrentPosition());
+        telemetry.addData("bRight", bRight.getCurrentPosition());
+        telemetry.addData("fLeft", fLeft.getCurrentPosition());
+        telemetry.addData("bLeft", bLeft.getCurrentPosition());
+        telemetry.addData("Strafe", strafe.getCurrentPosition());
     }
 }
