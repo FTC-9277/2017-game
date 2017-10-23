@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.drm.DrmStore;
+
 import com.kauailabs.navx.ftc.AHRS;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -18,8 +20,8 @@ public class MainTele extends OpMode {
     private boolean navxInitialized, servosInitialized;
 
     DcMotor fLeft, fRight, bLeft, bRight, strafe;
-    Servo i1,i2;
-    double x, y, z, leftSet, rightSet;
+    Servo i1, i2;
+    double x, y, z, yaw, leftSet, rightSet, error, errorScaler;
 
     @Override
     public void init() {
@@ -35,6 +37,10 @@ public class MainTele extends OpMode {
         fRight = hardwareMap.get(DcMotor.class, "fRight");
         bRight = hardwareMap.get(DcMotor.class, "bRight");
         strafe = hardwareMap.get(DcMotor.class, "strafe");
+        yaw = navx.getYaw();
+        errorScaler = 0.01;
+        error = 0 - yaw;
+
 
         try {
             i1 = hardwareMap.get(Servo.class, "intake1");
@@ -43,29 +49,28 @@ public class MainTele extends OpMode {
             i1.setDirection(Servo.Direction.REVERSE);
             i2.setDirection(Servo.Direction.FORWARD);
             servosInitialized = true;
-        } catch(Exception e){
+        } catch (Exception e) {
             telemetry.addData("Servos", "Not Found");
             servosInitialized = false;
         }
-
 
 
     }
 
     @Override
     public void loop() {
-        /*if(navxInitialized){
+        if (navxInitialized) {
             telemetry.addData("Yaw", navx.getYaw());
             telemetry.addData("Roll", navx.getRoll());
             telemetry.addData("Pitch", navx.getPitch());
-        }*/
+        }
 
 
-        y = Math.abs(gamepad1.left_stick_y) > 0.1 ? gamepad1.left_stick_y/1.5 : 0;
+        y = Math.abs(gamepad1.left_stick_y) > 0.1 ? gamepad1.left_stick_y / 1.5 : 0;
         x = Math.abs(gamepad1.left_stick_x) > 0.1 ? gamepad1.left_stick_x : 0;
         z = Math.abs(gamepad1.right_stick_x) > 0.3 ? gamepad1.right_stick_x : 0;
-        rightSet = Math.abs(x-y) > 1 ? 1*((x-y)/Math.abs(x-y)) : x-y;
-        leftSet = Math.abs(y+x) > 1 ? 1*((y+x)/Math.abs(y+x)) : y+x;
+        rightSet = Math.abs(x - y) > 1 ? 1 * ((x - y) / Math.abs(x - y)) : x - y;
+        leftSet = Math.abs(y + x) > 1 ? 1 * ((y + x) / Math.abs(y + x)) : y + x;
 
         fRight.setPower(-y - z);
         bRight.setPower(-y - z);
@@ -73,19 +78,29 @@ public class MainTele extends OpMode {
         bLeft.setPower(y - z);
         strafe.setPower(-x);
 
-        if(servosInitialized){
-            if(gamepad1.right_trigger > 0.1){
+        if (servosInitialized) {
+            if (gamepad1.right_trigger > 0.1) {
                 i1.setPosition(0);
                 i2.setPosition(0);
-            } else if(gamepad1.left_trigger > 0.1){
+            } else if (gamepad1.left_trigger > 0.1) {
                 i1.setPosition(1);
                 i2.setPosition(1);
-            }
-            else{
+            } else {
                 i1.setPosition(0.5);
                 i2.setPosition(0.5);
+
             }
-        }
+            if (yaw < 0) {
+                fRight.setPower(rightSet - error);
+                fLeft.setPower(leftSet + error);
+                bRight.setPower(rightSet - error);
+                bLeft.setPower(leftSet + error);
+            } else {
+                fRight.setPower(rightSet + error);
+                fLeft.setPower(leftSet - error);
+                bRight.setPower(rightSet + error);
+                bLeft.setPower(leftSet - error);
+            }
 
         /*if(gamepad1.a){
             fRight.setPower(0.5);
@@ -101,10 +116,11 @@ public class MainTele extends OpMode {
             strafe.setPower(0);
         }*/
 
-        telemetry.addData("fRight", fRight.getCurrentPosition());
-        telemetry.addData("bRight", bRight.getCurrentPosition());
-        telemetry.addData("fLeft", fLeft.getCurrentPosition());
-        telemetry.addData("bLeft", bLeft.getCurrentPosition());
-        telemetry.addData("Strafe", strafe.getCurrentPosition());
+            telemetry.addData("fRight", fRight.getCurrentPosition());
+            telemetry.addData("bRight", bRight.getCurrentPosition());
+            telemetry.addData("fLeft", fLeft.getCurrentPosition());
+            telemetry.addData("bLeft", bLeft.getCurrentPosition());
+            telemetry.addData("Strafe", strafe.getCurrentPosition());
+        }
     }
 }

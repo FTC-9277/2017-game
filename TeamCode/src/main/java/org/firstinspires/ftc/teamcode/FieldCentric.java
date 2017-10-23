@@ -87,7 +87,7 @@ public class FieldCentric extends OpMode {
             telemetry.update();
         }
 
-        setCapped(mSet - z - (error * errorScalar), mSet + z + (error * errorScalar), sSet);
+        setCapped(mSet - (error * errorScalar), mSet + (error * errorScalar), sSet);
 
         if(servosInitialized){
             if(gamepad1.right_trigger > 0.1){
