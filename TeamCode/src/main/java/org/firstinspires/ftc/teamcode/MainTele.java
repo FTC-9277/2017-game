@@ -21,7 +21,7 @@ public class MainTele extends OpMode {
 
     DcMotor fLeft, fRight, bLeft, bRight, strafe;
     Servo i1, i2;
-    double x, y, z, yaw, leftSet, rightSet, error, errorScaler;
+    double x, y, z, yaw, leftSet, rightSet, error, errorScaler, angle;
 
     @Override
     public void init() {
@@ -38,8 +38,9 @@ public class MainTele extends OpMode {
         bRight = hardwareMap.get(DcMotor.class, "bRight");
         strafe = hardwareMap.get(DcMotor.class, "strafe");
         yaw = navx.getYaw();
+        angle = Math.atan2(gamepad1.right_stick_x, gamepad1. right_stick_y);
         errorScaler = 0.01;
-        error = 0 - yaw;
+        error = angle - yaw;
 
 
         try {
