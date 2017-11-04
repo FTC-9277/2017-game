@@ -11,7 +11,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class LiftTest extends OpMode{
     DcMotor lift1, lift2;
 
-
     @Override
     public void init() {
         lift1 = hardwareMap.get(DcMotor.class, "lift1");

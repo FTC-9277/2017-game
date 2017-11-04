@@ -33,7 +33,7 @@ public class driveTest extends OpMode {
         right.setDirection(DcMotorSimple.Direction.REVERSE, DcMotorSimple.Direction.REVERSE);
         strafe.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        hDrive = new HDrive(left,right,strafe);
+        hDrive = new HDrive(this,left,right,strafe);
     }
 
     @Override

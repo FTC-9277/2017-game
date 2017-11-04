@@ -2,20 +2,30 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 /**
  * Created by robotics9277 on 11/4/2017.
  */
-@TeleOp(name = "Log Test")
+@TeleOp(name = "Null Test")
 public class nullTest extends OpMode{
+    Servo horiz, vert;
+    ColorSensor color;
 
     @Override
     public void init() {
-
+        horiz = hardwareMap.get(Servo.class, "horizontal");
+        vert = hardwareMap.get(Servo.class, "vertical");
+        color = hardwareMap.get(ColorSensor.class, "color");
     }
 
     @Override
     public void loop() {
-
+        telemetry.addData("Horizontal", horiz.getPosition());
+        telemetry.addData("Vertical", vert.getPosition());
+        telemetry.addData("Red", color.red());
+        telemetry.addData("Blue", color.blue());
+        telemetry.update();
     }
 }
