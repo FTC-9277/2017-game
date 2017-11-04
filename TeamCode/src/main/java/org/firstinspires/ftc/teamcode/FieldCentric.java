@@ -122,10 +122,10 @@ public class FieldCentric extends OpMode {
         if (max < 1) {
             set(leftPower, rightPower, strafePower);
             return;
-    }
+        }
 
-    set(leftPower / max, rightPower / max, strafePower / max);
-}
+        set(leftPower / max, rightPower / max, strafePower / max);
+    }
 
     public static double maxDouble(double... nums) {
         double currMax = Math.abs(nums[0]);

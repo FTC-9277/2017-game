@@ -16,7 +16,7 @@ public class MotorGroup {
         motorLog = new Log(opmode);
     }
 
-    public void setReversed(DcMotor.Direction... directions){
+    public void setDirection(DcMotor.Direction... directions){
         if(directions.length == motors.length){
             int curr = 0;
             for(DcMotor current : motors){
