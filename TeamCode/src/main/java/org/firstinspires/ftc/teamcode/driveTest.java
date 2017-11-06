@@ -29,9 +29,9 @@ public class driveTest extends OpMode {
         right = new MotorGroup(this, bRight, fRight);
         strafe = new MotorGroup(this, strafeMotor);
 
-        left.setDirection(DcMotorSimple.Direction.FORWARD, DcMotorSimple.Direction.FORWARD);
-        right.setDirection(DcMotorSimple.Direction.REVERSE, DcMotorSimple.Direction.REVERSE);
-        strafe.setDirection(DcMotorSimple.Direction.REVERSE);
+        left.setDirection(DcMotorSimple.Direction.REVERSE, DcMotorSimple.Direction.REVERSE);
+        right.setDirection(DcMotorSimple.Direction.FORWARD, DcMotorSimple.Direction.FORWARD);
+        strafe.setDirection(DcMotorSimple.Direction.FORWARD);
 
         hDrive = new HDrive(this,left,right,strafe);
     }

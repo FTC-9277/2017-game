@@ -15,15 +15,18 @@ public class nullTest extends OpMode{
 
     @Override
     public void init() {
-        horiz = hardwareMap.get(Servo.class, "horizontal");
-        vert = hardwareMap.get(Servo.class, "vertical");
+        horiz = hardwareMap.servo.get("horizontal");
+        //vert = hardwareMap.get(Servo.class, "vertical");
         color = hardwareMap.get(ColorSensor.class, "color");
     }
 
     @Override
     public void loop() {
         telemetry.addData("Horizontal", horiz.getPosition());
-        telemetry.addData("Vertical", vert.getPosition());
+        horiz.setPosition(0.5);
+        telemetry.addData("Port Num",horiz.getPortNumber());
+        //vert.setPosition(0.5);
+        //telemetry.addData("Vertical", vert.getPosition());
         telemetry.addData("Red", color.red());
         telemetry.addData("Blue", color.blue());
         telemetry.update();

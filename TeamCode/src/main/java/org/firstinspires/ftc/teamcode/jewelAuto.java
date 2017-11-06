@@ -22,7 +22,11 @@ public class jewelAuto extends LinearOpMode {
 
         waitForStart();
 
+        wait(100);
+
         vert.setPosition(0); //TODO: Set
+
+        wait(500);
 
         if(color.red() > redThreshold){
             telemetry.addData("Red", color.red());
@@ -33,5 +37,7 @@ public class jewelAuto extends LinearOpMode {
             telemetry.update();
             horiz.setPosition(0); //TODO: Set
         }
+
+        wait(2000);
     }
 }
