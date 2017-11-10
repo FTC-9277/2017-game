@@ -22,6 +22,8 @@ public class MainTele extends OpMode {
     private AHRS navx;
     private boolean navxInitialized, servosInitialized;
 
+    //Merge Commit
+
     DcMotor fLeft, fRight, bLeft, bRight, strafe, lLift, rLift;
     Servo rt,lt,rb,lb,ll,rl,horizontal,vertical;
     AnalogInput pl,pr;
