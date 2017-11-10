@@ -5,7 +5,10 @@ import android.drm.DrmStore;
 import com.kauailabs.navx.ftc.AHRS;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.AnalogInput;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -19,43 +22,48 @@ public class MainTele extends OpMode {
     private AHRS navx;
     private boolean navxInitialized, servosInitialized;
 
-    DcMotor fLeft, fRight, bLeft, bRight, strafe;
-    Servo i1, i2;
+    DcMotor fLeft, fRight, bLeft, bRight, strafe, lLift, rLift;
+    Servo rt,lt,rb,lb,ll,rl,horizontal,vertical;
+    AnalogInput pl,pr;
+    ColorSensor color;
+
     double x, y, z, yaw, leftSet, rightSet, error, errorScaler, angle;
 
     @Override
     public void init() {
-        /*try{
+        try{
             navx = AHRS.getInstance(hardwareMap.deviceInterfaceModule.get("dim"), NAVX_DIM_I2C_PORT, AHRS.DeviceDataType.kProcessedData);
             navxInitialized = true;
         } catch (Exception e){
             telemetry.addData("navX initialization", "failed");
             navxInitialized = false;
-        }*/
+        }
+
         fLeft = hardwareMap.get(DcMotor.class, "fLeft");
         bLeft = hardwareMap.get(DcMotor.class, "bLeft");
         fRight = hardwareMap.get(DcMotor.class, "fRight");
         bRight = hardwareMap.get(DcMotor.class, "bRight");
         strafe = hardwareMap.get(DcMotor.class, "strafe");
-        yaw = navx.getYaw();
-        angle = Math.atan2(gamepad1.right_stick_x, gamepad1. right_stick_y);
-        errorScaler = 0.01;
-        error = angle - yaw;
+        lLift = hardwareMap.get(DcMotor.class, "lLift");
+        rLift = hardwareMap.get(DcMotor.class, "rLift");
 
+        lLift.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        try {
-            i1 = hardwareMap.get(Servo.class, "intake1");
-            i2 = hardwareMap.get(Servo.class, "intake2");
+        rt = hardwareMap.get(Servo.class, "rt");
+        lt = hardwareMap.get(Servo.class, "lt");
+        rb = hardwareMap.get(Servo.class, "rb");
+        lb = hardwareMap.get(Servo.class, "lb");
+        ll = hardwareMap.get(Servo.class, "ll");
+        rl = hardwareMap.get(Servo.class, "rl");
+        horizontal = hardwareMap.get(Servo.class, "horizontal");
+        vertical = hardwareMap.get(Servo.class,"vertical");
 
-            i1.setDirection(Servo.Direction.REVERSE);
-            i2.setDirection(Servo.Direction.FORWARD);
-            servosInitialized = true;
-        } catch (Exception e) {
-            telemetry.addData("Servos", "Not Found");
-            servosInitialized = false;
-        }
+        lb.setDirection(Servo.Direction.REVERSE);
+        lt.setDirection(Servo.Direction.REVERSE);
 
-
+        pl = hardwareMap.get(AnalogInput.class, "pl");
+        pr = hardwareMap.get(AnalogInput.class, "pr");
+        color = hardwareMap.get(ColorSensor.class, "color");
     }
 
     @Override
@@ -64,64 +72,45 @@ public class MainTele extends OpMode {
             telemetry.addData("Yaw", navx.getYaw());
             telemetry.addData("Roll", navx.getRoll());
             telemetry.addData("Pitch", navx.getPitch());
+            /*telemetry.addData("raw x", navx.getRawGyroX());
+            telemetry.addData("raw y", navx.getRawGyroY());
+            telemetry.addData("raw z", navx.getRawGyroZ());*/
         }
+        telemetry.update();
 
+        /*setServo(gamepad1.a, rt);
+        setServo(gamepad1.b,lt);
+        setServo(gamepad1.x,rb);
+        setServo(gamepad1.y,lb);
+        setServo(gamepad1.dpad_down,ll);
+        setServo(gamepad1.dpad_left, rl);
+        setServo(gamepad1.dpad_right, horizontal);
+        setServo(gamepad1.dpad_up, vertical);
 
-        y = Math.abs(gamepad1.left_stick_y) > 0.1 ? gamepad1.left_stick_y / 1.5 : 0;
-        x = Math.abs(gamepad1.left_stick_x) > 0.1 ? gamepad1.left_stick_x : 0;
-        z = Math.abs(gamepad1.right_stick_x) > 0.3 ? gamepad1.right_stick_x : 0;
-        rightSet = Math.abs(x - y) > 1 ? 1 * ((x - y) / Math.abs(x - y)) : x - y;
-        leftSet = Math.abs(y + x) > 1 ? 1 * ((y + x) / Math.abs(y + x)) : y + x;
+        lLift.setPower(gamepad1.right_stick_y);
+        rLift.setPower(gamepad1.right_stick_y);
 
-        fRight.setPower(-y - z);
-        bRight.setPower(-y - z);
-        fLeft.setPower(y - z);
-        bLeft.setPower(y - z);
-        strafe.setPower(-x);
+        telemetry.addData("fRight", fRight.getCurrentPosition());
+        telemetry.addData("bRight", bRight.getCurrentPosition());
+        telemetry.addData("fLeft", fLeft.getCurrentPosition());
+        telemetry.addData("bLeft", bLeft.getCurrentPosition());
+        telemetry.addData("Strafe", strafe.getCurrentPosition());
 
-        if (servosInitialized) {
-            if (gamepad1.right_trigger > 0.1) {
-                i1.setPosition(0);
-                i2.setPosition(0);
-            } else if (gamepad1.left_trigger > 0.1) {
-                i1.setPosition(1);
-                i2.setPosition(1);
-            } else {
-                i1.setPosition(0.5);
-                i2.setPosition(0.5);
+        telemetry.addData("LP", pl.getVoltage());
+        telemetry.addData("RP", pr.getVoltage());
+        telemetry.addData("Red", color.red());
+        telemetry.addData("Blue", color.blue());*/
+    }
 
-            }
-            if (yaw < 0) {
-                fRight.setPower(rightSet - error);
-                fLeft.setPower(leftSet + error);
-                bRight.setPower(rightSet - error);
-                bLeft.setPower(leftSet + error);
-            } else {
-                fRight.setPower(rightSet + error);
-                fLeft.setPower(leftSet - error);
-                bRight.setPower(rightSet + error);
-                bLeft.setPower(leftSet - error);
-            }
+    public void stop(){
+        navx.close();
+    }
 
-        /*if(gamepad1.a){
-            fRight.setPower(0.5);
-            bRight.setPower(0.5);
-            fLeft.setPower(-0.5);
-            bLeft.setPower(-0.5);
-            strafe.setPower(0.75);
+    public void setServo(boolean input, Servo s){
+        if(input){
+            s.setPosition(1);
         } else{
-            fRight.setPower(0);
-            bRight.setPower(0);
-            fLeft.setPower(0);
-            bLeft.setPower(0);
-            strafe.setPower(0);
-        }*/
-
-            telemetry.addData("fRight", fRight.getCurrentPosition());
-            telemetry.addData("bRight", bRight.getCurrentPosition());
-            telemetry.addData("fLeft", fLeft.getCurrentPosition());
-            telemetry.addData("bLeft", bLeft.getCurrentPosition());
-            telemetry.addData("Strafe", strafe.getCurrentPosition());
+            s.setPosition(0.5);
         }
     }
 }

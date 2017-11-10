@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  */
 @Autonomous(name = "Jewel Auto")
 public class jewelAuto extends LinearOpMode {
-    Servo horiz, vert;
+    Servo horiz, vert, rt,lt;
     ColorSensor color;
     int redThreshold = 0, blueThreshold = 0; //TODO: Set
 
@@ -18,26 +18,46 @@ public class jewelAuto extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         horiz = hardwareMap.get(Servo.class, "horizontal");
         vert = hardwareMap.get(Servo.class, "vertical");
+        rt = hardwareMap.get(Servo.class, "rt");
+        lt = hardwareMap.get(Servo.class, "lt");
         color = hardwareMap.get(ColorSensor.class, "color");
+
+        rt.setPosition(0.5);
+        lt.setPosition(0.5);
+
+        horiz.setPosition(0.7);
 
         waitForStart();
 
-        wait(100);
+        Thread.sleep(100);
 
-        vert.setPosition(0); //TODO: Set
+        telemetry.addData("Stage", 1);
+        telemetry.update();
 
-        wait(500);
+        vert.setPosition(0.7);
 
-        if(color.red() > redThreshold){
+        Thread.sleep(100);
+
+        vert.setPosition(1); //TODO: Set
+
+        Thread.sleep(500);
+
+        telemetry.addData("Stage", 2);
+        telemetry.update();
+
+        if(color.red() > color.blue()){
             telemetry.addData("Red", color.red());
             telemetry.update();
-            horiz.setPosition(0); //TODO: Set
-        } else if(color.blue() > blueThreshold){
+            horiz.setPosition(0.4); //TODO: Set
+        } else if(color.blue() > color.red()){
             telemetry.addData("Blue", color.red());
             telemetry.update();
-            horiz.setPosition(0); //TODO: Set
+            horiz.setPosition(1); //TODO: Set
         }
 
-        wait(2000);
+        telemetry.addData("Stage", 3);
+        telemetry.update();
+
+        Thread.sleep(2000);
     }
 }
