@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.competitionCode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -8,11 +8,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 /**
  * Created by robotics9277 on 11/4/2017.
  */
-@Autonomous(name = "Jewel Auto")
-public class jewelAuto extends LinearOpMode {
+@Autonomous(name = "Red Jewel")
+public class RedJewel extends LinearOpMode {
     Servo horiz, vert, rt,lt;
     ColorSensor color;
-    int redThreshold = 0, blueThreshold = 0;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -46,11 +45,11 @@ public class jewelAuto extends LinearOpMode {
         telemetry.addData("Stage", 2);
         telemetry.update();
 
-        if(color.red() > color.blue()){
+        if(color.red() < color.blue()){
             telemetry.addData("Red", color.red());
             telemetry.update();
             horiz.setPosition(0.5);
-        } else if(color.blue() > color.red()){
+        } else if(color.blue() < color.red()){
             telemetry.addData("Blue", color.red());
             telemetry.update();
             horiz.setPosition(0.8);

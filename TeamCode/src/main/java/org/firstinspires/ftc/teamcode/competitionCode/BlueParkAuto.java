@@ -1,18 +1,21 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.competitionCode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 /**
  * Created by robotics9277 on 11/4/2017.
  */
-@Autonomous(name = "Jewel Auto")
-public class jewelAuto extends LinearOpMode {
+@Autonomous(name = "Blue Parking")
+public class BlueParkAuto extends LinearOpMode {
     Servo horiz, vert, rt,lt;
     ColorSensor color;
-    int redThreshold = 0, blueThreshold = 0;
+    DcMotor strafe;
+    double strafeVal = 0;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -21,6 +24,7 @@ public class jewelAuto extends LinearOpMode {
         rt = hardwareMap.get(Servo.class, "rt");
         lt = hardwareMap.get(Servo.class, "lt");
         color = hardwareMap.get(ColorSensor.class, "color");
+        strafe = hardwareMap.get(DcMotor.class, "strafe");
 
         rt.setPosition(0.5);
         lt.setPosition(0.5);
@@ -59,11 +63,17 @@ public class jewelAuto extends LinearOpMode {
             telemetry.update();
         }
 
-        sleep(5000);
+        horiz.setPosition(0.6);
+        vert.setPosition(0.06);
+
+        sleep(2000);
 
         telemetry.addData("Stage", 3);
         telemetry.update();
 
-        sleep(2000);
+        while(strafe.getCurrentPosition() < strafeVal){
+            strafe.setPower(0.5);
+            telemetry.addData("Strafe", strafe.getCurrentPosition());
+        }
     }
 }
