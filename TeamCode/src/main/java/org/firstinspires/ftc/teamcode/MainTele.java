@@ -36,7 +36,7 @@ public class MainTele extends OpMode {
 
     boolean lockToggle = false, locked = false;
 
-    double x, y, z, yaw, leftSet, rightSet, error, errorScaler, angle, turnToggle;
+    double x, y, z, yaw, leftSet, rightSet, error, errorScaler, angle, turnToggle, horizCurrent, vertCurrent;
 
     @Override
     public void init() {
@@ -83,8 +83,6 @@ public class MainTele extends OpMode {
         right.setDirection(DcMotorSimple.Direction.FORWARD, DcMotorSimple.Direction.FORWARD);
         strafeMotors.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        horizontal.setPosition(0.6);
-        vertical.setPosition(0.06);
         lt.setPosition(0.5);
         rt.setPosition(0.5);
 
@@ -95,13 +93,22 @@ public class MainTele extends OpMode {
 
     @Override
     public void loop() {
-        if(gamepad2.x){
+        horizontal.setPosition(0.6);
+        vertical.setPosition(0.06);
+
+        /*if(gamepad2.x){
             if(!lockToggle){
                 lockToggle = true;
                 locked = !locked;
             }
         } else{
             lockToggle = false;
+        }*/
+
+        if(gamepad2.x){
+            locked = true;
+        } else if(gamepad2.y){
+            locked = false;
         }
 
         rt.setPosition((gamepad2.left_stick_y/2) + 0.5);

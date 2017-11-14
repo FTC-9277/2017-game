@@ -93,7 +93,11 @@ public class HDrive {
 
             if(error > 180){
                 error -= 360;
+            } else if(error < -180){
+                error += 360;
             }
+
+            driveLog.add("error", error);
 
             driveLog.add("rx", rx);
             driveLog.add("ry", ry);
