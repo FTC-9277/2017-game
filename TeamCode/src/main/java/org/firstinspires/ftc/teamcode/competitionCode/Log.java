@@ -22,6 +22,8 @@ public class Log {
         telemetry.addData("", msg);
     }
 
+    public void add(double msg) {telemetry.addData("", msg);}
+
     public void add(String msg){
         telemetry.addData(msg, "");
     }
