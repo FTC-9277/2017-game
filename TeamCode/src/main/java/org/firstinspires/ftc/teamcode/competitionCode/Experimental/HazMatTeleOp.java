@@ -10,6 +10,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public abstract class HazMatTeleOp extends OpMode{
     Controller dController, mController;
+    boolean isStarted, isLooping, isFinished;
 
     public abstract void initHardware();
 
@@ -25,6 +26,10 @@ public abstract class HazMatTeleOp extends OpMode{
     public void init(){
         telemetry.addData("Initializing", "Started");
         telemetry.update();
+
+        isFinished = false;
+        isStarted = false;
+        isLooping = false;
 
         dController = new Controller(gamepad1);
         mController = new Controller(gamepad2);
@@ -43,6 +48,8 @@ public abstract class HazMatTeleOp extends OpMode{
 
         firstLoop();
 
+        isStarted = true;
+
         telemetry.addData("First Loop", "Finished");
         telemetry.update();
     }
@@ -50,6 +57,7 @@ public abstract class HazMatTeleOp extends OpMode{
     @Override
     public void loop(){
         bodyLoop();
+        isLooping = true;
     }
 
     @Override
@@ -57,5 +65,7 @@ public abstract class HazMatTeleOp extends OpMode{
         telemetry.addData("Exit", "Started");
 
         exit();
+
+        isFinished = true;
     }
 }
