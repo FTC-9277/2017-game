@@ -47,14 +47,14 @@ public class HDrive {
         PIDEnabled = enabled;
     }
 
-   /* public void setPID(double kp, double ki, double kd){
+    public void setPID(double kp, double ki, double kd){
         PIDController
-    }*/
+    }
 
-    /*public void resetPID(){
+    public void resetPID(){
         expAngle = gyro.getYaw();
         error = 0;
-    }*/
+    }
 
     private void set(double leftPow, double rightPow, double strafePow){
         left.set(leftPow);
