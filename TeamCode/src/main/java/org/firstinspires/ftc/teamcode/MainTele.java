@@ -116,6 +116,18 @@ public class MainTele extends OpMode {
         rb.setPosition((gamepad2.right_stick_y/2) + 0.5);
         lb.setPosition((gamepad2.right_stick_y/2) + 0.5);
 
+        if(gamepad1.a){
+            rt.setPosition(1);
+            rb.setPosition(1);
+            lt.setPosition(0);
+            lb.setPosition(0);
+        } else if(gamepad1.b){
+            rt.setPosition(0);
+            rb.setPosition(0);
+            lt.setPosition(1);
+            lb.setPosition(1);
+        }
+
         /*setServo(gamepad2.a, gamepad2.b, rt);
         setServo(gamepad2.a, gamepad2.b, lt);
         setServo(gamepad2.a, gamepad2.b, rb);
