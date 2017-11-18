@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.competitionCode.Experimental.Framework;
+package org.firstinspires.ftc.teamcode.Experimental.Framework;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
@@ -54,6 +54,7 @@ public abstract class HazMatTeleOp extends OpMode{
 
     @Override
     public void loop(){
+        telemetry.clear();
         bodyLoop();
         isLooping = true;
     }

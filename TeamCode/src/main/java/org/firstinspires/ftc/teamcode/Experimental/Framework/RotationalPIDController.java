@@ -1,9 +1,7 @@
-package org.firstinspires.ftc.teamcode.competitionCode.Experimental.Framework;
+package org.firstinspires.ftc.teamcode.Experimental.Framework;
 
 import com.kauailabs.navx.ftc.AHRS;
 import com.kauailabs.navx.ftc.navXPIDController;
-
-import static com.kauailabs.navx.ftc.navXPIDController.navXTimestampedDataSource.YAW;
 
 /**
  * Created by Varun on 11/14/2017.
@@ -56,15 +54,15 @@ public class RotationalPIDController extends navXPIDController{
         this.setOutputRange(min,max);
     }
 
-    @Override
+    /*@Override
     public void setPID(double p, double i, double d){
         this.setPID(p,i,d);
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void setContinuous(boolean continuous){
         this.setContinuous(true);
-    }
+    }*/
 
     public boolean updateAvailable(){
         return this.isNewUpdateAvailable(yawPIDResult);

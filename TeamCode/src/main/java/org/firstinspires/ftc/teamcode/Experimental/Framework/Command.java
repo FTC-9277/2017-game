@@ -1,8 +1,8 @@
-package org.firstinspires.ftc.teamcode.competitionCode.Experimental.Framework;
+package org.firstinspires.ftc.teamcode.Experimental.Framework;
 
 import org.firstinspires.ftc.teamcode.competitionCode.Log;
 
-import static org.firstinspires.ftc.teamcode.competitionCode.Experimental.Framework.Utils.*;
+import static org.firstinspires.ftc.teamcode.Experimental.Framework.Utils.*;
 
 /**
  * Created by Varun on 11/16/2017.

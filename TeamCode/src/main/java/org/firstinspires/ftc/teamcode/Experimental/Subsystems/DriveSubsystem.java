@@ -1,13 +1,13 @@
-package org.firstinspires.ftc.teamcode.competitionCode.Experimental.Subsystems;
+package org.firstinspires.ftc.teamcode.Experimental.Subsystems;
 
 import com.kauailabs.navx.ftc.AHRS;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.teamcode.competitionCode.Experimental.Framework.Subsystem;
-import org.firstinspires.ftc.teamcode.competitionCode.Experimental.Framework.RotationalPIDController;
+import org.firstinspires.ftc.teamcode.Experimental.Framework.Subsystem;
+import org.firstinspires.ftc.teamcode.Experimental.Framework.RotationalPIDController;
 import org.firstinspires.ftc.teamcode.competitionCode.Log;
 import org.firstinspires.ftc.teamcode.competitionCode.MotorGroup;
-import org.firstinspires.ftc.teamcode.competitionCode.Experimental.Framework.RotationalPIDController.Orientation;
+import org.firstinspires.ftc.teamcode.Experimental.Framework.RotationalPIDController.Orientation;
 
 import static org.firstinspires.ftc.teamcode.competitionCode.Utils.*;
 
@@ -54,15 +54,21 @@ public class DriveSubsystem extends Subsystem {
 
     public void resetPID(){
         rc.reset();
+        expAngle = gyro.getYaw();
     }
 
     public void setPID(double p, double i, double d){
         rc.setPID(p,i,d);
     }
 
+    public void setPIDTarget(double target){
+        expAngle = target;
+    }
+
     @Override
     public void enable() {
         gyro.zeroYaw();
+        expAngle = gyro.getYaw();
     }
 
     @Override
@@ -100,19 +106,11 @@ public class DriveSubsystem extends Subsystem {
         setCapped(y+z, y-z, x);
     }
 
-    public void fieldCentricDrive(double lx, double ly, double rx, double ry){
+    /*public void fieldCentricDrive(double lx, double ly, double rx, double ry){
         if(gyroEnabled){
             angle = Math.toRadians(gyro.getYaw());
             mSet = (ly * Math.cos(angle)) - (lx * Math.sin(angle))/1.5;
             sSet = (ly * Math.sin(angle)) + (lx * Math.cos(angle));
-
-            if(Math.abs(rx) > 0.1 || Math.abs(ry) > 0.1) {
-                expAngle = 180 - Math.toDegrees(Math.atan2(rx,ry));
-                if(expAngle > 180){
-                    expAngle -= 360;
-                }
-                driveLog.add("Expected changing true");
-            }
 
             rc.setTarget(expAngle);
 
@@ -127,37 +125,23 @@ public class DriveSubsystem extends Subsystem {
         } else{
             driveLog.add("AHRS not enabled, cannot field centric drive");
         }
-    }
+    }*/
 
-    public void fieldCentricTurnDrive(double lx, double ly, double rx, double ry, double lTurn, double rTurn){
+    public void fieldCentricDrive(double lx, double ly, double turn){
         if(gyroEnabled){
             angle = Math.toRadians(gyro.getYaw());
             mSet = (ly * Math.cos(angle)) - (lx * Math.sin(angle))/1.5;
             sSet = (ly * Math.sin(angle)) + (lx * Math.cos(angle));
 
-            if(Math.abs(rx) > 0.1 || Math.abs(ry) > 0.1) {
-                expAngle = 180 - Math.toDegrees(Math.atan2(rx,ry));
-                if(expAngle > 180){
-                    expAngle -= 360;
-                }
-                driveLog.add("Expected changing true");
-            }
-
             rc.setTarget(expAngle);
 
-            if(lTurn > 0.1 || rTurn > 0.1){
-                if(lTurn > rTurn){
-                    turn = -lTurn;
-                } else{
-                    turn = rTurn;
-                }
+            if(turn != 0){
                 rc.reset();
-            } else{
-                turn = 0;
             }
 
             driveLog.add("Expected Angle", expAngle);
             driveLog.add("Current Angle", gyro.getYaw());
+            driveLog.add("PID output", rc.getOutput());
 
             if(PIDEnabled){
                 setCapped(mSet + rc.getOutput() + turn, mSet - rc.getOutput() - turn, sSet);
