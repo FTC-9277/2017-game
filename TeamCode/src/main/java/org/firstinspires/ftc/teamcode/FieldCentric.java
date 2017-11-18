@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.kauailabs.navx.ftc.AHRS;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -11,6 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Created by robotics9277 on 10/4/2017.
  */
 @TeleOp(name = "Field Centric")
+@Disabled
 public class FieldCentric extends OpMode {
     private final int NAVX_DIM_I2C_PORT = 1;
     private AHRS navx;

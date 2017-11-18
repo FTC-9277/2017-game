@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -8,6 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Created by robotics9277 on 11/6/2017.
  */
 @TeleOp(name = "Servo Test")
+@Disabled
 public class ServoTest extends OpMode {
     Servo rt,lt,rb,lb,ll,rl,horizontal,vertical;
 
