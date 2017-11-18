@@ -48,7 +48,7 @@ public class Robot {
         }
 
         if(liftInitialized){
-            lift = new LiftSubsystem();
+            //lift = new LiftSubsystem();
         }
 
         if(intakeInitialized){

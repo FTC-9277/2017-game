@@ -21,7 +21,7 @@ public class DriveSubsystem extends Subsystem {
     private AHRS gyro;
     private RotationalPIDController rc;
     private boolean PIDEnabled = false, gyroEnabled = false;
-    private double angle, mSet, sSet, turn, expAngle;
+    private double angle, mSet, sSet, expAngle, PIDOutput;
 
     public DriveSubsystem(OpMode opmode, MotorGroup left, MotorGroup right, MotorGroup strafe){
         super(opmode);
@@ -133,18 +133,29 @@ public class DriveSubsystem extends Subsystem {
             mSet = (ly * Math.cos(angle)) - (lx * Math.sin(angle))/1.5;
             sSet = (ly * Math.sin(angle)) + (lx * Math.cos(angle));
 
-            rc.setTarget(expAngle);
+            if(rc.getTarget() != expAngle){
+                rc.setTarget(expAngle);
+            }
 
             if(turn != 0){
                 rc.reset();
             }
 
+            driveLog.update();
+
+            if(rc.isNewUpdateAvailable(rc.yawPIDResult)){
+                PIDOutput = rc.getOutput();
+            }
+
             driveLog.add("Expected Angle", expAngle);
             driveLog.add("Current Angle", gyro.getYaw());
-            driveLog.add("PID output", rc.getOutput());
+            driveLog.add("PID output", PIDOutput);
+            driveLog.add("PID On Target", rc.isOnTarget());
+            driveLog.add("Error", rc.getError());
+            driveLog.add("PID Enabled", rc.isEnabled());
 
             if(PIDEnabled){
-                setCapped(mSet + rc.getOutput() + turn, mSet - rc.getOutput() - turn, sSet);
+                setCapped(mSet + PIDOutput + turn, mSet - PIDOutput - turn, sSet);
             } else{
                 setCapped(mSet, mSet, sSet);
             }

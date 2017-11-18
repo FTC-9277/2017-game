@@ -28,7 +28,7 @@ public class RotationalPIDController extends navXPIDController{
         }
     }
 
-    private PIDResult yawPIDResult;
+    public PIDResult yawPIDResult;
 
     public RotationalPIDController(AHRS navx_device, Orientation orientation) {
         super(navx_device, orientation.dataSource);
@@ -39,7 +39,7 @@ public class RotationalPIDController extends navXPIDController{
         this.setTolerance(navXPIDController.ToleranceType.ABSOLUTE, DEFAULT_TOLERANCE_DEGREES);
         this.setPID(DEFAULT_YAW_PID_P, DEFAULT_YAW_PID_I, DEFAULT_YAW_PID_D);
 
-        this.yawPIDResult = new navXPIDController.PIDResult();
+        this.yawPIDResult = new PIDResult();
     }
 
     public void setTarget(double target){
@@ -82,5 +82,9 @@ public class RotationalPIDController extends navXPIDController{
         } else{
             return 0;
         }
+    }
+
+    public double getTarget(){
+        return this.getSetpoint();
     }
 }

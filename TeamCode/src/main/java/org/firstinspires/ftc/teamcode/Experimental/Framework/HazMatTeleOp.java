@@ -54,7 +54,6 @@ public abstract class HazMatTeleOp extends OpMode{
 
     @Override
     public void loop(){
-        telemetry.clear();
         bodyLoop();
         isLooping = true;
     }

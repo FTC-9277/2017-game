@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.miscOpModes;
 
 import com.kauailabs.navx.ftc.AHRS;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -11,9 +11,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 /**
  * Created by robotics9277 on 10/4/2017.
  */
-@TeleOp(name = "Field Centric")
+@TeleOp(name = "Field Centric Test")
 @Disabled
-public class FieldCentric extends OpMode {
+public class FieldCentricTest extends OpMode {
     private final int NAVX_DIM_I2C_PORT = 1;
     private AHRS navx;
     private boolean navxInitialized, servosInitialized;
@@ -26,7 +26,7 @@ public class FieldCentric extends OpMode {
 
     @Override
     public void init() {
-        errorScalar = 0.02;
+        errorScalar = 0.002;
 
         try{
             navx = AHRS.getInstance(hardwareMap.deviceInterfaceModule.get("dim"), NAVX_DIM_I2C_PORT, AHRS.DeviceDataType.kProcessedData);
@@ -41,9 +41,8 @@ public class FieldCentric extends OpMode {
         bRight = hardwareMap.get(DcMotor.class, "bRight");
         strafe = hardwareMap.get(DcMotor.class, "strafe");
 
-        strafe.setDirection(DcMotorSimple.Direction.REVERSE);
-        fRight.setDirection(DcMotorSimple.Direction.REVERSE);
-        bRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        fLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        bLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
         try {
             i1 = hardwareMap.get(Servo.class, "intake1");
@@ -79,7 +78,12 @@ public class FieldCentric extends OpMode {
             sSet = (y * Math.sin(angle)) + (x * Math.cos(angle));
             telemetry.addData("trig test", Math.cos(180));
 
-            if(Math.abs(gamepad1.right_stick_x) > 0.3 && Math.abs(gamepad1.right_stick_y) > 0.3)  expAngle = Math.atan2(gamepad1.right_stick_x, gamepad1.right_stick_y);
+            if(Math.abs(gamepad1.right_stick_x) > 0.3 || Math.abs(gamepad1.right_stick_y) > 0.3){
+                expAngle = 180 - Math.toDegrees(Math.atan2(gamepad1.right_stick_x, gamepad1.right_stick_y));
+                if(expAngle > 180){
+                    expAngle -= 360;
+                }
+            }
 
             error = expAngle - navx.getYaw();
 

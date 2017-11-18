@@ -29,7 +29,7 @@ public class DriveCommand extends Command {
 
     @Override
     public void start() {
-        drive.setPID(0.005,0,0);
+        drive.setPID(0.015,0,0);
     }
 
     @Override

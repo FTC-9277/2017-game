@@ -39,4 +39,10 @@ public class Log {
     public void add(String str, long l){
         telemetry.addData(str, l);
     }
+
+    public void add(String str, boolean b) {telemetry.addData(str, b);}
+
+    public void clear(){telemetry.clear();}
+
+    public void update(){telemetry.update();}
 }
