@@ -1,4 +1,9 @@
-package org.firstinspires.ftc.teamcode.competitionCode.Experimental;
+package org.firstinspires.ftc.teamcode.competitionCode.Experimental.Commands;
+
+import org.firstinspires.ftc.teamcode.competitionCode.Experimental.Subsystems.DriveSubsystem;
+import org.firstinspires.ftc.teamcode.competitionCode.Experimental.Framework.Command;
+import org.firstinspires.ftc.teamcode.competitionCode.Experimental.Framework.Controller;
+import org.firstinspires.ftc.teamcode.competitionCode.Experimental.Framework.HazMatTeleOp;
 
 /**
  * Created by Varun on 11/17/2017.
@@ -13,7 +18,7 @@ public class DriveCommand extends Command {
     public DriveCommand(HazMatTeleOp opmode, DriveSubsystem drive){
         super(opmode, drive);
         this.drive = drive;
-        this.opMode = opmode;
+        this.opmode = opmode;
         this.dController = opmode.dController;
     }
 

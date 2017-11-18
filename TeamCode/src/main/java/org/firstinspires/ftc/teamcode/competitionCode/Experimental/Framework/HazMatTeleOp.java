@@ -1,15 +1,13 @@
-package org.firstinspires.ftc.teamcode.competitionCode.Experimental;
+package org.firstinspires.ftc.teamcode.competitionCode.Experimental.Framework;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 /**
  * Created by Varun on 11/16/2017.
  */
 
 public abstract class HazMatTeleOp extends OpMode{
-    Controller dController, mController;
+    public Controller dController, mController;
     boolean isStarted, isLooping, isFinished;
 
     public abstract void initHardware();
