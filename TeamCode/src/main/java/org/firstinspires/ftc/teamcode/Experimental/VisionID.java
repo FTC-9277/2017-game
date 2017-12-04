@@ -31,6 +31,11 @@ package org.firstinspires.ftc.teamcode.Experimental;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.vuforia.CameraDevice;
+import com.vuforia.Trackable;
+import com.vuforia.Vuforia;
+
+import org.opencv.*;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
@@ -45,6 +50,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
+import org.opencv.core.Mat;
 
 @Autonomous(name="Concept: VuMark Id", group ="Concept")
 public class VisionID extends LinearOpMode {
@@ -60,6 +66,8 @@ public class VisionID extends LinearOpMode {
     VuforiaLocalizer vuforia;
 
     @Override public void runOpMode() {
+
+        Mat mat = new Mat();
 
         /*
          * To start up Vuforia, tell it the view that we wish to use for camera monitor (on the RC phone);
@@ -91,6 +99,7 @@ public class VisionID extends LinearOpMode {
          * for a competition robot, the front camera might be more convenient.
          */
         parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
+        parameters.useExtendedTracking = true;
         this.vuforia = ClassFactory.createVuforiaLocalizer(parameters);
 
         /**
@@ -118,6 +127,7 @@ public class VisionID extends LinearOpMode {
              * UNKNOWN will be returned by {@link RelicRecoveryVuMark#from(VuforiaTrackable)}.
              */
             RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
+
             if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
 
                 /* Found an instance of the template. In the actual game, you will probably
