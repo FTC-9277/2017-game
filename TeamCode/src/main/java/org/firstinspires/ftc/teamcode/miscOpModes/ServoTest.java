@@ -9,7 +9,6 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Created by robotics9277 on 11/6/2017.
  */
 @TeleOp(name = "Servo Test")
-@Disabled
 public class ServoTest extends OpMode {
     Servo rt,lt,rb,lb,ll,rl,horizontal,vertical;
 
@@ -21,8 +20,8 @@ public class ServoTest extends OpMode {
         lb = hardwareMap.get(Servo.class, "lb");
         ll = hardwareMap.get(Servo.class, "ll");
         rl = hardwareMap.get(Servo.class, "rl");
-        horizontal = hardwareMap.get(Servo.class, "horizontal");
-        vertical = hardwareMap.get(Servo.class,"vertical");
+        //horizontal = hardwareMap.get(Servo.class, "horizontal");
+        //vertical = hardwareMap.get(Servo.class,"vertical");
     }
 
     @Override
@@ -42,9 +41,18 @@ public class ServoTest extends OpMode {
         telemetry.addData("Left", ll.getPosition());
         telemetry.addData("Right", rl.getPosition());
 
-        rt.setPosition(0.5);
-        lt.setPosition(0.5);
-        rb.setPosition(0.5);
-        lb.setPosition(0.5);
+        if(gamepad1.x) {
+            rt.setPosition(0.5);
+            lt.setPosition(0.5);
+            rb.setPosition(0.5);
+            lb.setPosition(0.5);
+        }
+        else{
+            rt.setPosition(0);
+            lt.setPosition(0);
+            rb.setPosition(0);
+            lb.setPosition(0);
+        }
+
     }
 }
