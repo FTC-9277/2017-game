@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.competitionCode.MotorGroup;
  * Created by Varun on 11/17/2017.
  */
 
-public class Robot {
+public class HazmatRobot {
     private final int NAVX_DIM_I2C_PORT = 0;
     AHRS ahrs;
     private boolean ahrsInitialized, driveInitialized, liftInitialized, intakeInitialized, jewelInitialized;
@@ -42,7 +42,7 @@ public class Robot {
     IntakeSubsystem intake;
     JewelSubsystem jewel;
 
-    public Robot(OpMode opmode){
+    public HazmatRobot(OpMode opmode){
         RobotLog = new Log(opmode);
 
         getHardware(opmode);

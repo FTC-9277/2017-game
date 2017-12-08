@@ -13,14 +13,14 @@ public class nullTest extends OpMode{
     @Override
     public void init() {
 
-        Log.d("Robot: ", "Null Tele Initialized");
+        Log.d("HazmatRobot: ", "Null Tele Initialized");
     }
 
     @Override
     public void loop() {
         telemetry.addData("Gamepad 1", gamepad1.a);
         if(gamepad1.a){
-            Log.d("Robot: ", "Gamepad 1 'A' pressed");
+            Log.d("HazmatRobot: ", "Gamepad 1 'A' pressed");
         }
     }
 }

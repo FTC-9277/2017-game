@@ -79,7 +79,7 @@ public class DriveSubsystem extends Subsystem {
     @Override
     public void stop(){
         gyro.close();
-        android.util.Log.d("Robot", "Drive Subsystem Stopped");
+        android.util.Log.d("HazmatRobot", "Drive Subsystem Stopped");
     }
 
     private void set(double leftPow, double rightPow, double strafePow){

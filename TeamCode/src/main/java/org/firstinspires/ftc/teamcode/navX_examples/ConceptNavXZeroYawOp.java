@@ -43,7 +43,7 @@ import java.text.DecimalFormat;
  *  navX-Micro Zero Yaw Op
  * <p>
  * Acquires processed data from navX-Micro
- * and displays it in the Robot DriveStation
+ * and displays it in the HazmatRobot DriveStation
  * as telemetry data.  This opmode demonstrates how to "zero"
  * (reset to zero degrees) the yaw.  This causes whatever
  * direction the navX-Model device is currently pointing to

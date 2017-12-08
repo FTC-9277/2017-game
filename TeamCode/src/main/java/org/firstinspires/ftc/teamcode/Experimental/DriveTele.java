@@ -11,12 +11,12 @@ import org.firstinspires.ftc.teamcode.Experimental.Framework.HazMatTeleOp;
  */
 @TeleOp(name = "Drive Test", group = "Experimental")
 public class DriveTele extends HazMatTeleOp {
-    Robot robot;
+    HazmatRobot robot;
     DriveCommand drive;
 
     @Override
     public void initHardware() {
-        robot = new Robot(this);
+        robot = new HazmatRobot(this);
         drive = new DriveCommand(this,robot.drive);
     }
 

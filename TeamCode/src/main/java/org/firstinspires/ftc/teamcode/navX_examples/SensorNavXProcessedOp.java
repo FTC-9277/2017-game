@@ -43,7 +43,7 @@ import java.text.DecimalFormat;
  *  navX-Micro Processed Data Mode Op
  * <p>
  * Acquires processed data from navX-Micro
- * and displays it in the Robot DriveStation
+ * and displays it in the HazmatRobot DriveStation
  * as telemetry data.  This processed data includes
  * Yaw, Pitch, Roll, Compass Heading, Fused (9-axis) Heading,
  * Sensor Status and Timestamp, and World-Frame Linear

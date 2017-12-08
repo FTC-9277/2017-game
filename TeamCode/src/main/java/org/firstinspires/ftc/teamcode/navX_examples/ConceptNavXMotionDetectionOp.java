@@ -43,7 +43,7 @@ import java.text.DecimalFormat;
  *  navX-Micro Processed Data Mode Op
  * <p>
  * Acquires motion-in-progress indicator from navX-Micro
- * and displays it in the Robot DriveStation
+ * and displays it in the HazmatRobot DriveStation
  * as telemetry data.
  */
 @TeleOp(name = "Concept: navX Motion Detection", group = "Concept")
