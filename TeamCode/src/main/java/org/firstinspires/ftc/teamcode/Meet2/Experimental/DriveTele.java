@@ -1,14 +1,15 @@
-package org.firstinspires.ftc.teamcode.Experimental;
+package org.firstinspires.ftc.teamcode.Meet2.Experimental;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Experimental.Commands.DriveCommand;
-import org.firstinspires.ftc.teamcode.Experimental.Framework.Controller;
-import org.firstinspires.ftc.teamcode.Experimental.Framework.HazMatTeleOp;
+import org.firstinspires.ftc.teamcode.Meet2.Experimental.Commands.DriveCommand;
+import org.firstinspires.ftc.teamcode.Meet2.Experimental.Framework.Controller;
+import org.firstinspires.ftc.teamcode.Meet2.Experimental.Framework.HazMatTeleOp;
 
 /**
  * Created by robotics9277 on 11/18/2017.
  */
+@TeleOp(name = "Drive Test", group = "Experimental")
 public class DriveTele extends HazMatTeleOp {
     HazmatRobot robot;
     DriveCommand drive;
@@ -21,7 +22,7 @@ public class DriveTele extends HazMatTeleOp {
 
     @Override
     public void initAction() {
-        dController.setJoystickDeadzone(Controller.DeadzoneType.CIRCULAR, 0.1);
+        dController.setJoystickDeadzone(Controller.DeadzoneType.CIRCULAR, 0.3);
 
         drive.enable();
     }

@@ -1,9 +1,15 @@
 package org.firstinspires.ftc.teamcode.miscOpModes;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.Servo;
+
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 /**
  * Created by robotics9277 on 12/6/2017.
@@ -12,7 +18,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class ServoTest2 extends OpMode {
     Servo ll, rl;
 
+    BNO055IMU imu;
     CRServo rt, lt, rb, lb, il;
+    Orientation angles;
 
     @Override
     public void init() {
@@ -23,6 +31,11 @@ public class ServoTest2 extends OpMode {
         ll = hardwareMap.get(Servo.class, "ll");
         rl = hardwareMap.get(Servo.class, "rl");
         il = hardwareMap.get(CRServo.class, "il");
+
+        imu = hardwareMap.get(BNO055IMU.class,"imu");
+        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+        imu.initialize(parameters);
     }
 
     @Override
@@ -42,6 +55,7 @@ public class ServoTest2 extends OpMode {
             lt.setPower(-0.5);
             rb.setPower(0.5);
             lb.setPower(-0.5);
+            il.setPower(-0.5);
         } else {
             rt.setPower(0);
             lt.setPower(0);
@@ -53,10 +67,10 @@ public class ServoTest2 extends OpMode {
             rl.setPosition(0);
         }
 
-        /*telemetry.addData("rt", rt.getPosition());
-        telemetry.addData("lb", lb.getPosition());
-        telemetry.addData("rb", rb.getPosition());
-        telemetry.addData("lt", lt.getPosition());*/
+        angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        telemetry.addData("First Angle", angles.firstAngle);
+        telemetry.addData("Second Angle", angles.secondAngle);
+        telemetry.addData("Third Angle", angles.thirdAngle);
 
     }
 }

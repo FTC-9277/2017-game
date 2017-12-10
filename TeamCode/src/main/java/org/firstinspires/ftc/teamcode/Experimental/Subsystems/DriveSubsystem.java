@@ -1,8 +1,11 @@
 package org.firstinspires.ftc.teamcode.Experimental.Subsystems;
 
 import com.kauailabs.navx.ftc.AHRS;
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode.Experimental.Framework.HazmatAHRS;
 import org.firstinspires.ftc.teamcode.Experimental.Framework.Subsystem;
 import org.firstinspires.ftc.teamcode.Experimental.Framework.RotationalPIDController;
 import org.firstinspires.ftc.teamcode.competitionCode.Log;
@@ -18,7 +21,9 @@ import static org.firstinspires.ftc.teamcode.competitionCode.Utils.*;
 public class DriveSubsystem extends Subsystem {
     private Log driveLog;
     private MotorGroup left, right, strafe;
+    private Servo ls,rs;
     private AHRS gyro;
+    private BNO055IMU imu;
     private RotationalPIDController rc;
     private boolean PIDEnabled = false, gyroEnabled = false;
     private double angle, mSet, sSet, expAngle, PIDOutput;
@@ -41,6 +46,21 @@ public class DriveSubsystem extends Subsystem {
         this.strafe = strafe;
 
         this.gyro = ahrs;
+        this.rc = new RotationalPIDController(gyro, Orientation.YAW);
+
+        gyroEnabled = true;
+        driveLog = new Log(opmode);
+    }
+
+    public DriveSubsystem(OpMode opmode, MotorGroup left, MotorGroup right, MotorGroup strafe, BNO055IMU imu){
+        super(opmode);
+
+        this.left = left;
+        this.right = right;
+        this.strafe = strafe;
+
+        this.imu = imu;
+        this.gyro = new HazmatAHRS(imu);
         this.rc = new RotationalPIDController(gyro, Orientation.YAW);
 
         gyroEnabled = true;
@@ -143,9 +163,11 @@ public class DriveSubsystem extends Subsystem {
 
             driveLog.update();
 
-            if(rc.isNewUpdateAvailable(rc.yawPIDResult)){
+            /*if(rc.isNewUpdateAvailable(rc.yawPIDResult)){
                 PIDOutput = rc.getOutput();
-            }
+            }*/
+
+            PIDOutput = rc.getOutput();
 
             driveLog.add("Expected Angle", expAngle);
             driveLog.add("Current Angle", gyro.getYaw());
@@ -153,6 +175,7 @@ public class DriveSubsystem extends Subsystem {
             driveLog.add("PID On Target", rc.isOnTarget());
             driveLog.add("Error", rc.getError());
             driveLog.add("PID Enabled", rc.isEnabled());
+            driveLog.add("RC current", rc.getGyroYaw());
 
             if(PIDEnabled){
                 setCapped(mSet + PIDOutput + turn, mSet - PIDOutput - turn, sSet);

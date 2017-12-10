@@ -17,13 +17,15 @@ public class RotationalPIDController extends navXPIDController{
     private final double DEFAULT_YAW_PID_D = 0.0;
     private final boolean DEFAULT_CONTINUOUS = true;
 
+    private AHRS ahrs;
+
     public enum Orientation{
         YAW(navXTimestampedDataSource.YAW),
         PITCH(navXTimestampedDataSource.PITCH),
         ROLL(navXTimestampedDataSource.ROLL);
 
         private navXTimestampedDataSource dataSource;
-        private Orientation(navXTimestampedDataSource dataSource){
+        Orientation(navXTimestampedDataSource dataSource){
             this.dataSource = dataSource;
         }
     }
@@ -32,6 +34,8 @@ public class RotationalPIDController extends navXPIDController{
 
     public RotationalPIDController(AHRS navx_device, Orientation orientation) {
         super(navx_device, orientation.dataSource);
+
+        this.ahrs = navx_device;
 
         this.setSetpoint(DEFAULT_TARGET_ANGLE_DEGREES);
         this.setContinuous(DEFAULT_CONTINUOUS);
@@ -87,4 +91,6 @@ public class RotationalPIDController extends navXPIDController{
     public double getTarget(){
         return this.getSetpoint();
     }
+
+    public double getGyroYaw() {return ahrs.getYaw();}
 }

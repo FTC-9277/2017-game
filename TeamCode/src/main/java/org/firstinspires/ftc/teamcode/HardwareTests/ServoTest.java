@@ -17,18 +17,24 @@ public class ServoTest extends OpMode {
         robot = new HazmatRobot(this);
     }
 
+    public void start(){
+        robot.ls.setPosition(0.5);
+        robot.rs.setPosition(0.5);
+    }
+
     @Override
     public void loop() {
         if(gamepad1.a){
-            robot.horizontal.setPosition(1);
+            robot.ls.setPosition(0.6);
+            robot.rs.setPosition(0.4);
+        } else if(gamepad1.b){
+            robot.ls.setPosition(0.4);
+            robot.rs.setPosition(0.6);
         } else{
-            robot.horizontal.setPosition(0.5);
+            robot.ls.setPosition(0.6);
+            robot.rs.setPosition(0.4);
         }
 
-        if(gamepad1.b){
-            robot.vertical.setPosition(1);
-        } else{
-            robot.vertical.setPosition(0.5);
-        }
+        //to move up, increase left, decrease right
     }
 }

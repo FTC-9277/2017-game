@@ -1,37 +1,19 @@
-package org.firstinspires.ftc.teamcode.Experimental;
+package org.firstinspires.ftc.teamcode.Meet2.Experimental;
 
-import com.kauailabs.navx.ftc.AHRS;
-import com.qualcomm.hardware.adafruit.AdafruitBNO055IMU;
 import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.hardware.kauailabs.NavxMicroNavigationSensor;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
-import com.qualcomm.robotcore.hardware.Gyroscope;
-import com.qualcomm.robotcore.hardware.HardwareDevice;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.I2cAddressableDevice;
-import com.qualcomm.robotcore.hardware.I2cController;
-import com.qualcomm.robotcore.hardware.I2cControllerPortDevice;
-import com.qualcomm.robotcore.hardware.I2cDevice;
-import com.qualcomm.robotcore.hardware.I2cDeviceImpl;
-import com.qualcomm.robotcore.hardware.I2cDeviceSynch;
-import com.qualcomm.robotcore.hardware.I2cDeviceSynchDevice;
-import com.qualcomm.robotcore.hardware.I2cDeviceSynchImplOnSimple;
-import com.qualcomm.robotcore.hardware.IntegratingGyroscope;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.Device;
-import com.qualcomm.robotcore.util.Hardware;
 
-import org.firstinspires.ftc.teamcode.Experimental.Subsystems.DriveSubsystem;
-import org.firstinspires.ftc.teamcode.Experimental.Subsystems.IntakeSubsystem;
-import org.firstinspires.ftc.teamcode.Experimental.Subsystems.JewelSubsystem;
-import org.firstinspires.ftc.teamcode.Experimental.Subsystems.LiftSubsystem;
+import org.firstinspires.ftc.teamcode.Meet2.Experimental.Subsystems.DriveSubsystem;
+import org.firstinspires.ftc.teamcode.Meet2.Experimental.Subsystems.IntakeSubsystem;
+import org.firstinspires.ftc.teamcode.Meet2.Experimental.Subsystems.JewelSubsystem;
+import org.firstinspires.ftc.teamcode.Meet2.Experimental.Subsystems.LiftSubsystem;
 import org.firstinspires.ftc.teamcode.competitionCode.Log;
 import org.firstinspires.ftc.teamcode.competitionCode.MotorGroup;
 
@@ -135,7 +117,7 @@ public class HazmatRobot {
 
             left.setDirection(DcMotorSimple.Direction.REVERSE, DcMotorSimple.Direction.REVERSE);
             right.setDirection(DcMotorSimple.Direction.FORWARD, DcMotorSimple.Direction.FORWARD);
-            strafe.setDirection(DcMotorSimple.Direction.REVERSE, DcMotorSimple.Direction.REVERSE);
+            strafe.setDirection(DcMotorSimple.Direction.FORWARD, DcMotorSimple.Direction.FORWARD);
 
             driveInitialized = true;
         } catch (Exception e){
