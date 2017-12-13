@@ -17,7 +17,7 @@ public class BNO055PIDController implements Runnable{
     BNO055IMU gyro;
     Orientation orientation;
     public boolean PIDEnabled = false, isTurning = false, isMoving = false, close = false;
-    public double kP, currentAngle, expAngle, error, movingScalar, output;
+    public double kP, currentAngle, expAngle, error, movingScalar, output, tolerance;
 
     private Thread t;
 
@@ -37,6 +37,7 @@ public class BNO055PIDController implements Runnable{
         error = 0;
         movingScalar = 0;
         output = 0;
+        tolerance = 0;
 
         t = new Thread(this);
         t.start();
@@ -63,6 +64,8 @@ public class BNO055PIDController implements Runnable{
     public void setTarget(double target){
         expAngle = target;
     }
+
+    public void setTolerance(double tolerance){this.tolerance = tolerance;}
 
     public void resetPID(){
         expAngle = currentAngle;
@@ -97,10 +100,14 @@ public class BNO055PIDController implements Runnable{
                         error += 360;
                     }
 
-                    if(isMoving){
-                        output = error * kP * movingScalar;
+                    if(Math.abs(error) < Math.abs(tolerance)){
+                        output = 0;
                     } else{
-                        output = error * kP;
+                        if(isMoving){
+                            output = error * kP * movingScalar;
+                        } else{
+                            output = error * kP;
+                        }
                     }
                 }
             }

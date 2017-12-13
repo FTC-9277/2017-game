@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.competitionCode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -11,6 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Created by robotics9277 on 11/4/2017.
  */
 @Autonomous(name = "Blue Parking")
+@Disabled
 public class BlueParkAuto extends LinearOpMode {
     Servo horiz, vert, rt,lt;
     ColorSensor color;

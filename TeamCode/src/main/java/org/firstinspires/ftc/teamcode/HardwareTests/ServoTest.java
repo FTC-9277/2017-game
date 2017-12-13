@@ -25,15 +25,23 @@ public class ServoTest extends OpMode {
     @Override
     public void loop() {
         if(gamepad1.a){
-            robot.ls.setPosition(0.6);
-            robot.rs.setPosition(0.4);
+            robot.ls.setPosition(0.7);
+            robot.rs.setPosition(0.3);
         } else if(gamepad1.b){
-            robot.ls.setPosition(0.4);
-            robot.rs.setPosition(0.6);
+            robot.ls.setPosition(0.8);
+            robot.rs.setPosition(0.2);
+        } else if(gamepad1.x){
+            robot.ls.setPosition(0.9);
+            robot.rs.setPosition(0.1);
+        } else if(gamepad1.y){
+            robot.ls.setPosition(1);
+            robot.rs.setPosition(0);
         } else{
             robot.ls.setPosition(0.6);
             robot.rs.setPosition(0.4);
         }
+
+        //upper limit 0.8/0.2
 
         //to move up, increase left, decrease right
     }

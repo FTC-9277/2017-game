@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.HardwareTests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Meet2.Experimental.Framework.Controller;
@@ -9,6 +10,7 @@ import org.firstinspires.ftc.teamcode.Meet2.Experimental.Framework.HazMatTeleOp;
  * Created by robotics9277 on 12/9/2017.
  */
 @TeleOp(name = "Controller Test")
+@Disabled
 public class ControllerTest extends HazMatTeleOp {
     @Override
     public void initHardware() {

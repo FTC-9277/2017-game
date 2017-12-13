@@ -13,7 +13,6 @@ public class DriveCommand extends Command {
     Controller dController;
     DriveSubsystem drive;
     HazMatTeleOp opmode;
-    boolean turnToggle = false;
 
     public DriveCommand(HazMatTeleOp opmode, DriveSubsystem drive){
         super(opmode, drive);
@@ -28,6 +27,7 @@ public class DriveCommand extends Command {
     @Override
     public void start() {
         drive.enablePID(true,0.014, 0.357);
+        drive.setPIDTolerance(2);
     }
 
     @Override
@@ -37,7 +37,25 @@ public class DriveCommand extends Command {
         else if(dController.y()) drive.setPIDTarget(0);
         else if(dController.x()) drive.setPIDTarget(90);
 
+        if(dController.rightTrigger() > 0.3){
+            drive.setStrafeHeight(0.1);
+        } else if(dController.rx() > 0.3){
+            drive.setStrafeHeight(0.11);
+        } else if(dController.leftTrigger() > 0.3){
+            drive.setStrafeHeight(0.2);
+        } else{
+            drive.setStrafeHeight(0.12);
+        }
+
         drive.strafeArcadeDrive(dController.lx(), dController.ly(),dController.rx());
+
+        /*if(dController.dpadDown()){
+            drive.setStrafeHeight(0.1);
+        } else if(dController.dpadRight()){
+            drive.setStrafeHeight(0.11);
+        } else if(dController.dpadUp()){
+            drive.setStrafeHeight(0.12);
+        }*/
     }
 
     @Override

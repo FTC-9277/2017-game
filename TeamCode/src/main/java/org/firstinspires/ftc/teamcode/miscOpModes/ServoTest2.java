@@ -41,7 +41,7 @@ public class ServoTest2 extends OpMode {
     @Override
     public void loop() {
 
-        if(gamepad1.x) {
+        /*if(gamepad1.x) {
             rt.setPower(-0.5);
             lt.setPower(0.5);
             rb.setPower(-0.5);
@@ -65,12 +65,35 @@ public class ServoTest2 extends OpMode {
 
             ll.setPosition(0);
             rl.setPosition(0);
+        }*/
+
+        if(gamepad1.a){
+            rt.setPower(0.5);
+        } else{
+            rt.setPower(0);
         }
 
-        angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        if(gamepad1.b){
+            rb.setPower(0.5);
+        } else{
+            rb.setPower(0);
+        }
+
+        if(gamepad1.x){
+            lt.setPower(0.5);
+        } else{
+            lt.setPower(0);
+        }
+
+        if(gamepad1.y){
+            lb.setPower(0.5);
+        } else{
+            lb.setPower(0);
+        }
+        /*angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         telemetry.addData("First Angle", angles.firstAngle);
         telemetry.addData("Second Angle", angles.secondAngle);
-        telemetry.addData("Third Angle", angles.thirdAngle);
+        telemetry.addData("Third Angle", angles.thirdAngle);*/
 
     }
 }

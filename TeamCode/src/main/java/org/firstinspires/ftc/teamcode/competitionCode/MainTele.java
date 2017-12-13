@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.competitionCode;
 import android.drm.DrmStore;
 
 import com.kauailabs.navx.ftc.AHRS;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.AnalogInput;
@@ -21,6 +22,7 @@ import org.firstinspires.ftc.teamcode.competitionCode.MotorGroup;
  * Created by robotics9277 on 10/4/2017.
  */
 @TeleOp(name = "Main")
+@Disabled
 public class MainTele extends OpMode {
     private final int NAVX_DIM_I2C_PORT = 0;
     private AHRS navx;

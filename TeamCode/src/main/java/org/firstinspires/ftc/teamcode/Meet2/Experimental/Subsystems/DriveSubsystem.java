@@ -24,21 +24,28 @@ public class DriveSubsystem extends Subsystem {
     private boolean PIDEnabled = false, gyroEnabled = false;
     private double PIDoutput;
 
-    public DriveSubsystem(OpMode opmode, MotorGroup left, MotorGroup right, MotorGroup strafe){
+    private final double STRAFE_MAX_HEIGHT = 0.3, STRAFE_MIN_HEIGHT = 0.1;
+
+    public DriveSubsystem(OpMode opmode, MotorGroup left, MotorGroup right, MotorGroup strafe, Servo ls, Servo rs){
         super(opmode);
 
         this.left = left;
         this.right = right;
         this.strafe = strafe;
+        this.ls = ls;
+        this.ls = rs;
+
         driveLog = new Log(opmode);
     }
 
-    public DriveSubsystem(OpMode opmode, MotorGroup left, MotorGroup right, MotorGroup strafe, BNO055IMU imu){
+    public DriveSubsystem(OpMode opmode, MotorGroup left, MotorGroup right, MotorGroup strafe, Servo ls, Servo rs, BNO055IMU imu){
         super(opmode);
 
         this.left = left;
         this.right = right;
         this.strafe = strafe;
+        this.ls = ls;
+        this.rs = rs;
 
         this.imu = imu;
         this.rc = new BNO055PIDController(imu);
@@ -65,6 +72,10 @@ public class DriveSubsystem extends Subsystem {
         rc.setTarget(target);
     }
 
+    public void setPIDTolerance(double tolerance){
+        rc.setTolerance(tolerance);
+    }
+
     @Override
     public void enable() {
 
@@ -80,6 +91,13 @@ public class DriveSubsystem extends Subsystem {
         rc.close();
         imu.close();
         android.util.Log.d("HazmatRobot", "Drive Subsystem Stopped");
+    }
+
+    public void setStrafeHeight(double height){
+        if(height >= STRAFE_MIN_HEIGHT && height <= STRAFE_MAX_HEIGHT){
+            ls.setPosition(0.5 + height);
+            rs.setPosition(0.5 - height);
+        }
     }
 
     private void set(double leftPow, double rightPow, double strafePow){

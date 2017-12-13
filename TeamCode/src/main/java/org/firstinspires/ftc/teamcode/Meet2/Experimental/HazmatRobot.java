@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode.Meet2.Experimental.Framework.CRServoGroup;
 import org.firstinspires.ftc.teamcode.Meet2.Experimental.Subsystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.Meet2.Experimental.Subsystems.IntakeSubsystem;
 import org.firstinspires.ftc.teamcode.Meet2.Experimental.Subsystems.JewelSubsystem;
@@ -28,6 +29,7 @@ public class HazmatRobot {
     private boolean ahrsInitialized, driveInitialized, liftInitialized, intakeInitialized, jewelInitialized;
 
     public MotorGroup left, right, strafe, liftMotors;
+    public CRServoGroup ti, bi;
 
     private DcMotor fLeft, fRight, bLeft, bRight, lStrafe,rStrafe, lLift, rLift;
     public Servo ll,rl,horizontal,vertical, ls, rs;
@@ -49,7 +51,7 @@ public class HazmatRobot {
         getHardware(opmode);
 
         if(driveInitialized && ahrsInitialized){
-            drive = new DriveSubsystem(opmode, left, right , strafe, imu);
+            drive = new DriveSubsystem(opmode, left, right , strafe, ls, rs, imu);
         }
 
         if(liftInitialized){
@@ -57,11 +59,11 @@ public class HazmatRobot {
         }
 
         if(intakeInitialized){
-            intake = new IntakeSubsystem();
+            intake = new IntakeSubsystem(opmode, ti, bi, il);
         }
 
         if(jewelInitialized){
-            jewel = new JewelSubsystem();
+            jewel = new JewelSubsystem(opmode, horizontal, vertical, color, distance);
         }
     }
 
@@ -157,7 +159,9 @@ public class HazmatRobot {
 
             lb.setDirection(CRServo.Direction.REVERSE);
             lt.setDirection(CRServo.Direction.REVERSE);
-            rt.setDirection(CRServo.Direction.REVERSE);
+
+            ti = new CRServoGroup(opmode,rt,lt);
+            bi = new CRServoGroup(opmode,rb,lb);
 
             intakeInitialized = true;
         } catch (Exception e){

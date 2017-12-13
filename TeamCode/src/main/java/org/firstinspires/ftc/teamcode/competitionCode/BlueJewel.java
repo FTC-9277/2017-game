@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.competitionCode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -9,6 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Created by robotics9277 on 11/4/2017.
  */
 @Autonomous(name = "Blue Jewel")
+@Disabled
 public class BlueJewel extends LinearOpMode {
     Servo horiz, vert, rt,lt;
     ColorSensor color;

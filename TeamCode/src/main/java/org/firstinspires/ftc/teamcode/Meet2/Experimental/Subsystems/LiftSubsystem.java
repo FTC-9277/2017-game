@@ -16,7 +16,6 @@ public class LiftSubsystem extends Subsystem {
     Log LiftLog;
     MotorGroup liftMotors;
     Servo ll, rl;
-    AnalogInput pl, pr;
 
     public LiftSubsystem(OpMode opmode, MotorGroup liftMotors, Servo ll, Servo rl){
         super(opmode);
@@ -40,5 +39,19 @@ public class LiftSubsystem extends Subsystem {
     @Override
     public void stop() {
 
+    }
+
+    public void setLock(boolean locked){
+        if(locked){
+            ll.setPosition(0.45); //0.4
+            rl.setPosition(0.35); //0.6
+        } else{
+            ll.setPosition(1);
+            rl.setPosition(0);
+        }
+    }
+
+    public void setLift(double pow){
+        liftMotors.set(pow);
     }
 }
