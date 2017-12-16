@@ -13,6 +13,7 @@ public class IntakeCommand extends Command {
     Controller mController;
     IntakeSubsystem intake;
     HazMatTeleOp opmode;
+    public boolean beltToggle, useBelt;
 
     public IntakeCommand(HazMatTeleOp opmode, IntakeSubsystem intake){
         super(opmode,intake);
@@ -20,6 +21,8 @@ public class IntakeCommand extends Command {
         this.opmode = opmode;
         this.intake = intake;
         this.mController = opmode.mController;
+        this.beltToggle = false;
+        this.useBelt = false;
     }
 
     @Override
@@ -33,11 +36,21 @@ public class IntakeCommand extends Command {
     }
 
     @Override
-    public void loop() {        intake.intakeTop(mController.ly()/2);
+    public void loop() {
+        intake.intakeTop(mController.ly()/2);
         intake.intakeBottom(mController.ry()/2);
 
-        if(mController.ly() > 0){intake.intakeLift(mController.ly()/2); }
-        else if(mController.a()){
+        if(mController.a()){
+            if(!beltToggle){
+                beltToggle = true;
+                useBelt = !useBelt;
+            }
+        } else{
+            beltToggle = false;
+        }
+
+        if(mController.ly() > 0 && useBelt){intake.intakeLift(mController.ly()/2); }
+        else if(mController.b()){
             intake.intakeLift(0.5);
         } else{
             intake.intakeLift(0);

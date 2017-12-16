@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Meet3.Experimental.Framework.HazMatAutonomous;
+import org.firstinspires.ftc.teamcode.Meet3.Experimental.Framework.Utils;
 
 /**
  * Created by robotics9277 on 12/10/2017.
@@ -36,7 +37,7 @@ public class RedJewelAuto extends HazMatAutonomous {
 
         sleep(1000);
 
-        vertical.setPosition(0.75);
+        vertical.setPosition(0.76);
 
         sleep(1000);
 
@@ -52,7 +53,7 @@ public class RedJewelAuto extends HazMatAutonomous {
             telemetry.addData("Jewels", "Not Found");
         }
 
-        sleep(300);
+        sleep(2000);
 
         //horizontal.setPosition(0.625);
 
@@ -60,7 +61,7 @@ public class RedJewelAuto extends HazMatAutonomous {
 
         vertical.setPosition(0.1);
 
-        sleep(500);
+        Utils.sleep(2000);
     }
 
     @Override
