@@ -1,17 +1,17 @@
-package org.firstinspires.ftc.teamcode.Meet2.Experimental;
+package org.firstinspires.ftc.teamcode.Meet3.Experimental.OpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.teamcode.Meet2.Experimental.Framework.HazMatAutonomous;
+import org.firstinspires.ftc.teamcode.Meet3.Experimental.Framework.HazMatAutonomous;
 
 /**
  * Created by robotics9277 on 12/10/2017.
  */
+@Autonomous(name = "Red Jewel Auto")
 public class RedJewelAuto extends HazMatAutonomous {
     Servo horizontal, vertical;
     ColorSensor color;

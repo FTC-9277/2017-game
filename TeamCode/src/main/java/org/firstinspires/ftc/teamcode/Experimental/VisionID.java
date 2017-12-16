@@ -67,7 +67,7 @@ public class VisionID extends LinearOpMode {
 
     @Override public void runOpMode() {
 
-        Mat mat = new Mat();
+        //Mat mat = new Mat();
 
         /*
          * To start up Vuforia, tell it the view that we wish to use for camera monitor (on the RC phone);
@@ -99,7 +99,6 @@ public class VisionID extends LinearOpMode {
          * for a competition robot, the front camera might be more convenient.
          */
         parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
-        parameters.useExtendedTracking = true;
         this.vuforia = ClassFactory.createVuforiaLocalizer(parameters);
 
 

@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.miscOpModes;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.AnalogInput;
@@ -12,6 +13,7 @@ import org.firstinspires.ftc.robotcontroller.external.samples.SensorREVColorDist
  * Created by robotics9277 on 11/18/2017.
  */
 @TeleOp(name = "Sensor Test")
+@Disabled
 public class SensorTest extends OpMode {
     //SensorREVColorDistance color;
     ColorSensor color;

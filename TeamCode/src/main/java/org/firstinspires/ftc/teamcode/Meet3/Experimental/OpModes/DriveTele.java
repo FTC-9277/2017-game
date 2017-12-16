@@ -1,17 +1,16 @@
-package org.firstinspires.ftc.teamcode.Meet2.Experimental;
+package org.firstinspires.ftc.teamcode.Meet3.Experimental.OpModes;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Meet2.Experimental.Commands.DriveCommand;
-import org.firstinspires.ftc.teamcode.Meet2.Experimental.Framework.Controller;
-import org.firstinspires.ftc.teamcode.Meet2.Experimental.Framework.HazMatTeleOp;
+import org.firstinspires.ftc.teamcode.Meet3.Experimental.Commands.DriveCommand;
+import org.firstinspires.ftc.teamcode.Meet3.Experimental.Framework.Controller;
+import org.firstinspires.ftc.teamcode.Meet3.Experimental.Framework.HazMatTeleOp;
+import org.firstinspires.ftc.teamcode.Meet3.Experimental.HazmatRobot;
 
 /**
  * Created by robotics9277 on 11/18/2017.
  */
 @TeleOp(name = "Drive Test", group = "Experimental")
-@Disabled
 public class DriveTele extends HazMatTeleOp {
     HazmatRobot robot;
     DriveCommand drive;

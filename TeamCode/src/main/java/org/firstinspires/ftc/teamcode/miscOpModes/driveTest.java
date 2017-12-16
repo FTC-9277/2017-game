@@ -62,6 +62,7 @@ import java.text.DecimalFormat;
  */
 
 @TeleOp(name = "Concept: navX Drive Straight PID - loop", group = "Concept")
+@Disabled
 public class driveTest extends OpMode {
     MotorGroup left, right;
 

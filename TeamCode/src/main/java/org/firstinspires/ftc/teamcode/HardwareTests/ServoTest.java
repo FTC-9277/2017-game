@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.HardwareTests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -9,6 +10,7 @@ import org.firstinspires.ftc.teamcode.Experimental.HazmatRobot;
  * Created by robotics9277 on 12/7/2017.
  */
 @TeleOp(name = "Servo Hardware Test")
+@Disabled
 public class ServoTest extends OpMode {
     HazmatRobot robot;
 

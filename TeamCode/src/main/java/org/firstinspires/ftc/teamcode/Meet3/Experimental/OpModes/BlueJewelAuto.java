@@ -1,18 +1,18 @@
-package org.firstinspires.ftc.teamcode.Meet2.Experimental;
+package org.firstinspires.ftc.teamcode.Meet3.Experimental.OpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.teamcode.Meet2.Experimental.Framework.HazMatAutonomous;
+import org.firstinspires.ftc.teamcode.Meet3.Experimental.Framework.HazMatAutonomous;
 
 /**
  * Created by robotics9277 on 12/10/2017.
  */
-public class RedJewelAuto extends HazMatAutonomous {
+@Autonomous(name = "Blue Jewel Auto")
+public class BlueJewelAuto extends HazMatAutonomous {
     Servo horizontal, vertical;
     ColorSensor color;
     DistanceSensor distance;
@@ -42,9 +42,9 @@ public class RedJewelAuto extends HazMatAutonomous {
 
         if(distance.getDistance(DistanceUnit.CM) < 10){
             if(color.red() > color.blue()){
-                horizontal.setPosition(horizontal.getPosition() - 0.3);
-            } else if(color.blue() > color.red()){
                 horizontal.setPosition(horizontal.getPosition() + 0.3);
+            } else if(color.blue() > color.red()){
+                horizontal.setPosition(horizontal.getPosition() - 0.3);
             } else{
                 telemetry.addData("Jewel Color"," Not Identified");
             }
@@ -54,7 +54,7 @@ public class RedJewelAuto extends HazMatAutonomous {
 
         sleep(300);
 
-        //horizontal.setPosition(0.625);
+        horizontal.setPosition(0.625);
 
         sleep(500);
 

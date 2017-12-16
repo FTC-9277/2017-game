@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Meet2.Experimental;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -11,7 +12,6 @@ import org.firstinspires.ftc.teamcode.Meet2.Experimental.Framework.HazMatAutonom
 /**
  * Created by robotics9277 on 12/10/2017.
  */
-@Autonomous(name = "BlueJewel")
 public class BlueJewelAuto extends HazMatAutonomous {
     Servo horizontal, vertical;
     ColorSensor color;

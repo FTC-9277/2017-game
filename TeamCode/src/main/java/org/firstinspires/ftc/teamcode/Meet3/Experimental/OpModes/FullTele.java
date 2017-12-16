@@ -1,19 +1,18 @@
-package org.firstinspires.ftc.teamcode.Meet2.Experimental;
+package org.firstinspires.ftc.teamcode.Meet3.Experimental.OpModes;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Meet2.Experimental.Commands.DriveCommand;
-import org.firstinspires.ftc.teamcode.Meet2.Experimental.Commands.IntakeCommand;
-import org.firstinspires.ftc.teamcode.Meet2.Experimental.Commands.LiftCommand;
-import org.firstinspires.ftc.teamcode.Meet2.Experimental.Framework.Controller;
-import org.firstinspires.ftc.teamcode.Meet2.Experimental.Framework.HazMatTeleOp;
+import org.firstinspires.ftc.teamcode.Meet3.Experimental.Commands.DriveCommand;
+import org.firstinspires.ftc.teamcode.Meet3.Experimental.Commands.IntakeCommand;
+import org.firstinspires.ftc.teamcode.Meet3.Experimental.Commands.LiftCommand;
+import org.firstinspires.ftc.teamcode.Meet3.Experimental.Framework.Controller;
+import org.firstinspires.ftc.teamcode.Meet3.Experimental.Framework.HazMatTeleOp;
+import org.firstinspires.ftc.teamcode.Meet3.Experimental.HazmatRobot;
 
 /**
  * Created by robotics9277 on 12/10/2017.
  */
 @TeleOp(name = "Full Tele")
-@Disabled
 public class FullTele extends HazMatTeleOp {
     HazmatRobot robot;
     DriveCommand drive;

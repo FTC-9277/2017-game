@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.HardwareTests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -10,6 +11,7 @@ import org.firstinspires.ftc.teamcode.Experimental.HazmatRobot;
  */
 
 @TeleOp(name = "Motor Test")
+@Disabled
 public class MotorTest extends OpMode{
     HazmatRobot robot;
 

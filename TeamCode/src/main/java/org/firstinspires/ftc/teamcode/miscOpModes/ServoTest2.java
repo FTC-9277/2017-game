@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.miscOpModes;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -15,6 +16,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
  * Created by robotics9277 on 12/6/2017.
  */
 @TeleOp (name = "ServoTest2")
+@Disabled
 public class ServoTest2 extends OpMode {
     Servo ll, rl;
 
