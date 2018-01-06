@@ -15,11 +15,13 @@ public class Utils {
         return currMax;
     }
 
-    public static void sleep(long millis){
+    public static void sleep(long millis) throws InterruptedException{
         try {
-            Thread.currentThread().sleep(millis);
-        } catch (Exception e) {
+            Thread.sleep(millis);
+        } catch (Error e) {
             e.printStackTrace();
+        } catch (Exception ex){
+            ex.printStackTrace();
         }
     }
 }

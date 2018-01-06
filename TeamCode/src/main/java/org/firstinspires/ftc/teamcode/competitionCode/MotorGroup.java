@@ -10,10 +10,12 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class MotorGroup {
     DcMotor[] motors;
     Log motorLog;
+    OpMode opMode;
 
     public MotorGroup(OpMode opmode, DcMotor... motors){
         this.motors = motors;
         motorLog = new Log(opmode);
+        this.opMode = opmode;
     }
 
     public void setDirection(DcMotor.Direction... directions){
@@ -44,11 +46,16 @@ public class MotorGroup {
         return out;
     }
 
-    public void reset(){
+    public void reset() throws InterruptedException{
         set(0);
         for(DcMotor motor : motors){
             while(motor.getCurrentPosition() != 0) motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+            try{
+                motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            } catch(Exception e){
+                e.printStackTrace();
+            }
         }
     }
 }

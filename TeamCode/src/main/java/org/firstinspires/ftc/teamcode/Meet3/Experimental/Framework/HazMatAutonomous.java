@@ -12,12 +12,12 @@ public abstract class HazMatAutonomous extends LinearOpMode {
 
     public abstract void initAction();
 
-    public abstract void body();
+    public abstract void body() throws InterruptedException;
 
-    public abstract void exit();
+    public abstract void exit() throws InterruptedException;
 
     @Override
-    public void runOpMode(){
+    public void runOpMode() throws InterruptedException {
         telemetry.addData("Initializing", "Started");
         telemetry.update();
 

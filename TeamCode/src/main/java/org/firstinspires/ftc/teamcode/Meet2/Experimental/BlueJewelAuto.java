@@ -12,6 +12,7 @@ import org.firstinspires.ftc.teamcode.Meet2.Experimental.Framework.HazMatAutonom
 /**
  * Created by robotics9277 on 12/10/2017.
  */
+@Disabled
 public class BlueJewelAuto extends HazMatAutonomous {
     Servo horizontal, vertical;
     ColorSensor color;

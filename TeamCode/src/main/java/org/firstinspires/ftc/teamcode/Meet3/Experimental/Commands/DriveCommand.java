@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.Meet3.Experimental.Commands;
 
+import android.util.Log;
+
 import org.firstinspires.ftc.teamcode.Meet3.Experimental.Framework.Command;
 import org.firstinspires.ftc.teamcode.Meet3.Experimental.Framework.Controller;
 import org.firstinspires.ftc.teamcode.Meet3.Experimental.Framework.HazMatTeleOp;
@@ -13,6 +15,7 @@ public class DriveCommand extends Command {
     Controller dController;
     DriveSubsystem drive;
     HazMatTeleOp opmode;
+    boolean balancingMode = false;
 
     public DriveCommand(HazMatTeleOp opmode, DriveSubsystem drive){
         super(opmode, drive);
@@ -37,14 +40,22 @@ public class DriveCommand extends Command {
         else if(dController.y()) drive.setPIDTarget(0);
         else if(dController.x()) drive.setPIDTarget(90);
 
+        if(dController.leftBumper()) balancingMode = true;
+        else if(dController.rightBumper()) balancingMode = false;
+
         if(dController.rightTrigger() > 0.3){
             drive.setStrafeHeight(0.1);
+            //Log.d("Robot", "Strafe Height: 0.1");
         } else if(dController.rx() > 0.3){
             drive.setStrafeHeight(0.11);
+            //Log.d("Robot", "Strafe Height: 0.11");
         } else if(dController.leftTrigger() > 0.3){
             drive.setStrafeHeight(0.2);
+            //Log.d("Robot", "Strafe Height: 0.2");
         } else{
-            drive.setStrafeHeight(0.12);
+            if(!balancingMode) drive.setStrafeHeight(0.12);
+            else drive.setStrafeHeight(0.13);
+            //Log.d("Robot", "Strafe Height: 0.12/0.13");
         }
 
         drive.strafeArcadeDrive(dController.lx(), dController.ly(),dController.rx());

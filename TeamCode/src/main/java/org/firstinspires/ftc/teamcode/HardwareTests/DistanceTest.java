@@ -29,22 +29,14 @@ public class DistanceTest extends OpMode {
 
     @Override
     public void init() {
-        distance = hardwareMap.get(LynxI2cColorRangeSensor.class, "frontDist");
         color = hardwareMap.get(DistanceSensor.class, "color");
-        //distance.enableLed(false);
 
         range = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "range");
-
-        //light = hardwareMap.get(I2cDeviceSynch.class, "light");
     }
 
     @Override
     public void loop() {
         telemetry.addData("Range", range.getDistance(DistanceUnit.CM));
-
-        telemetry.addData("Distance", distance.getDistance(DistanceUnit.CM));
-        telemetry.addData("Inches", distance.getDistance(DistanceUnit.INCH));
-        telemetry.addData("mm", distance.getDistance(DistanceUnit.MM));
 
         telemetry.addData("Color Distance", color.getDistance(DistanceUnit.CM));
         telemetry.addData("Color Inches", color.getDistance(DistanceUnit.INCH));

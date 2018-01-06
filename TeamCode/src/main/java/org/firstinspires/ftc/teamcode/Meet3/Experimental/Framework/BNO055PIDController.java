@@ -31,6 +31,7 @@ public class BNO055PIDController implements Runnable{
         output = 0;
         tolerance = 0;
 
+        PIDEnabled = false;
         t = new Thread(this);
         t.start();
     }
@@ -75,7 +76,7 @@ public class BNO055PIDController implements Runnable{
     }
 
     @Override
-    public void run() {
+    public void run(){
         while(!close){
             if(PIDEnabled){
                 currentAngle = gyro.getYaw();
@@ -100,6 +101,12 @@ public class BNO055PIDController implements Runnable{
                             output = error * kP;
                         }
                     }
+                }
+            } else{
+                try {
+                    Utils.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         }
