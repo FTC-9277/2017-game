@@ -2,9 +2,16 @@ package org.firstinspires.ftc.teamcode.HardwareTests;
 
 import android.util.Log;
 
+import com.qualcomm.hardware.lynx.LynxI2cColorRangeSensor;
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
+import com.qualcomm.robotcore.hardware.I2cAddr;
+import com.qualcomm.robotcore.hardware.I2cDevice;
+import com.qualcomm.robotcore.hardware.I2cDeviceImpl;
+import com.qualcomm.robotcore.hardware.I2cDeviceSynch;
+import com.qualcomm.robotcore.hardware.I2cDeviceSynchImpl;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
@@ -13,22 +20,35 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
  */
 @TeleOp(name = "Distance Test")
 public class DistanceTest extends OpMode {
-    DistanceSensor distance, color;
+    DistanceSensor dist, color;
+    LynxI2cColorRangeSensor distance;
+
+    ModernRoboticsI2cRangeSensor range;
+
+    I2cDeviceSynch light;
 
     @Override
     public void init() {
-        distance = hardwareMap.get(DistanceSensor.class, "frontDist");
+        distance = hardwareMap.get(LynxI2cColorRangeSensor.class, "frontDist");
         color = hardwareMap.get(DistanceSensor.class, "color");
+        //distance.enableLed(false);
+
+        range = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "range");
+
+        //light = hardwareMap.get(I2cDeviceSynch.class, "light");
     }
 
     @Override
     public void loop() {
+        telemetry.addData("Range", range.getDistance(DistanceUnit.CM));
+
         telemetry.addData("Distance", distance.getDistance(DistanceUnit.CM));
         telemetry.addData("Inches", distance.getDistance(DistanceUnit.INCH));
         telemetry.addData("mm", distance.getDistance(DistanceUnit.MM));
+
         telemetry.addData("Color Distance", color.getDistance(DistanceUnit.CM));
         telemetry.addData("Color Inches", color.getDistance(DistanceUnit.INCH));
         telemetry.addData("Color mm", color.getDistance(DistanceUnit.MM));
-        Log.d("Robot", "Distance: " + distance.getDistance(DistanceUnit.CM));
+        //Log.d("Robot", "Distance: " + distance.getDistance(DistanceUnit.CM));
     }
 }

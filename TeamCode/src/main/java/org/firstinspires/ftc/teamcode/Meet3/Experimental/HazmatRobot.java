@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Meet3.Experimental;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -31,12 +32,13 @@ public class HazmatRobot {
     public MotorGroup left, right, strafe, liftMotors;
     public CRServoGroup ti, bi;
 
-    private DcMotor fLeft, fRight, bLeft, bRight, lStrafe,rStrafe, lLift, rLift;
+    public DcMotor fLeft, fRight, bLeft, bRight, lStrafe,rStrafe, lLift, rLift;
     public Servo ll,rl,horizontal,vertical, ls, rs;
     public CRServo rt,lt,rb,lb,il;
     public AnalogInput pl,pr;
     public ColorSensor color;
     public DistanceSensor distance;
+    public ModernRoboticsI2cRangeSensor range;
 
     Log RobotLog;
 
@@ -170,6 +172,12 @@ public class HazmatRobot {
         } catch (Exception e){
             RobotLog.add("Jewel initialization failed: " + e.getMessage());
             jewelInitialized = false;
+        }
+
+        try{
+            range = opmode.hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "range");
+        } catch (Exception e){
+            RobotLog.add("Range sensor initialization  failed: " + e.getMessage());
         }
     }
 }

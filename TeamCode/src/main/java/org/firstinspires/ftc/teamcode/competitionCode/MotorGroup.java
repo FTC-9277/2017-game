@@ -48,6 +48,7 @@ public class MotorGroup {
         set(0);
         for(DcMotor motor : motors){
             while(motor.getCurrentPosition() != 0) motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
     }
 }

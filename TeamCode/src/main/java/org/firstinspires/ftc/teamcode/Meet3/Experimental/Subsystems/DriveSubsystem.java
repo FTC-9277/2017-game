@@ -65,6 +65,14 @@ public class DriveSubsystem extends Subsystem {
         PIDEnabled = enabled;
     }
 
+    public void closePID(){
+        rc.resetPID();
+        rc.close();
+        rc.output = 0;
+        rc.error = 0;
+        PIDoutput = 0;
+    }
+
     public void resetPID(){
         rc.resetPID();
     }
@@ -138,10 +146,10 @@ public class DriveSubsystem extends Subsystem {
         setCapped(-y+z+PIDoutput, -y-z-PIDoutput, -x);
 
         driveLog.update();
-        driveLog.add("PID Output", PIDoutput);
+        /*driveLog.add("PID Output", PIDoutput);
         driveLog.add("Current", rc.currentAngle);
         driveLog.add("Expected", rc.expAngle);
         driveLog.add("Turning", rc.isTurning);
-        driveLog.add("Moving", rc.isMoving);
+        driveLog.add("Moving", rc.isMoving);*/
     }
 }

@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.teamcode.Meet3.Experimental.OpModes;
 
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Meet3.Experimental.Commands.DriveCommand;
 import org.firstinspires.ftc.teamcode.Meet3.Experimental.Framework.Controller;
 import org.firstinspires.ftc.teamcode.Meet3.Experimental.Framework.HazMatTeleOp;
@@ -15,10 +17,13 @@ public class DriveTele extends HazMatTeleOp {
     HazmatRobot robot;
     DriveCommand drive;
 
+    ModernRoboticsI2cRangeSensor range;
     @Override
     public void initHardware() {
         robot = new HazmatRobot(this);
         drive = new DriveCommand(this,robot.drive);
+
+        range = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "range");
     }
 
     @Override
@@ -35,7 +40,7 @@ public class DriveTele extends HazMatTeleOp {
 
     @Override
     public void bodyLoop() {
-
+        telemetry.addData("Range", range.getDistance(DistanceUnit.CM));
     }
 
     @Override
