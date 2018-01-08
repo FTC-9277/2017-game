@@ -4,8 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.States.Framework.Log;
+import org.firstinspires.ftc.teamcode.States.Framework.MotorGroup;
 import org.firstinspires.ftc.teamcode.States.Framework.Subsystem;
-import org.firstinspires.ftc.teamcode.competitionCode.MotorGroup;
 
 /**
  * Created by Varun on 11/17/2017.

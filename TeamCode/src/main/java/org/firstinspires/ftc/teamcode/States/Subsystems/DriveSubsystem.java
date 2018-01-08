@@ -6,10 +6,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.States.Framework.BNO055PIDController;
 import org.firstinspires.ftc.teamcode.States.Framework.HazmatBNO055;
 import org.firstinspires.ftc.teamcode.States.Framework.Log;
+import org.firstinspires.ftc.teamcode.States.Framework.MotorGroup;
 import org.firstinspires.ftc.teamcode.States.Framework.Subsystem;
-import org.firstinspires.ftc.teamcode.competitionCode.MotorGroup;
 
-import static org.firstinspires.ftc.teamcode.competitionCode.Utils.maxDouble;
+import static org.firstinspires.ftc.teamcode.States.Framework.Utils.maxDouble;
 
 /**
  * Created by Varun on 11/17/2017.

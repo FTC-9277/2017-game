@@ -13,11 +13,11 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.States.Framework.CRServoGroup;
 import org.firstinspires.ftc.teamcode.States.Framework.HazmatBNO055;
 import org.firstinspires.ftc.teamcode.States.Framework.Log;
+import org.firstinspires.ftc.teamcode.States.Framework.MotorGroup;
 import org.firstinspires.ftc.teamcode.States.Subsystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.States.Subsystems.IntakeSubsystem;
 import org.firstinspires.ftc.teamcode.States.Subsystems.JewelSubsystem;
 import org.firstinspires.ftc.teamcode.States.Subsystems.LiftSubsystem;
-import org.firstinspires.ftc.teamcode.competitionCode.MotorGroup;
 
 /**
  * Created by Varun on 11/17/2017.
@@ -38,6 +38,8 @@ public class HazmatRobot {
     public ColorSensor color;
     public DistanceSensor distance;
     public ModernRoboticsI2cRangeSensor range;
+
+    MotorGroup mote;
 
     Log RobotLog;
 
