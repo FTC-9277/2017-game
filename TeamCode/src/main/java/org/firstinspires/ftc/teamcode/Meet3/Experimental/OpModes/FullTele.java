@@ -49,6 +49,13 @@ public class FullTele extends HazMatTeleOp {
     @Override
     public void bodyLoop() {
         robot.vertical.setPosition(0.1);
+
+        if(mController.b()){
+            robot.lt.setPower(0.5);
+            robot.lb.setPower(0.5);
+            robot.rb.setPower(-0.5);
+            robot.rt.setPower(-0.5);
+        }
     }
 
     @Override
