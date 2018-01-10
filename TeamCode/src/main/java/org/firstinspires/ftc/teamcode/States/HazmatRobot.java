@@ -39,8 +39,6 @@ public class HazmatRobot {
     public DistanceSensor distance;
     public ModernRoboticsI2cRangeSensor range;
 
-    MotorGroup mote;
-
     Log RobotLog;
 
     public DriveSubsystem drive;

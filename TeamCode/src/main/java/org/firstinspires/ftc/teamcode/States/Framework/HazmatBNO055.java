@@ -39,4 +39,8 @@ public class HazmatBNO055 {
         imu = null;
         instance = null;
     }
+
+    public double getLatency(){
+        return System.currentTimeMillis() - imu.getAngularOrientation().acquisitionTime;
+    }
 }
