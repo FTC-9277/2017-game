@@ -42,17 +42,17 @@ public class DriveCommand extends Command {
         else if(dController.rightBumper()) balancingMode = false;
 
         if(dController.rightTrigger() > 0.3){
-            drive.setStrafeHeight(0.1);
+            drive.setStrafeHeight(0.07);
             //Log.d("Robot", "Strafe Height: 0.1");
         } else if(dController.rx() > 0.3){
-            drive.setStrafeHeight(0.11);
+            drive.setStrafeHeight(0.08);
             //Log.d("Robot", "Strafe Height: 0.11");
         } else if(dController.leftTrigger() > 0.3){
             drive.setStrafeHeight(0.2);
             //Log.d("Robot", "Strafe Height: 0.2");
         } else{
-            if(!balancingMode) drive.setStrafeHeight(0.12);
-            else drive.setStrafeHeight(0.13);
+            if(!balancingMode) drive.setStrafeHeight(0.09);
+            else drive.setStrafeHeight(0.12);
             //Log.d("Robot", "Strafe Height: 0.12/0.13");
         }
 

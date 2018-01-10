@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.States.Framework;
 
-import static org.firstinspires.ftc.teamcode.States.Framework.Utils.sleep;
-
 /**
  * Created by Varun on 11/16/2017.
  */
@@ -59,13 +57,21 @@ public abstract class Command implements Runnable {
         subsystem.enable();
 
         while(!isStarted() && !cancel){
-            sleep(1);
+            try {
+                Utils.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         start();
 
         while(!isLooping() && !cancel){
-            sleep(1);
+            try {
+                Utils.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         while(!isFinished() && !cancel){

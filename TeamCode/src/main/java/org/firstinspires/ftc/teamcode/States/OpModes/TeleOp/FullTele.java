@@ -56,6 +56,8 @@ public class FullTele extends HazMatTeleOp {
             robot.rb.setPower(-0.5);
             robot.rt.setPower(-0.5);
         }
+
+        //telemetry.addData("Latency",robot.imu.getLatency());
     }
 
     @Override

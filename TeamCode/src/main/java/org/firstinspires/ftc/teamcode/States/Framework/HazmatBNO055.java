@@ -41,6 +41,17 @@ public class HazmatBNO055 {
     }
 
     public double getLatency(){
-        return System.currentTimeMillis() - imu.getAngularOrientation().acquisitionTime;
+        return (System.nanoTime() - imu.getAngularOrientation().acquisitionTime)/1000000;
+    }
+
+    public double getUpdatedYaw(){
+        while((System.nanoTime() - imu.getAngularOrientation().acquisitionTime)/1000000 > 5){
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
     }
 }

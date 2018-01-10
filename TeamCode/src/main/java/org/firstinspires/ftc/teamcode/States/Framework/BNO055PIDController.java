@@ -6,7 +6,7 @@ package org.firstinspires.ftc.teamcode.States.Framework;
 
 public class BNO055PIDController implements Runnable{
     HazmatBNO055 gyro;
-    public boolean PIDEnabled = false, isTurning = false, isMoving = false, close = false;
+    public boolean PIDEnabled = false, isTurning = false, isMoving = false, close = false, wasTurning = false;
     public double kP, currentAngle, expAngle, error, movingScalar, output, tolerance;
 
     private Thread t;
@@ -74,7 +74,15 @@ public class BNO055PIDController implements Runnable{
 
                 if(isTurning){
                     resetPID();
+                    wasTurning = true;
                 } else{
+                    if(wasTurning){
+                        resetPID();
+                        wasTurning = false;
+                        currentAngle = gyro.getUpdatedYaw();
+                        resetPID();
+                    }
+
                     error = currentAngle - expAngle;
 
                     if(error > 180){
