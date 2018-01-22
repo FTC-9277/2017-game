@@ -17,8 +17,8 @@ import org.firstinspires.ftc.teamcode.States.HazmatRobot;
 /**
  * Created by robotics9277 on 12/15/2017.
  */
-@Autonomous(name = "Blue Glyph Auto")
-public class BlueGlyphAuto extends HazMatAutonomous {
+@Autonomous(name = "Blue Range Auto")
+public class BlueRangeAuto extends HazMatAutonomous {
     HazmatRobot robot;
 
     double target;
@@ -27,6 +27,8 @@ public class BlueGlyphAuto extends HazMatAutonomous {
     VuforiaLocalizer vuforia;
     VuforiaTrackables relicTrackables;
     VuforiaTrackable relicTemplate;
+
+    final int lTarget = 0, cTarget = 0, rTarget = 0;
 
     @Override
     public void initHardware() {

@@ -22,8 +22,6 @@ public class DriveTele extends HazMatTeleOp {
     public void initHardware() {
         robot = new HazmatRobot(this);
         drive = new DriveCommand(this,robot.drive);
-
-        range = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "range");
     }
 
     @Override
@@ -40,7 +38,10 @@ public class DriveTele extends HazMatTeleOp {
 
     @Override
     public void bodyLoop() {
-        telemetry.addData("Range", range.getDistance(DistanceUnit.CM));
+        telemetry.addData("lsRange", robot.lsRange.getDistance(DistanceUnit.CM));
+        telemetry.addData("lfRange", robot.lfRange.getDistance(DistanceUnit.CM));
+        telemetry.addData("rsRange", robot.rsRange.getDistance(DistanceUnit.CM));
+        telemetry.addData("rfRange", robot.rfRange.getDistance(DistanceUnit.CM));
     }
 
     @Override

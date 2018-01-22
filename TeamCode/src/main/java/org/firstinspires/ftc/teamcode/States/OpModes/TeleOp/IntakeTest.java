@@ -1,29 +1,46 @@
 package org.firstinspires.ftc.teamcode.States.OpModes.TeleOp;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.CRServo;
+
+import org.firstinspires.ftc.teamcode.States.Commands.IntakeCommand;
+import org.firstinspires.ftc.teamcode.States.Framework.Controller;
+import org.firstinspires.ftc.teamcode.States.Framework.HazMatTeleOp;
+import org.firstinspires.ftc.teamcode.States.HazmatRobot;
 
 /**
  * Created by robotics9277 on 1/6/2018.
  */
 @TeleOp(name="Intake Test")
-public class IntakeTest extends OpMode {
-    CRServo rt,lt,rb,lb;
+public class IntakeTest extends HazMatTeleOp {
+    HazmatRobot robot;
+    IntakeCommand intake;
 
     @Override
-    public void init() {
-        rt = hardwareMap.get(CRServo.class, "rt");
-        lt = hardwareMap.get(CRServo.class, "lt");
-        rb = hardwareMap.get(CRServo.class, "rb");
-        lb = hardwareMap.get(CRServo.class, "lb");
+    public void initHardware() {
+        robot = new HazmatRobot(this);
+        intake = new IntakeCommand(this, robot.intake);
     }
 
     @Override
-    public void loop() {
-        rt.setPower(gamepad1.right_stick_y/2);
-        rb.setPower(gamepad1.right_stick_y/2);
-        lt.setPower(gamepad1.left_stick_y/2);
-        lb.setPower(gamepad1.left_stick_y/2);
+    public void initAction() {
+        mController.setJoystickDeadzone(Controller.DeadzoneType.CIRCULAR, 0.3);
+        mController.setTriggerDeadzone(0.1);
+
+        intake.enable();
+    }
+
+    @Override
+    public void firstLoop() {
+
+    }
+
+    @Override
+    public void bodyLoop() {
+
+    }
+
+    @Override
+    public void exit() {
+
     }
 }

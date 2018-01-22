@@ -12,6 +12,9 @@ import org.firstinspires.ftc.teamcode.States.HazmatRobot;
 public class StrafeWheelTest extends HazMatTeleOp {
     HazmatRobot robot;
 
+    double lHeight = 0, rHeight = 0;
+    boolean aToggle = false, bToggle = false, xToggle = false, yToggle = false;
+
     @Override
     public void initHardware() {
         robot = new HazmatRobot(this);
@@ -30,14 +33,47 @@ public class StrafeWheelTest extends HazMatTeleOp {
     @Override
     public void bodyLoop() {
         if(dController.a()){
-            robot.drive.setStrafeHeight(0.1);
-        } else if(dController.b()){
-            robot.drive.setStrafeHeight(0.11);
-        } else if(dController.x()){
-            robot.drive.setStrafeHeight(0.12);
-        } else if(dController.y()){
-            robot.drive.setStrafeHeight(0.105);
+            if(!aToggle){
+                aToggle = true;
+                rHeight += 0.01;
+            }
+        } else{
+            aToggle = false;
         }
+
+        if(dController.b()){
+            if(!bToggle){
+                bToggle = true;
+                rHeight -= 0.01;
+            }
+        } else{
+            bToggle = false;
+        }
+
+        if(dController.x()){
+            if(!xToggle){
+                xToggle = true;
+                rHeight += 0.001;
+            }
+        } else{
+            xToggle = false;
+        }
+
+        if(dController.y()){
+            if(!yToggle){
+                yToggle = true;
+                rHeight -= 0.001;
+            }
+        } else{
+            yToggle = false;
+        }
+        telemetry.addData("Height", rHeight);
+        /*robot.rs.setPosition(0.5 - rHeight);
+        robot.ls.setPosition(0.5 + lHeight);*/
+
+        robot.drive.setStrafeHeight(rHeight);
+
+        robot.strafe.set(dController.lx());
     }
 
     @Override

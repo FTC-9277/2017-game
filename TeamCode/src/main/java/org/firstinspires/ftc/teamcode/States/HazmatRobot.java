@@ -37,7 +37,7 @@ public class HazmatRobot {
     public AnalogInput pl,pr;
     public ColorSensor color;
     public DistanceSensor distance;
-    public ModernRoboticsI2cRangeSensor range;
+    public ModernRoboticsI2cRangeSensor lsRange, lfRange, rsRange, rfRange;
 
     Log RobotLog;
 
@@ -174,7 +174,10 @@ public class HazmatRobot {
         }
 
         try{
-            range = opmode.hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "range");
+            lsRange = opmode.hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "lsRange");
+            rsRange = opmode.hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "rsRange");
+            lfRange = opmode.hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "lfRange");
+            rfRange = opmode.hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "rfRange");
         } catch (Exception e){
             RobotLog.add("Range sensor initialization  failed: " + e.getMessage());
         }

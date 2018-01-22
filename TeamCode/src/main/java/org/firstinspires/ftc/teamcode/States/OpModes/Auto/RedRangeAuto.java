@@ -17,12 +17,14 @@ import org.firstinspires.ftc.teamcode.States.HazmatRobot;
 /**
  * Created by robotics9277 on 12/15/2017.
  */
-@Autonomous(name = "Blue Glyph Auto")
-public class BlueGlyphAuto extends HazMatAutonomous {
+@Autonomous(name = "Red Range Auto")
+public class RedRangeAuto extends HazMatAutonomous {
     HazmatRobot robot;
 
     double target;
     long current;
+
+    final int lTarget = 135, cTarget = 118, rTarget = 100; //ltarget is right at the seam between 135/65
 
     VuforiaLocalizer vuforia;
     VuforiaTrackables relicTrackables;
@@ -41,7 +43,7 @@ public class BlueGlyphAuto extends HazMatAutonomous {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
 
-        parameters.vuforiaLicenseKey = "Ae1zrnj/////AAAAGav1yQVpZUSKniMroT7r6iABdn4S2dvC3kr8kHPXmGVTUv+TPviY2luSPOvIb3766OLU7oSCOdj3mv92vurqm8ijBYuzI0lnp51aYSsHH3y4GBTw77Kpvav2XNkHJ1TtcUtou0aZH2hw4N5RrYKXXf+ahVWuXvUMJqU3ccVWCMxNA76qQfRTexbnryWrFftMXgM5+1QTR6srigPms0lW86MFJJ9AzwdB2WVbZe6PoEeiEgoOjd1/AAbTCMML2O7vRaM8eXCL1NS8SDZ3a2bJ6jopy/ChNkjMuQboWGn2A29XDcANIM+y28S+o0jfCWg7eMlai5HFdU0IZnPJ/efMbLsnddFyuGQNzihNS2ocx2mZ";
+        parameters.vuforiaLicenseKey = "Ae1zrnj/////AAAAGav1yQVpZUSKniMrozr6iABdn4S2dvC3kr8kHPXmGVTUv+TPviY2luSPOvIb3766OLU7oSCOdj3mv92vurqm8ijBYuzI0lnp51aYSsHH3y4GBTw77Kpvav2XNkHJ1TtcUtou0aZH2hw4N5RrYKXXf+ahVWuXvUMJqU3ccVWCMxNA76qQfRTexbnryWrFftMXgM5+1QTR6srigPms0lW86MFJJ9AzwdB2WVbZe6PoEeiEgoOjd1/AAbTCMML2O7vRaM8eXCL1NS8SDZ3a2bJ6jopy/ChNkjMuQboWGn2A29XDcANIM+y28S+o0jfCWg7eMlai5HFdU0IZnPJ/efMbLsnddFyuGQNzihNS2ocx2mZ";
 
         parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
         this.vuforia = ClassFactory.createVuforiaLocalizer(parameters);
@@ -65,13 +67,13 @@ public class BlueGlyphAuto extends HazMatAutonomous {
 
         if(robot.distance.getDistance(DistanceUnit.CM) < 20){
             if(robot.color.red() > robot.color.blue()){
-                robot.horizontal.setPosition(robot.horizontal.getPosition() + 0.3);
-                Utils.sleep(500);
-                robot.horizontal.setPosition(robot.horizontal.getPosition() - 0.2);
-            } else if(robot.color.blue() > robot.color.red()){
                 robot.horizontal.setPosition(robot.horizontal.getPosition() - 0.3);
                 Utils.sleep(500);
                 robot.horizontal.setPosition(robot.horizontal.getPosition() + 0.2);
+            } else if(robot.color.blue() > robot.color.red()){
+                robot.horizontal.setPosition(robot.horizontal.getPosition() + 0.3);
+                Utils.sleep(500);
+                robot.horizontal.setPosition(robot.horizontal.getPosition() - 0.2);
             } else{
                 telemetry.addData("Jewel Color"," Not Identified");
             }
@@ -92,8 +94,8 @@ public class BlueGlyphAuto extends HazMatAutonomous {
 
         relicTrackables.deactivate();
 
-        while(robot.imu.getYaw() < 88 && opModeIsActive() && !isStopRequested()){
-            robot.drive.strafeArcadeDrive(0,0,-0.3);
+        while(robot.imu.getYaw() > -88 && opModeIsActive() && !isStopRequested()){
+            robot.drive.strafeArcadeDrive(0,0,0.3);
             telemetry.addData("Yaw", robot.imu.getYaw());
             telemetry.addData("Left", robot.left.getPosition());
             telemetry.addData("Right", robot.right.getPosition());
@@ -110,7 +112,7 @@ public class BlueGlyphAuto extends HazMatAutonomous {
 
         Utils.sleep(100);
 
-        while(robot.left.getPosition() < 1300 && robot.right.getPosition() < 1300 && opModeIsActive() && !isStopRequested()){
+        while(robot.left.getPosition() < 1100 && robot.right.getPosition() < 1100 && opModeIsActive() && !isStopRequested()){
             robot.drive.strafeArcadeDrive(0,-0.3,0);
             //robot.fLeft.setPower(0.5);
             //robot.bLeft.setPower(0.5);
@@ -141,14 +143,14 @@ public class BlueGlyphAuto extends HazMatAutonomous {
 
         robot.strafe.reset();
 
-        if(vuMark == RelicRecoveryVuMark.LEFT){
+        if(vuMark == RelicRecoveryVuMark.RIGHT){
             robot.drive.setStrafeHeight(0.1);
             Utils.sleep(1000);
 
             robot.strafe.reset();
 
-            while(robot.strafe.getPosition() < 40  && opModeIsActive() && !isStopRequested()){
-                robot.drive.strafeArcadeDrive(-0.1,0,0);
+            while(robot.strafe.getPosition() > -240  && opModeIsActive() && !isStopRequested()){
+                robot.drive.strafeArcadeDrive(0.1,0,0);
                 Log.d("Robot", "Strafe: "+ + robot.strafe.getPosition());
             }
             robot.drive.strafeArcadeDrive(0,0,0);
@@ -166,8 +168,8 @@ public class BlueGlyphAuto extends HazMatAutonomous {
 
             robot.strafe.reset();
 
-            while(robot.strafe.getPosition() > -200 && opModeIsActive() && !isStopRequested()){
-                robot.drive.strafeArcadeDrive(0.1,0,0);
+            while(robot.strafe.getPosition() < 150 && opModeIsActive() && !isStopRequested()){
+                robot.drive.strafeArcadeDrive(-0.1,0,0);
                 Log.d("Robot", "Strafe: "+ + robot.strafe.getPosition());
             }
             robot.drive.strafeArcadeDrive(0,0,0);
@@ -180,14 +182,14 @@ public class BlueGlyphAuto extends HazMatAutonomous {
             Utils.sleep(250);
             score();
         }
-        else if(vuMark == RelicRecoveryVuMark.RIGHT){
+        else if(vuMark == RelicRecoveryVuMark.LEFT){
             robot.drive.setStrafeHeight(0.1);
             Utils.sleep(1000);
 
             robot.strafe.reset();
 
-            while(robot.strafe.getPosition() > -450 && opModeIsActive() && !isStopRequested()){
-                robot.drive.strafeArcadeDrive(0.1,0,0);
+            while(robot.strafe.getPosition() < 400 && opModeIsActive() && !isStopRequested()){
+                robot.drive.strafeArcadeDrive(-0.1,0,0);
                 Log.d("Robot", "Strafe: "+ + robot.strafe.getPosition());
             }
             robot.drive.strafeArcadeDrive(0,0,0);
@@ -209,9 +211,9 @@ public class BlueGlyphAuto extends HazMatAutonomous {
     }
 
     public void alignForward(){
-        Log.d("Robot", "Range 1: " + robot.lfRange.getDistance(DistanceUnit.CM));
+        Log.d("Robot", "Range 1: " + robot.rfRange.getDistance(DistanceUnit.CM));
 
-        if(robot.lfRange.getDistance(DistanceUnit.CM) > 25){
+        if(robot.rfRange.getDistance(DistanceUnit.CM) > 25){
             target = 18;
         } else{
             target = 14;
@@ -219,13 +221,15 @@ public class BlueGlyphAuto extends HazMatAutonomous {
 
         Log.d("Robot", "Target: " + target);
 
-        while(robot.lfRange.getDistance(DistanceUnit.CM) > target && opModeIsActive() && !isStopRequested()){
+        current = System.currentTimeMillis();
+
+        while(robot.rfRange.getDistance(DistanceUnit.CM) > target && System.currentTimeMillis() - current < 3000  && opModeIsActive() && !isStopRequested()){
             robot.drive.strafeArcadeDrive(0,-0.05,0);
         }
 
         robot.drive.arcadeDrive(0,0);
 
-        Log.d("Robot", "Range 2: " + robot.lfRange.getDistance(DistanceUnit.CM));
+        Log.d("Robot", "Range 2: " + robot.rfRange.getDistance(DistanceUnit.CM));
 
     }
 

@@ -24,4 +24,16 @@ public class Utils {
             ex.printStackTrace();
         }
     }
+
+    public static double getSquaredOutput(double input){
+        double sign = getSign(input);
+        double out = input * input;
+        return out * sign;
+    }
+
+    public static double getSign(double input){
+        if(input == 0) return 0;
+
+        return ((input)/(Math.abs(input)));
+    }
 }

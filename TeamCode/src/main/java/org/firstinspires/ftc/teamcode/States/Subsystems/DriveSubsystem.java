@@ -24,7 +24,7 @@ public class DriveSubsystem extends Subsystem {
     private boolean PIDEnabled = false, gyroEnabled = false;
     private double PIDoutput;
 
-    private final double STRAFE_MAX_HEIGHT = 0.3, STRAFE_MIN_HEIGHT = -0.1;
+    private final double STRAFE_MAX_HEIGHT = 0.5, STRAFE_MIN_HEIGHT = -0.5;
 
     public DriveSubsystem(OpMode opmode, MotorGroup left, MotorGroup right, MotorGroup strafe, Servo ls, Servo rs){
         super(opmode);
@@ -33,7 +33,7 @@ public class DriveSubsystem extends Subsystem {
         this.right = right;
         this.strafe = strafe;
         this.ls = ls;
-        this.ls = rs;
+        this.rs = rs;
 
         driveLog = new Log(opmode);
     }
@@ -103,8 +103,8 @@ public class DriveSubsystem extends Subsystem {
 
     public void setStrafeHeight(double height){
         if(height >= STRAFE_MIN_HEIGHT && height <= STRAFE_MAX_HEIGHT){
-            ls.setPosition(0.5 + height);
             rs.setPosition(0.5 - height);
+            ls.setPosition(0.5 + height);
         }
     }
 

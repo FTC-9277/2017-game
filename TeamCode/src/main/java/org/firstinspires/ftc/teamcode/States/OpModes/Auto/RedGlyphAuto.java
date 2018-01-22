@@ -209,9 +209,9 @@ public class RedGlyphAuto extends HazMatAutonomous {
     }
 
     public void alignForward(){
-        Log.d("Robot", "Range 1: " + robot.range.getDistance(DistanceUnit.CM));
+        Log.d("Robot", "Range 1: " + robot.rfRange.getDistance(DistanceUnit.CM));
 
-        if(robot.range.getDistance(DistanceUnit.CM) > 25){
+        if(robot.rfRange.getDistance(DistanceUnit.CM) > 25){
             target = 18;
         } else{
             target = 14;
@@ -221,13 +221,13 @@ public class RedGlyphAuto extends HazMatAutonomous {
 
         current = System.currentTimeMillis();
 
-        while(robot.range.getDistance(DistanceUnit.CM) > target && System.currentTimeMillis() - current < 3000  && opModeIsActive() && !isStopRequested()){
+        while(robot.rfRange.getDistance(DistanceUnit.CM) > target && System.currentTimeMillis() - current < 3000  && opModeIsActive() && !isStopRequested()){
             robot.drive.strafeArcadeDrive(0,-0.05,0);
         }
 
         robot.drive.arcadeDrive(0,0);
 
-        Log.d("Robot", "Range 2: " + robot.range.getDistance(DistanceUnit.CM));
+        Log.d("Robot", "Range 2: " + robot.rfRange.getDistance(DistanceUnit.CM));
 
     }
 

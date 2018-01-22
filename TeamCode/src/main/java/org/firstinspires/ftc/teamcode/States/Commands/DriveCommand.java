@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.States.Commands;
 import org.firstinspires.ftc.teamcode.States.Framework.Command;
 import org.firstinspires.ftc.teamcode.States.Framework.Controller;
 import org.firstinspires.ftc.teamcode.States.Framework.HazMatTeleOp;
+import org.firstinspires.ftc.teamcode.States.Framework.Utils;
 import org.firstinspires.ftc.teamcode.States.Subsystems.DriveSubsystem;
 
 /**
@@ -13,7 +14,8 @@ public class DriveCommand extends Command {
     Controller dController;
     DriveSubsystem drive;
     HazMatTeleOp opmode;
-    boolean balancingMode = false;
+    boolean balancingMode = false, slowToggle = false, isSlow = false;
+    double speedModifier;
 
     public DriveCommand(HazMatTeleOp opmode, DriveSubsystem drive){
         super(opmode, drive);
@@ -42,21 +44,36 @@ public class DriveCommand extends Command {
         else if(dController.rightBumper()) balancingMode = false;
 
         if(dController.rightTrigger() > 0.3){
-            drive.setStrafeHeight(0.07);
+            drive.setStrafeHeight(-0.05);
             //Log.d("Robot", "Strafe Height: 0.1");
         } else if(dController.rx() > 0.3){
-            drive.setStrafeHeight(0.08);
+            drive.setStrafeHeight(-0.04);
             //Log.d("Robot", "Strafe Height: 0.11");
         } else if(dController.leftTrigger() > 0.3){
-            drive.setStrafeHeight(0.2);
+            drive.setStrafeHeight(0.05);
             //Log.d("Robot", "Strafe Height: 0.2");
         } else{
-            if(!balancingMode) drive.setStrafeHeight(0.09);
-            else drive.setStrafeHeight(0.12);
+            if(!balancingMode) drive.setStrafeHeight(-0.03);
+            else drive.setStrafeHeight(0);
             //Log.d("Robot", "Strafe Height: 0.12/0.13");
         }
 
-        drive.strafeArcadeDrive(dController.lx(), dController.ly(),dController.rx());
+        if(dController.leftStickPressed()){
+            slowToggle = true;
+        } else{
+            if(slowToggle){
+                slowToggle = false;
+                isSlow = !isSlow;
+            }
+        }
+
+        if(isSlow) speedModifier = 0.5;
+        else speedModifier = 1;
+
+        drive.strafeArcadeDrive(Utils.getSquaredOutput(dController.lx()) * speedModifier, Utils.getSquaredOutput(dController.ly()) * speedModifier,Utils.getSquaredOutput(dController.rx()) * speedModifier);
+        opmode.telemetry.addData("lx Squared", Utils.getSquaredOutput(dController.lx()));
+        opmode.telemetry.addData("ly Squared", Utils.getSquaredOutput(dController.ly()));
+        opmode.telemetry.addData("rx Squared", Utils.getSquaredOutput(dController.rx()));
 
         /*if(dController.dpadDown()){
             drive.setStrafeHeight(0.1);
