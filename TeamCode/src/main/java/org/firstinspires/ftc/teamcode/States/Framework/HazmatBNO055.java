@@ -32,7 +32,12 @@ public class HazmatBNO055 {
     }
 
     public double getYaw(){
-        return imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
+        try{
+            return imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
+        } catch(Exception e){
+            android.util.Log.d("Robot", "GYRO ERROR: " + e.getMessage());
+        }
+        return 0;
     }
 
     public void close(){

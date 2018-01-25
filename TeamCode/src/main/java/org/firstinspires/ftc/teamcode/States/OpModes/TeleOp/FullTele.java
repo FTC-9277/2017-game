@@ -14,6 +14,9 @@ import org.firstinspires.ftc.teamcode.States.HazmatRobot;
  */
 @TeleOp(name = "Full Tele")
 public class FullTele extends HazMatTeleOp {
+
+    //TODO: Fix Strafe Wheel Slippage, Right: 0.17, Left: 0.1
+
     HazmatRobot robot;
     DriveCommand drive;
     LiftCommand lift;

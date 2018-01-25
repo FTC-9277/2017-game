@@ -84,6 +84,10 @@ public class DriveSubsystem extends Subsystem {
         rc.setTolerance(tolerance);
     }
 
+    public void isMoving(boolean moving){
+        rc.isTurning(moving);
+    }
+
     @Override
     public void enable() {
 

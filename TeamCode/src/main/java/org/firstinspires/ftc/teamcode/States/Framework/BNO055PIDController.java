@@ -63,6 +63,7 @@ public class BNO055PIDController implements Runnable{
 
     public void close(){
         gyro.close();
+        PIDEnabled = false;
         close = true;
     }
 

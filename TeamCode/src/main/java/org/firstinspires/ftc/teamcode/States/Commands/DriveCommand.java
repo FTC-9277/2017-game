@@ -71,9 +71,6 @@ public class DriveCommand extends Command {
         else speedModifier = 1;
 
         drive.strafeArcadeDrive(Utils.getSquaredOutput(dController.lx()) * speedModifier, Utils.getSquaredOutput(dController.ly()) * speedModifier,Utils.getSquaredOutput(dController.rx()) * speedModifier);
-        opmode.telemetry.addData("lx Squared", Utils.getSquaredOutput(dController.lx()));
-        opmode.telemetry.addData("ly Squared", Utils.getSquaredOutput(dController.ly()));
-        opmode.telemetry.addData("rx Squared", Utils.getSquaredOutput(dController.rx()));
 
         /*if(dController.dpadDown()){
             drive.setStrafeHeight(0.1);
