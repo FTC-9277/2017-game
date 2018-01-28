@@ -15,6 +15,8 @@ public class HazmatBNO055 {
     private static HazmatBNO055 instance = null;
     private BNO055IMU imu = null;
 
+
+
     private HazmatBNO055(OpMode opMode, String name){
         imu = opMode.hardwareMap.get(BNO055IMU.class, name);
 

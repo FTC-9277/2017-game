@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.States.Commands;
 import org.firstinspires.ftc.teamcode.States.Framework.Command;
 import org.firstinspires.ftc.teamcode.States.Framework.Controller;
 import org.firstinspires.ftc.teamcode.States.Framework.HazMatTeleOp;
+import org.firstinspires.ftc.teamcode.States.Framework.Log;
 import org.firstinspires.ftc.teamcode.States.Framework.Utils;
 import org.firstinspires.ftc.teamcode.States.Subsystems.DriveSubsystem;
 
@@ -42,6 +43,8 @@ public class DriveCommand extends Command {
 
         if(dController.leftBumper()) balancingMode = true;
         else if(dController.rightBumper()) balancingMode = false;
+
+
 
         if(dController.rightTrigger() > 0.3){
             drive.setStrafeHeight(-0.05);

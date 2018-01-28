@@ -80,12 +80,12 @@ public class HazmatRobot {
          * Initialize gyro
          */
         try{
-            imu = HazmatBNO055.getInstance(opmode,"imu");
+                imu = HazmatBNO055.getInstance(opmode,"imu");
 
-            gyroInitialized = true;
-        } catch (Exception e){
-            RobotLog.add("Gyro initialization failed: " + e.getMessage());
-            gyroInitialized = false;
+                gyroInitialized = true;
+            } catch (Exception e){
+                RobotLog.add("Gyro initialization failed: " + e.getMessage());
+                gyroInitialized = false;
         }
 
         /**

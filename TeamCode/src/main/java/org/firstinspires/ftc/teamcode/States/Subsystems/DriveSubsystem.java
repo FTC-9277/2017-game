@@ -105,10 +105,12 @@ public class DriveSubsystem extends Subsystem {
         android.util.Log.d("HazmatRobot", "Drive Subsystem Stopped");
     }
 
+    double offset = 0.07;
+
     public void setStrafeHeight(double height){
         if(height >= STRAFE_MIN_HEIGHT && height <= STRAFE_MAX_HEIGHT){
-            rs.setPosition(0.5 - height);
-            ls.setPosition(0.5 + height);
+            rs.setPosition(0.5 - (height + offset));
+            ls.setPosition(0.5 + (height + offset));
         }
     }
 

@@ -15,20 +15,20 @@ import org.firstinspires.ftc.teamcode.States.Framework.Utils;
 import org.firstinspires.ftc.teamcode.States.HazmatRobot;
 
 /**
- * Created by robotics9277 on 12/15/2017.
+ * Created by Robotics9277 on 1/27/2018.
  */
-@Autonomous(name = "Red Range Auto")
-public class RedRangeAuto extends HazMatAutonomous {
+@Autonomous(name = "Red Range Corner Auto")
+public class RedRangeCornerAuto extends HazMatAutonomous {
+
     HazmatRobot robot;
-
-    double target, range = 0;
-    long current;
-
-    final int lTarget = 133, cTarget = 115, rTarget = 97; //ltarget is right at the seam between 135/65
 
     VuforiaLocalizer vuforia;
     VuforiaTrackables relicTrackables;
     VuforiaTrackable relicTemplate;
+
+    double range = 0, target;
+    long current;
+    final int lTarget = 00, cTarget= 00, rTarget = 65;
 
     @Override
     public void initHardware() {
@@ -37,7 +37,7 @@ public class RedRangeAuto extends HazMatAutonomous {
 
     @Override
     public void initAction() {
-        robot.drive.setStrafeHeight(-0.035);
+        robot.drive.setStrafeHeight(-0.040);
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
@@ -54,33 +54,33 @@ public class RedRangeAuto extends HazMatAutonomous {
 
     @Override
     public void body() throws InterruptedException {
-            relicTrackables.activate();
+        relicTrackables.activate();
 
-            robot.horizontal.setPosition(0.625);
+        robot.horizontal.setPosition(0.625);
 
-            Utils.sleep(200);
+        Utils.sleep(200);
 
-            robot.vertical.setPosition(0.7);
+        robot.vertical.setPosition(0.7);
 
-            Utils.sleep(1000);
+        Utils.sleep(1000);
 
-            if(robot.distance.getDistance(DistanceUnit.CM) < 20){
-                if(robot.color.red() > robot.color.blue()){
-                    robot.horizontal.setPosition(robot.horizontal.getPosition() - 0.3);
-                    Utils.sleep(500);
-                    robot.horizontal.setPosition(robot.horizontal.getPosition() + 0.2);
-                } else if(robot.color.blue() > robot.color.red()){
-                    robot.horizontal.setPosition(robot.horizontal.getPosition() + 0.3);
-                    Utils.sleep(500);
-                    robot.horizontal.setPosition(robot.horizontal.getPosition() - 0.2);
-                } else{
-                    telemetry.addData("Jewel Color"," Not Identified");
-                }
+        if(robot.distance.getDistance(DistanceUnit.CM) < 20){
+            if(robot.color.red() > robot.color.blue()){
+                robot.horizontal.setPosition(robot.horizontal.getPosition() - 0.3);
+                Utils.sleep(500);
+                robot.horizontal.setPosition(robot.horizontal.getPosition() + 0.2);
+            } else if(robot.color.blue() > robot.color.red()){
+                robot.horizontal.setPosition(robot.horizontal.getPosition() + 0.3);
+                Utils.sleep(500);
+                robot.horizontal.setPosition(robot.horizontal.getPosition() - 0.2);
             } else{
-                telemetry.addData("Jewels", "Not Found");
+                telemetry.addData("Jewel Color"," Not Identified");
             }
+        } else{
+            telemetry.addData("Jewels", "Not Found");
+        }
 
-            Utils.sleep(500);
+        Utils.sleep(500);
 
         robot.vertical.setPosition(0.1);
 
@@ -93,7 +93,7 @@ public class RedRangeAuto extends HazMatAutonomous {
 
         relicTrackables.deactivate();
 
-        while(robot.imu.getYaw() > -80 && opModeIsActive() && !isStopRequested()){
+        while(robot.imu.getYaw() > -79 && opModeIsActive() && !isStopRequested()){
             robot.drive.strafeArcadeDrive(0,0,0.3);
             telemetry.addData("Yaw", robot.imu.getYaw());
             telemetry.addData("Left", robot.left.getPosition());
@@ -111,7 +111,7 @@ public class RedRangeAuto extends HazMatAutonomous {
 
         Utils.sleep(100);
 
-        while(robot.left.getPosition() < 1000 && robot.right.getPosition() < 1000 && opModeIsActive() && !isStopRequested()){
+        while(robot.left.getPosition() < 700 && robot.right.getPosition() < 700 && opModeIsActive() && !isStopRequested()){
             robot.drive.strafeArcadeDrive(0,-0.3,0);
 
             telemetry.addData("Left", robot.left.getPosition());
@@ -119,27 +119,6 @@ public class RedRangeAuto extends HazMatAutonomous {
         }
         robot.drive.strafeArcadeDrive(0,0,0);
 
-        Utils.sleep(100);
-
-        current = System.currentTimeMillis();
-
-        robot.drive.setPIDTarget(180);
-        robot.drive.enablePID(true,0.014,0.5); //0.014
-
-        while(System.currentTimeMillis() - current < 4000 && opModeIsActive() && !isStopRequested()){
-            robot.drive.strafeArcadeDrive(0,0,0);
-        }
-        robot.drive.arcadeDrive(0,0);
-
-        //robot.drive.closePID();
-
-        robot.drive.arcadeDrive(0,0);
-
-        Utils.sleep(100);
-
-        robot.strafe.reset();
-
-        robot.drive.isMoving(true);
 
         if(vuMark == RelicRecoveryVuMark.RIGHT){
             robot.drive.setStrafeHeight(-0.05);
@@ -155,73 +134,6 @@ public class RedRangeAuto extends HazMatAutonomous {
             }*/
 
             while(range < rTarget){
-                range = robot.rsRange.getDistance(DistanceUnit.CM);
-                robot.drive.strafeArcadeDrive(-0.1,0,0);
-                //Log.d("Robot", "Strafe: "+ + robot.strafe.getPosition() + " Distance: " + robot.rsRange.getDistance(DistanceUnit.CM));
-            }
-            Log.d("Robot", "Final Distance: " + range);
-            robot.drive.strafeArcadeDrive(0,0,0);
-
-            robot.drive.setStrafeHeight(0.05);
-
-            current = System.currentTimeMillis();
-            while(System.currentTimeMillis() - current < 1000){
-                robot.drive.strafeArcadeDrive(0,0,0);
-            }
-
-            Utils.sleep(250);
-
-            alignForward();
-            Utils.sleep(250);
-            score();
-        } else if(vuMark == RelicRecoveryVuMark.CENTER /*|| vuMark == RelicRecoveryVuMark.UNKNOWN*/){
-            robot.drive.setStrafeHeight(-0.05);
-            current = System.currentTimeMillis();
-            Utils.sleep(1000);
-            Log.d("Robot", "Timeout: " + (System.currentTimeMillis() - current));
-
-            robot.strafe.reset();
-
-            /*while(robot.strafe.getPosition() < 150 && opModeIsActive() && !isStopRequested()){
-                robot.drive.strafeArcadeDrive(-0.1,0,0);
-                Log.d("Robot", "Strafe: "+ + robot.strafe.getPosition());
-            }*/
-
-            while(range < cTarget){
-                range = robot.rsRange.getDistance(DistanceUnit.CM);
-                robot.drive.strafeArcadeDrive(-0.1,0,0);
-                //Log.d("Robot", "Strafe: "+ + robot.strafe.getPosition() + " Distance: " + robot.rsRange.getDistance(DistanceUnit.CM));
-            }
-            Log.d("Robot", "Final Distance: " + range);
-            robot.drive.strafeArcadeDrive(0,0,0);
-
-            robot.drive.setStrafeHeight(0.05);
-
-            current = System.currentTimeMillis();
-            while(System.currentTimeMillis() - current < 1000){
-                robot.drive.strafeArcadeDrive(0,0,0);
-            }
-
-            Utils.sleep(250);
-
-            alignForward();
-            Utils.sleep(250);
-            score();
-        }
-        else if(vuMark == RelicRecoveryVuMark.LEFT || vuMark == RelicRecoveryVuMark.UNKNOWN){
-            robot.drive.setStrafeHeight(-0.05);
-            current = System.currentTimeMillis();
-            Utils.sleep(1000);
-            Log.d("Robot", "Timeout: " + (System.currentTimeMillis() - current));
-
-            robot.strafe.reset();
-
-            /*while(robot.strafe.getPosition() < 150 && opModeIsActive() && !isStopRequested()){
-                robot.drive.strafeArcadeDrive(-0.1,0,0);
-                Log.d("Robot", "Strafe: "+ + robot.strafe.getPosition());
-            }*/
-
-            while(range < lTarget){
                 range = robot.rsRange.getDistance(DistanceUnit.CM);
                 robot.drive.strafeArcadeDrive(-0.1,0,0);
                 //Log.d("Robot", "Strafe: "+ + robot.strafe.getPosition() + " Distance: " + robot.rsRange.getDistance(DistanceUnit.CM));
@@ -308,4 +220,7 @@ public class RedRangeAuto extends HazMatAutonomous {
 
         Utils.sleep(500);
     }
+
+
 }
+
