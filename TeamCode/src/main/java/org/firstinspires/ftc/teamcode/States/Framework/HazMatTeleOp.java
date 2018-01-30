@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
  */
 
 public abstract class HazMatTeleOp extends OpMode{
+
     public Controller dController, mController;
     boolean isStarted, isLooping, isFinished;
 
