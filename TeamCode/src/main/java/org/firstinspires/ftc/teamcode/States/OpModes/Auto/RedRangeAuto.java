@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.States.HazmatRobot;
 public class RedRangeAuto extends HazMatAutonomous {
     HazmatRobot robot;
 
-    double target, range = 0;
+    double target = 8, range = 0;
     long current;
 
     final int lTarget = 133, cTarget = 115, rTarget = 97; //ltarget is right at the seam between 135/65
@@ -60,7 +60,7 @@ public class RedRangeAuto extends HazMatAutonomous {
 
             Utils.sleep(200);
 
-            robot.vertical.setPosition(0.7);
+            robot.vertical.setPosition(0.8);
 
             Utils.sleep(1000);
 
@@ -255,19 +255,23 @@ public class RedRangeAuto extends HazMatAutonomous {
 
         robot.drive.isMoving(true);
 
-        if(robot.rfRange.getDistance(DistanceUnit.CM) > 25){
-            target = 18;
-        } else{
-            target = 14;
-        }
+//        if(robot.rfRange.getDistance(DistanceUnit.CM) > 25){
+//            target = 18;
+//        } else{
+//            target = 14;
+//        }
+//
+//        Log.d("Robot", "Target: " + target);
+//
+//        current = System.currentTimeMillis();
+//
+//        while(robot.rfRange.getDistance(DistanceUnit.CM) > target && System.currentTimeMillis() - current < 3000  && opModeIsActive() && !isStopRequested()){
+//            robot.drive.strafeArcadeDrive(0,-0.05,0);
+//        }
 
-        Log.d("Robot", "Target: " + target);
-
-        current = System.currentTimeMillis();
-
-        while(robot.rfRange.getDistance(DistanceUnit.CM) > target && System.currentTimeMillis() - current < 3000  && opModeIsActive() && !isStopRequested()){
-            robot.drive.strafeArcadeDrive(0,-0.05,0);
-        }
+        while(robot.rfRange.getDistance(DistanceUnit.CM) > target && robot.lfRange.getDistance(DistanceUnit.CM) > target && System.currentTimeMillis() - current < 3000  && opModeIsActive() && !isStopRequested()){
+          robot.drive.strafeArcadeDrive(0,-0.05,0);
+       }
 
         robot.drive.arcadeDrive(0,0);
 
