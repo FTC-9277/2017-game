@@ -36,10 +36,10 @@ public class DriveCommand extends Command {
 
     @Override
     public void loop() {
-        if(dController.a()) drive.setPIDTarget(180);
-        else if(dController.b()) drive.setPIDTarget(-90);
-        else if(dController.y()) drive.setPIDTarget(0);
-        else if(dController.x()) drive.setPIDTarget(90);
+        if(dController.a()) drive.setPIDTarget(0);
+        else if(dController.b()) drive.setPIDTarget(90);
+        else if(dController.y()) drive.setPIDTarget(180);
+        else if(dController.x()) drive.setPIDTarget(-90);
 
         if(dController.leftBumper()) balancingMode = true;
         else if(dController.rightBumper()) balancingMode = false;
@@ -47,17 +47,17 @@ public class DriveCommand extends Command {
 
 
         if(dController.rightTrigger() > 0.3){
-            drive.setStrafeHeight(-0.05);
+            drive.setStrafeHeight(0.05); //-0.05
             //Log.d("Robot", "Strafe Height: 0.1");
         } else if(dController.rx() > 0.3){
-            drive.setStrafeHeight(-0.04);
+            drive.setStrafeHeight(0.05); //-0.04
             //Log.d("Robot", "Strafe Height: 0.11");
         } else if(dController.leftTrigger() > 0.3){
-            drive.setStrafeHeight(0.05);
+            drive.setStrafeHeight(0.145); //0.05
             //Log.d("Robot", "Strafe Height: 0.2");
         } else{
-            if(!balancingMode) drive.setStrafeHeight(-0.03);
-            else drive.setStrafeHeight(0);
+            if(!balancingMode) drive.setStrafeHeight(0.065); //-0.03
+            else drive.setStrafeHeight(0.095); //0
             //Log.d("Robot", "Strafe Height: 0.12/0.13");
         }
 

@@ -54,10 +54,8 @@ public class FullTele extends HazMatTeleOp {
         robot.vertical.setPosition(0.1);
 
         if(mController.b()){
-            robot.lt.setPower(0.5);
             robot.lb.setPower(0.5);
             robot.rb.setPower(-0.5);
-            robot.rt.setPower(-0.5);
         }
 
         //telemetry.addData("Latency",robot.imu.getLatency());

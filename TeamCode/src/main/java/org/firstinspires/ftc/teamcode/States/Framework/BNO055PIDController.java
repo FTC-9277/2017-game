@@ -2,15 +2,22 @@ package org.firstinspires.ftc.teamcode.States.Framework;
 
 /**
  * Created by robotics9277 on 12/9/2017.
+ * Rotational PID Controller for the integrated BNO055 IMU
  */
-
 public class BNO055PIDController implements Runnable{
     HazmatBNO055 gyro;
     public boolean PIDEnabled = false, isTurning = false, isMoving = false, close = false, wasTurning = false;
     public double kP, currentAngle, expAngle, error, movingScalar, output, tolerance;
 
+    /**
+     * Thread in which the PID Controller runs
+     */
     private Thread t;
 
+    /**
+     * Consructor for the PID controller
+     * @param gyro HazmatBNO055 gyro(wrapped version of the integrated IMU)
+     */
     public BNO055PIDController(HazmatBNO055 gyro){
         this.gyro = gyro;
 
@@ -27,40 +34,74 @@ public class BNO055PIDController implements Runnable{
         t.start();
     }
 
+    /**
+     * Enabled PID
+     */
     public void enable(){
         PIDEnabled = true;
     }
 
+    /**
+     * Enabled PID and set initial constants
+     * @param kP Scalar constant for P
+     * @param movingScalar Scalar constant to reduce PID strength when moving
+     */
     public void enable(double kP, double movingScalar){
         this.kP = kP;
         this.movingScalar = movingScalar;
         PIDEnabled = true;
     }
 
+    /**
+     * Define whether robot is turning
+     * @param isTurning True if turning, false if not
+     */
     public void isTurning(boolean isTurning){
         this.isTurning = isTurning;
     }
 
+    /**
+     * Define whether robot is moving
+     * @param isMoving True if moving, false if not
+     */
     public void isMoving(boolean isMoving){
         this.isMoving = isMoving;
     }
 
+    /**
+     * Set the expected angle for the PID
+     * @param target Expected angle in degrees
+     */
     public void setTarget(double target){
         expAngle = target;
     }
 
+    /**
+     * Set the tolerance for PID error
+     * @param tolerance Allowed tolerance in degrees
+     */
     public void setTolerance(double tolerance){this.tolerance = tolerance;}
 
+    /**
+     * Resets PID to current angle
+     */
     public void resetPID(){
         expAngle = currentAngle;
         error = 0;
         output = 0;
     }
 
+    /**
+     * Get PID Output
+     * @return Output power
+     */
     public double getOutput(){
         return output;
     }
 
+    /**
+     * Disable PID and stop thread
+     */
     public void close(){
         gyro.close();
         PIDEnabled = false;

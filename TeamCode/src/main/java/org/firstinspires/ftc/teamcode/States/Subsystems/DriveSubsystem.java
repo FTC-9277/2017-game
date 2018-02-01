@@ -24,7 +24,7 @@ public class DriveSubsystem extends Subsystem {
     private boolean PIDEnabled = false, gyroEnabled = false;
     private double PIDoutput;
 
-    private final double STRAFE_MAX_HEIGHT = 0.5, STRAFE_MIN_HEIGHT = -0.5;
+    private final double STRAFE_MAX_HEIGHT = 0.5, STRAFE_MIN_HEIGHT = -0.5, STRAFE_OFFSET = 0;
 
     public DriveSubsystem(OpMode opmode, MotorGroup left, MotorGroup right, MotorGroup strafe, Servo ls, Servo rs){
         super(opmode);
@@ -105,12 +105,10 @@ public class DriveSubsystem extends Subsystem {
         android.util.Log.d("HazmatRobot", "Drive Subsystem Stopped");
     }
 
-    double offset = 0.07;
-
     public void setStrafeHeight(double height){
         if(height >= STRAFE_MIN_HEIGHT && height <= STRAFE_MAX_HEIGHT){
-            rs.setPosition(0.5 - (height + offset));
-            ls.setPosition(0.5 + (height + offset));
+            rs.setPosition(0.5 - (height + STRAFE_OFFSET));
+            ls.setPosition(0.5 + (height + STRAFE_OFFSET));
         }
     }
 

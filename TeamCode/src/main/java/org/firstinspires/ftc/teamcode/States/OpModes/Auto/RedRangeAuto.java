@@ -37,7 +37,7 @@ public class RedRangeAuto extends HazMatAutonomous {
 
     @Override
     public void initAction() {
-        robot.drive.setStrafeHeight(-0.035);
+        robot.drive.setStrafeHeight(-0.035 + 0.07);
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
@@ -86,15 +86,15 @@ public class RedRangeAuto extends HazMatAutonomous {
 
         RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
 
-        telemetry.addData("Vumark", vuMark);
-        Log.d("Robot", "Vumark: " + vuMark);
+        //telemetry.addData("Vumark", vuMark);
+        //Log.d("Robot", "Vumark: " + vuMark);
 
         Utils.sleep(500);
 
         relicTrackables.deactivate();
 
         while(robot.imu.getYaw() > -80 && opModeIsActive() && !isStopRequested()){
-            robot.drive.strafeArcadeDrive(0,0,0.3);
+            robot.drive.strafeArcadeDrive(0,0,0.25);
             telemetry.addData("Yaw", robot.imu.getYaw());
             telemetry.addData("Left", robot.left.getPosition());
             telemetry.addData("Right", robot.right.getPosition());
@@ -102,7 +102,7 @@ public class RedRangeAuto extends HazMatAutonomous {
 
         robot.drive.arcadeDrive(0,0);
 
-        robot.drive.setStrafeHeight(0.05);
+        robot.drive.setStrafeHeight(0.05 + 0.07);
 
         Utils.sleep(500);
 
@@ -142,7 +142,7 @@ public class RedRangeAuto extends HazMatAutonomous {
         robot.drive.isMoving(true);
 
         if(vuMark == RelicRecoveryVuMark.RIGHT){
-            robot.drive.setStrafeHeight(-0.05);
+            robot.drive.setStrafeHeight(-0.05 + 0.07);
             current = System.currentTimeMillis();
             Utils.sleep(1000);
             Log.d("Robot", "Timeout: " + (System.currentTimeMillis() - current));
@@ -162,7 +162,7 @@ public class RedRangeAuto extends HazMatAutonomous {
             Log.d("Robot", "Final Distance: " + range);
             robot.drive.strafeArcadeDrive(0,0,0);
 
-            robot.drive.setStrafeHeight(0.05);
+            robot.drive.setStrafeHeight(0.05 + 0.07);
 
             current = System.currentTimeMillis();
             while(System.currentTimeMillis() - current < 1000){
@@ -175,7 +175,7 @@ public class RedRangeAuto extends HazMatAutonomous {
             Utils.sleep(250);
             score();
         } else if(vuMark == RelicRecoveryVuMark.CENTER /*|| vuMark == RelicRecoveryVuMark.UNKNOWN*/){
-            robot.drive.setStrafeHeight(-0.05);
+            robot.drive.setStrafeHeight(-0.05 + 0.07);
             current = System.currentTimeMillis();
             Utils.sleep(1000);
             Log.d("Robot", "Timeout: " + (System.currentTimeMillis() - current));
@@ -195,7 +195,7 @@ public class RedRangeAuto extends HazMatAutonomous {
             Log.d("Robot", "Final Distance: " + range);
             robot.drive.strafeArcadeDrive(0,0,0);
 
-            robot.drive.setStrafeHeight(0.05);
+            robot.drive.setStrafeHeight(0.05 + 0.07);
 
             current = System.currentTimeMillis();
             while(System.currentTimeMillis() - current < 1000){
@@ -209,7 +209,7 @@ public class RedRangeAuto extends HazMatAutonomous {
             score();
         }
         else if(vuMark == RelicRecoveryVuMark.LEFT || vuMark == RelicRecoveryVuMark.UNKNOWN){
-            robot.drive.setStrafeHeight(-0.05);
+            robot.drive.setStrafeHeight(-0.05 + 0.07);
             current = System.currentTimeMillis();
             Utils.sleep(1000);
             Log.d("Robot", "Timeout: " + (System.currentTimeMillis() - current));
@@ -229,7 +229,7 @@ public class RedRangeAuto extends HazMatAutonomous {
             Log.d("Robot", "Final Distance: " + range);
             robot.drive.strafeArcadeDrive(0,0,0);
 
-            robot.drive.setStrafeHeight(0.05);
+            robot.drive.setStrafeHeight(0.05 + 0.07);
 
             current = System.currentTimeMillis();
             while(System.currentTimeMillis() - current < 1000){
