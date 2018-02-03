@@ -24,7 +24,7 @@ public class RedRangeAuto extends HazMatAutonomous {
     double target = 8, range = 0;
     long current;
 
-    final int lTarget = 133, cTarget = 115, rTarget = 97; //ltarget is right at the seam between 135/65
+    final int lTarget = 133, cTarget = 118, rTarget = 97; //ltarget is right at the seam between 135/65
 
     VuforiaLocalizer vuforia;
     VuforiaTrackables relicTrackables;
@@ -174,7 +174,7 @@ public class RedRangeAuto extends HazMatAutonomous {
             alignForward();
             Utils.sleep(250);
             score();
-        } else if(vuMark == RelicRecoveryVuMark.CENTER /*|| vuMark == RelicRecoveryVuMark.UNKNOWN*/){
+        } else if(vuMark == RelicRecoveryVuMark.CENTER || vuMark == RelicRecoveryVuMark.UNKNOWN){
             robot.drive.setStrafeHeight(-0.05 + 0.07);
             current = System.currentTimeMillis();
             Utils.sleep(1000);
@@ -208,7 +208,7 @@ public class RedRangeAuto extends HazMatAutonomous {
             Utils.sleep(250);
             score();
         }
-        else if(vuMark == RelicRecoveryVuMark.LEFT || vuMark == RelicRecoveryVuMark.UNKNOWN){
+        else if(vuMark == RelicRecoveryVuMark.LEFT){
             robot.drive.setStrafeHeight(-0.05 + 0.07);
             current = System.currentTimeMillis();
             Utils.sleep(1000);
