@@ -24,7 +24,7 @@ public class BlueRangeAuto extends HazMatAutonomous {
     double target = 8, range = 0;
     long current;
 
-    final int rTarget = 133, cTarget = 118, lTarget = 97; //ltarget is right at the seam between 135/65
+    final int rTarget = 133, cTarget = 121, lTarget = 100; //ltarget is right at the seam between 135/65
 
     VuforiaLocalizer vuforia;
     VuforiaTrackables relicTrackables;

@@ -24,7 +24,7 @@ public class RedRangeAuto extends HazMatAutonomous {
     double target = 8, range = 0;
     long current;
 
-    final int lTarget = 133, cTarget = 118, rTarget = 97; //ltarget is right at the seam between 135/65
+    final int lTarget = 133, cTarget = 121, rTarget = 100; //ltarget is right at the seam between 135/65
 
     VuforiaLocalizer vuforia;
     VuforiaTrackables relicTrackables;
