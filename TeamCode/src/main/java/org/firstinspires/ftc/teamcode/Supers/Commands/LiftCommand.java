@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.Supers.Commands;
 
 import org.firstinspires.ftc.teamcode.Supers.Framework.Command;
 import org.firstinspires.ftc.teamcode.Supers.Framework.Controller;
-import org.firstinspires.ftc.teamcode.Supers.Framework.HazMatTeleOp;
+import org.firstinspires.ftc.teamcode.Supers.Framework.ExplosiveTele;
 import org.firstinspires.ftc.teamcode.Supers.Subsystems.LiftSubsystem;
 
 /**
@@ -12,9 +12,9 @@ import org.firstinspires.ftc.teamcode.Supers.Subsystems.LiftSubsystem;
 public class LiftCommand extends Command {
     Controller mController;
     LiftSubsystem lift;
-    HazMatTeleOp opmode;
+    ExplosiveTele opmode;
 
-    public LiftCommand(HazMatTeleOp opmode, LiftSubsystem lift){
+    public LiftCommand(ExplosiveTele opmode, LiftSubsystem lift){
         super(opmode,lift);
 
         this.opmode = opmode;

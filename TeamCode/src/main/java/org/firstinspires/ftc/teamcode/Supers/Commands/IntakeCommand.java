@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.Supers.Commands;
 
 import org.firstinspires.ftc.teamcode.Supers.Framework.Command;
 import org.firstinspires.ftc.teamcode.Supers.Framework.Controller;
-import org.firstinspires.ftc.teamcode.Supers.Framework.HazMatTeleOp;
+import org.firstinspires.ftc.teamcode.Supers.Framework.ExplosiveTele;
 import org.firstinspires.ftc.teamcode.Supers.Subsystems.IntakeSubsystem;
 
 /**
@@ -12,10 +12,10 @@ import org.firstinspires.ftc.teamcode.Supers.Subsystems.IntakeSubsystem;
 public class IntakeCommand extends Command {
     Controller mController;
     IntakeSubsystem intake;
-    HazMatTeleOp opmode;
+    ExplosiveTele opmode;
     public boolean beltToggle, useBelt;
 
-    public IntakeCommand(HazMatTeleOp opmode, IntakeSubsystem intake){
+    public IntakeCommand(ExplosiveTele opmode, IntakeSubsystem intake){
         super(opmode,intake);
 
         this.opmode = opmode;

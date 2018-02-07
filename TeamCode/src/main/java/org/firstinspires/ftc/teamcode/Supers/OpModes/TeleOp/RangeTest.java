@@ -4,14 +4,14 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Supers.Framework.Controller;
-import org.firstinspires.ftc.teamcode.Supers.Framework.HazMatTeleOp;
+import org.firstinspires.ftc.teamcode.Supers.Framework.ExplosiveTele;
 import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
 
 /**
  * Created by robotics9277 on 11/18/2017.
  */
 @TeleOp(name = "Range Test", group = "Experimental")
-public class RangeTest extends HazMatTeleOp {
+public class RangeTest extends ExplosiveTele {
     HazmatRobot robot;
 
     long start, end, lsTime, rsTime, lfTime, rfTime;

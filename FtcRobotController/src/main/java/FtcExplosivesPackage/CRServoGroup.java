@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Supers.Framework;
+package FtcExplosivesPackage;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CRServo;

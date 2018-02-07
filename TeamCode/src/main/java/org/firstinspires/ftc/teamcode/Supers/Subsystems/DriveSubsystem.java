@@ -4,8 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.Supers.Framework.BNO055PIDController;
-import org.firstinspires.ftc.teamcode.Supers.Framework.HazmatBNO055;
-import org.firstinspires.ftc.teamcode.Supers.Framework.Log;
+import org.firstinspires.ftc.teamcode.Supers.Framework.ExplosiveBNO055;
+import org.firstinspires.ftc.teamcode.Supers.Framework.TelemetryLog;
 import org.firstinspires.ftc.teamcode.Supers.Framework.MotorGroup;
 import org.firstinspires.ftc.teamcode.Supers.Framework.Subsystem;
 
@@ -16,10 +16,10 @@ import static org.firstinspires.ftc.teamcode.Supers.Framework.Utils.maxDouble;
  */
 
 public class DriveSubsystem extends Subsystem {
-    private Log driveLog;
+    private TelemetryLog driveLog;
     private MotorGroup left, right, strafe;
     private Servo ls,rs;
-    private HazmatBNO055 imu;
+    private ExplosiveBNO055 imu;
     private BNO055PIDController rc;
     private boolean PIDEnabled = false, gyroEnabled = false;
     private double PIDoutput;
@@ -35,10 +35,10 @@ public class DriveSubsystem extends Subsystem {
         this.ls = ls;
         this.rs = rs;
 
-        driveLog = new Log(opmode);
+        driveLog = new TelemetryLog(opmode);
     }
 
-    public DriveSubsystem(OpMode opmode, MotorGroup left, MotorGroup right, MotorGroup strafe, Servo ls, Servo rs, HazmatBNO055 imu){
+    public DriveSubsystem(OpMode opmode, MotorGroup left, MotorGroup right, MotorGroup strafe, Servo ls, Servo rs, ExplosiveBNO055 imu){
         super(opmode);
 
         this.left = left;
@@ -51,7 +51,7 @@ public class DriveSubsystem extends Subsystem {
         this.rc = new BNO055PIDController(imu);
 
         gyroEnabled = true;
-        driveLog = new Log(opmode);
+        driveLog = new TelemetryLog(opmode);
     }
 
     public void enablePID(boolean enabled){

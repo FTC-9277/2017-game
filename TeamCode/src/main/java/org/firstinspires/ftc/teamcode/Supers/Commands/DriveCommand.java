@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.Supers.Commands;
 
 import org.firstinspires.ftc.teamcode.Supers.Framework.Command;
 import org.firstinspires.ftc.teamcode.Supers.Framework.Controller;
-import org.firstinspires.ftc.teamcode.Supers.Framework.HazMatTeleOp;
+import org.firstinspires.ftc.teamcode.Supers.Framework.ExplosiveTele;
 import org.firstinspires.ftc.teamcode.Supers.Framework.Utils;
 import org.firstinspires.ftc.teamcode.Supers.Subsystems.DriveSubsystem;
 
@@ -13,11 +13,11 @@ import org.firstinspires.ftc.teamcode.Supers.Subsystems.DriveSubsystem;
 public class DriveCommand extends Command {
     Controller dController;
     DriveSubsystem drive;
-    HazMatTeleOp opmode;
+    ExplosiveTele opmode;
     boolean balancingMode = false, slowToggle = false, isSlow = false;
     double speedModifier;
 
-    public DriveCommand(HazMatTeleOp opmode, DriveSubsystem drive){
+    public DriveCommand(ExplosiveTele opmode, DriveSubsystem drive){
         super(opmode, drive);
         this.drive = drive;
         this.opmode = opmode;
@@ -47,17 +47,17 @@ public class DriveCommand extends Command {
 
         if(dController.rx() > 0.3){
             drive.setStrafeHeight(0.05); //-0.05
-            //Log.d("Robot", "Strafe Height: 0.1");
+            //TelemetryLog.d("Robot", "Strafe Height: 0.1");
         } else if(dController.rightTrigger() > 0.3){
             drive.setStrafeHeight(0.045); //-0.04
-            //Log.d("Robot", "Strafe Height: 0.11");
+            //TelemetryLog.d("Robot", "Strafe Height: 0.11");
         } else if(dController.leftTrigger() > 0.3){
             drive.setStrafeHeight(0.145); //0.05
-            //Log.d("Robot", "Strafe Height: 0.2");
+            //TelemetryLog.d("Robot", "Strafe Height: 0.2");
         } else{
             if(!balancingMode) drive.setStrafeHeight(0.055); //-0.03
             else drive.setStrafeHeight(0.085); //0
-            //Log.d("Robot", "Strafe Height: 0.12/0.13");
+            //TelemetryLog.d("Robot", "Strafe Height: 0.12/0.13");
         }
 
         if(dController.leftStickPressed()){

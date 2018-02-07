@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.Supers.OpModes.Auto;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.teamcode.Supers.Framework.HazMatAutonomous;
+import org.firstinspires.ftc.teamcode.Supers.Framework.ExplosiveAuto;
 import org.firstinspires.ftc.teamcode.Supers.Framework.Utils;
 import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
 
@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
  * Created by robotics9277 on 12/10/2017.
  */
 @Autonomous(name = "Blue Jewel Auto")
-public class BlueJewelAuto extends HazMatAutonomous {
+public class BlueJewelAuto extends ExplosiveAuto {
     HazmatRobot robot;
 
     @Override

@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  * Created by Varun on 11/16/2017.
  */
 
-public abstract class HazMatAutonomous extends LinearOpMode {
+public abstract class ExplosiveAuto extends LinearOpMode {
 
     public abstract void initHardware();
 

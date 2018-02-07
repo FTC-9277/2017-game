@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Supers.Framework;
+package FtcExplosivesPackage;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
  * Created by Varun on 11/16/2017.
  */
 
-public abstract class HazMatTeleOp extends OpMode{
+public abstract class ExplosiveTele extends OpMode{
 
     public Controller dController, mController;
     boolean isStarted, isLooping, isFinished;

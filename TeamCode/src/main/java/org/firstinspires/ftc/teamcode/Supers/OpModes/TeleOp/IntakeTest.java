@@ -4,14 +4,14 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Supers.Commands.IntakeCommand;
 import org.firstinspires.ftc.teamcode.Supers.Framework.Controller;
-import org.firstinspires.ftc.teamcode.Supers.Framework.HazMatTeleOp;
+import org.firstinspires.ftc.teamcode.Supers.Framework.ExplosiveTele;
 import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
 
 /**
  * Created by robotics9277 on 1/6/2018.
  */
 @TeleOp(name="Intake Test")
-public class IntakeTest extends HazMatTeleOp {
+public class IntakeTest extends ExplosiveTele {
     HazmatRobot robot;
     IntakeCommand intake;
 

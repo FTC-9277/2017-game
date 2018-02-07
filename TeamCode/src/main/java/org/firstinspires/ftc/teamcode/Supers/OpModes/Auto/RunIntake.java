@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.Supers.OpModes.Auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-import org.firstinspires.ftc.teamcode.Supers.Framework.HazMatAutonomous;
+import org.firstinspires.ftc.teamcode.Supers.Framework.ExplosiveAuto;
 import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
 
 /**
@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
  */
 
 @Autonomous(name = "Run Intake")
-public class RunIntake extends HazMatAutonomous {
+public class RunIntake extends ExplosiveAuto {
     HazmatRobot robot;
 
     @Override

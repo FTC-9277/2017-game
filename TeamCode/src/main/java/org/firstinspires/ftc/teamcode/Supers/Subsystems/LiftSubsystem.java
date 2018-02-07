@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.Supers.Subsystems;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.Supers.Framework.Log;
+import org.firstinspires.ftc.teamcode.Supers.Framework.TelemetryLog;
 import org.firstinspires.ftc.teamcode.Supers.Framework.MotorGroup;
 import org.firstinspires.ftc.teamcode.Supers.Framework.Subsystem;
 
@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.Supers.Framework.Subsystem;
  */
 
 public class LiftSubsystem extends Subsystem {
-    Log LiftLog;
+    TelemetryLog LiftLog;
     MotorGroup liftMotors;
     Servo ll, rl;
 
@@ -22,7 +22,7 @@ public class LiftSubsystem extends Subsystem {
         this.liftMotors = liftMotors;
         this.ll = ll;
         this.rl = rl;
-        LiftLog = new Log(opmode);
+        LiftLog = new TelemetryLog(opmode);
     }
 
     @Override

@@ -6,14 +6,14 @@ import org.firstinspires.ftc.teamcode.Supers.Commands.DriveCommand;
 import org.firstinspires.ftc.teamcode.Supers.Commands.IntakeCommand;
 import org.firstinspires.ftc.teamcode.Supers.Commands.LiftCommand;
 import org.firstinspires.ftc.teamcode.Supers.Framework.Controller;
-import org.firstinspires.ftc.teamcode.Supers.Framework.HazMatTeleOp;
+import org.firstinspires.ftc.teamcode.Supers.Framework.ExplosiveTele;
 import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
 
 /**
  * Created by robotics9277 on 12/10/2017.
  */
 @TeleOp(name = "Full Tele")
-public class FullTele extends HazMatTeleOp {
+public class FullTele extends ExplosiveTele {
 
     //TODO: Fix Strafe Wheel Slippage, Right: 0.17, Left: 0.1
 

@@ -10,7 +10,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
-import org.firstinspires.ftc.teamcode.Supers.Framework.HazMatAutonomous;
+import org.firstinspires.ftc.teamcode.Supers.Framework.ExplosiveAuto;
 import org.firstinspires.ftc.teamcode.Supers.Framework.Utils;
 import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
 
@@ -18,7 +18,7 @@ import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
  * Created by robotics9277 on 12/15/2017.
  */
 @Autonomous(name = "Janky Maelstrom Auto")
-public class JankMaelstromAuto extends HazMatAutonomous {
+public class JankMaelstromAuto extends ExplosiveAuto {
     HazmatRobot robot;
 
     double target = 8, range = 0;
@@ -87,7 +87,7 @@ public class JankMaelstromAuto extends HazMatAutonomous {
         RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
 
         //telemetry.addData("Vumark", vuMark);
-        //Log.d("Robot", "Vumark: " + vuMark);
+        //TelemetryLog.d("Robot", "Vumark: " + vuMark);
 
         Utils.sleep(500);
 
@@ -151,13 +151,13 @@ public class JankMaelstromAuto extends HazMatAutonomous {
 
             /*while(robot.strafe.getPosition() < 150 && opModeIsActive() && !isStopRequested()){
                 robot.drive.strafeArcadeDrive(-0.1,0,0);
-                Log.d("Robot", "Strafe: "+ + robot.strafe.getPosition());
+                TelemetryLog.d("Robot", "Strafe: "+ + robot.strafe.getPosition());
             }*/
 
             while(range < rTarget){
                 range = robot.lsRange.getDistance(DistanceUnit.CM);
                 robot.drive.strafeArcadeDrive(0.1,0,0);
-                //Log.d("Robot", "Strafe: "+ + robot.strafe.getPosition() + " Distance: " + robot.rsRange.getDistance(DistanceUnit.CM));
+                //TelemetryLog.d("Robot", "Strafe: "+ + robot.strafe.getPosition() + " Distance: " + robot.rsRange.getDistance(DistanceUnit.CM));
             }
             Log.d("Robot", "Final Distance: " + range);
             robot.drive.strafeArcadeDrive(0,0,0);
@@ -184,13 +184,13 @@ public class JankMaelstromAuto extends HazMatAutonomous {
 
             /*while(robot.strafe.getPosition() < 150 && opModeIsActive() && !isStopRequested()){
                 robot.drive.strafeArcadeDrive(-0.1,0,0);
-                Log.d("Robot", "Strafe: "+ + robot.strafe.getPosition());
+                TelemetryLog.d("Robot", "Strafe: "+ + robot.strafe.getPosition());
             }*/
 
             while(range < cTarget){
                 range = robot.lsRange.getDistance(DistanceUnit.CM);
                 robot.drive.strafeArcadeDrive(0.1,0,0);
-                //Log.d("Robot", "Strafe: "+ + robot.strafe.getPosition() + " Distance: " + robot.rsRange.getDistance(DistanceUnit.CM));
+                //TelemetryLog.d("Robot", "Strafe: "+ + robot.strafe.getPosition() + " Distance: " + robot.rsRange.getDistance(DistanceUnit.CM));
             }
             Log.d("Robot", "Final Distance: " + range);
             robot.drive.strafeArcadeDrive(0,0,0);
@@ -218,13 +218,13 @@ public class JankMaelstromAuto extends HazMatAutonomous {
 
             /*while(robot.strafe.getPosition() < 150 && opModeIsActive() && !isStopRequested()){
                 robot.drive.strafeArcadeDrive(-0.1,0,0);
-                Log.d("Robot", "Strafe: "+ + robot.strafe.getPosition());
+                TelemetryLog.d("Robot", "Strafe: "+ + robot.strafe.getPosition());
             }*/
 
             while(range < lTarget){
                 range = robot.lsRange.getDistance(DistanceUnit.CM);
                 robot.drive.strafeArcadeDrive(0.1,0,0);
-                //Log.d("Robot", "Strafe: "+ + robot.strafe.getPosition() + " Distance: " + robot.rsRange.getDistance(DistanceUnit.CM));
+                //TelemetryLog.d("Robot", "Strafe: "+ + robot.strafe.getPosition() + " Distance: " + robot.rsRange.getDistance(DistanceUnit.CM));
             }
             Log.d("Robot", "Final Distance: " + range);
             robot.drive.strafeArcadeDrive(0,0,0);
@@ -261,7 +261,7 @@ public class JankMaelstromAuto extends HazMatAutonomous {
 //            target = 14;
 //        }
 //
-//        Log.d("Robot", "Target: " + target);
+//        TelemetryLog.d("Robot", "Target: " + target);
 //
 //        current = System.currentTimeMillis();
 //

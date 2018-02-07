@@ -6,14 +6,14 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Supers.Commands.DriveCommand;
 import org.firstinspires.ftc.teamcode.Supers.Framework.Controller;
-import org.firstinspires.ftc.teamcode.Supers.Framework.HazMatTeleOp;
+import org.firstinspires.ftc.teamcode.Supers.Framework.ExplosiveTele;
 import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
 
 /**
  * Created by robotics9277 on 11/18/2017.
  */
 @TeleOp(name = "Drive Test", group = "Experimental")
-public class DriveTele extends HazMatTeleOp {
+public class DriveTele extends ExplosiveTele {
     HazmatRobot robot;
     DriveCommand drive;
 

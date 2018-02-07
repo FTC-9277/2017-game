@@ -2,14 +2,14 @@ package org.firstinspires.ftc.teamcode.Supers.OpModes.TeleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Supers.Framework.HazMatTeleOp;
+import org.firstinspires.ftc.teamcode.Supers.Framework.ExplosiveTele;
 import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
 
 /**
  * Created by robotics9277 on 12/15/2017.
  */
 @TeleOp(name = "Strafe Wheel Test")
-public class StrafeWheelTest extends HazMatTeleOp {
+public class StrafeWheelTest extends ExplosiveTele {
     HazmatRobot robot;
 
     double lHeight = 0, rHeight = 0;

@@ -11,8 +11,8 @@ import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.Supers.Framework.CRServoGroup;
-import org.firstinspires.ftc.teamcode.Supers.Framework.HazmatBNO055;
-import org.firstinspires.ftc.teamcode.Supers.Framework.Log;
+import org.firstinspires.ftc.teamcode.Supers.Framework.ExplosiveBNO055;
+import org.firstinspires.ftc.teamcode.Supers.Framework.TelemetryLog;
 import org.firstinspires.ftc.teamcode.Supers.Framework.MotorGroup;
 import org.firstinspires.ftc.teamcode.Supers.Subsystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.Supers.Subsystems.IntakeSubsystem;
@@ -25,7 +25,7 @@ import org.firstinspires.ftc.teamcode.Supers.Subsystems.LiftSubsystem;
 
 public class HazmatRobot {
     private final int NAVX_DIM_I2C_PORT = 0;
-    public HazmatBNO055 imu;
+    public ExplosiveBNO055 imu;
     private boolean gyroInitialized, driveInitialized, liftInitialized, intakeInitialized, jewelInitialized;
 
     public MotorGroup left, right, strafe, liftMotors;
@@ -39,7 +39,7 @@ public class HazmatRobot {
     public DistanceSensor distance;
     public ModernRoboticsI2cRangeSensor lsRange, lfRange, rsRange, rfRange;
 
-    Log RobotLog;
+    TelemetryLog RobotLog;
 
     public DriveSubsystem drive;
     public LiftSubsystem lift;
@@ -47,7 +47,7 @@ public class HazmatRobot {
     public JewelSubsystem jewel;
 
     public HazmatRobot(OpMode opmode){
-        RobotLog = new Log(opmode);
+        RobotLog = new TelemetryLog(opmode);
 
         getHardware(opmode);
 
@@ -80,7 +80,7 @@ public class HazmatRobot {
          * Initialize gyro
          */
         try{
-                imu = HazmatBNO055.getInstance(opmode,"imu");
+                imu = ExplosiveBNO055.getInstance(opmode,"imu");
 
                 gyroInitialized = true;
             } catch (Exception e){
