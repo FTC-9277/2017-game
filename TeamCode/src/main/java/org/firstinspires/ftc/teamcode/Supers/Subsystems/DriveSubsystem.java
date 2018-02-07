@@ -3,13 +3,13 @@ package org.firstinspires.ftc.teamcode.Supers.Subsystems;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.Supers.Framework.BNO055PIDController;
-import org.firstinspires.ftc.teamcode.Supers.Framework.ExplosiveBNO055;
-import org.firstinspires.ftc.teamcode.Supers.Framework.TelemetryLog;
-import org.firstinspires.ftc.teamcode.Supers.Framework.MotorGroup;
-import org.firstinspires.ftc.teamcode.Supers.Framework.Subsystem;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.BNO055PIDController;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.ExplosiveBNO055;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.TelemetryLog;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.MotorGroup;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.Subsystem;
 
-import static org.firstinspires.ftc.teamcode.Supers.Framework.Utils.maxDouble;
+import static org.firstinspires.ftc.teamcode.FtcExplosivesPackage.Utils.maxDouble;
 
 /**
  * Created by Varun on 11/17/2017.

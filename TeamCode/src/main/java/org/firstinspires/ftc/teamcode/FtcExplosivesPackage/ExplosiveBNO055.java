@@ -1,4 +1,4 @@
-package FtcExplosivesPackage;
+package org.firstinspires.ftc.teamcode.FtcExplosivesPackage;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -11,11 +11,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
  * Created by robotics9277 on 12/15/2017.
  */
 
-public class ExplosiveBNO055 {
+public class ExplosiveBNO055 implements ExplosivePIDEnabledHardware{
     private static ExplosiveBNO055 instance = null;
     private BNO055IMU imu = null;
-
-
 
     private ExplosiveBNO055(OpMode opMode, String name){
         imu = opMode.hardwareMap.get(BNO055IMU.class, name);
@@ -47,6 +45,7 @@ public class ExplosiveBNO055 {
         instance = null;
     }
 
+    @Override
     public double getLatency(){
         return (System.nanoTime() - imu.getAngularOrientation().acquisitionTime)/1000000;
     }
@@ -60,5 +59,10 @@ public class ExplosiveBNO055 {
             }
         }
         return imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
+    }
+
+    @Override
+    public double getOutput() {
+        return getYaw();
     }
 }

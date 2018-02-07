@@ -1,4 +1,4 @@
-package FtcExplosivesPackage;
+package org.firstinspires.ftc.teamcode.FtcExplosivesPackage;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 

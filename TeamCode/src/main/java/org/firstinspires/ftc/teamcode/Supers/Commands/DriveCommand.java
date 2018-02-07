@@ -1,9 +1,9 @@
 package org.firstinspires.ftc.teamcode.Supers.Commands;
 
-import org.firstinspires.ftc.teamcode.Supers.Framework.Command;
-import org.firstinspires.ftc.teamcode.Supers.Framework.Controller;
-import org.firstinspires.ftc.teamcode.Supers.Framework.ExplosiveTele;
-import org.firstinspires.ftc.teamcode.Supers.Framework.Utils;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.Command;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.Controller;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.ExplosiveTele;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.Utils;
 import org.firstinspires.ftc.teamcode.Supers.Subsystems.DriveSubsystem;
 
 /**

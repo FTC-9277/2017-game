@@ -3,8 +3,8 @@ package org.firstinspires.ftc.teamcode.Supers.Subsystems;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 
-import org.firstinspires.ftc.teamcode.Supers.Framework.CRServoGroup;
-import org.firstinspires.ftc.teamcode.Supers.Framework.Subsystem;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.CRServoGroup;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.Subsystem;
 
 /**
  * Created by Varun on 11/17/2017.

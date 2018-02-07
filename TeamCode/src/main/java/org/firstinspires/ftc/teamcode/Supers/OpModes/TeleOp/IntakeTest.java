@@ -3,8 +3,8 @@ package org.firstinspires.ftc.teamcode.Supers.OpModes.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Supers.Commands.IntakeCommand;
-import org.firstinspires.ftc.teamcode.Supers.Framework.Controller;
-import org.firstinspires.ftc.teamcode.Supers.Framework.ExplosiveTele;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.Controller;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.ExplosiveTele;
 import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
 
 /**

@@ -10,10 +10,10 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.Supers.Framework.CRServoGroup;
-import org.firstinspires.ftc.teamcode.Supers.Framework.ExplosiveBNO055;
-import org.firstinspires.ftc.teamcode.Supers.Framework.TelemetryLog;
-import org.firstinspires.ftc.teamcode.Supers.Framework.MotorGroup;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.CRServoGroup;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.ExplosiveBNO055;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.TelemetryLog;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.MotorGroup;
 import org.firstinspires.ftc.teamcode.Supers.Subsystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.Supers.Subsystems.IntakeSubsystem;
 import org.firstinspires.ftc.teamcode.Supers.Subsystems.JewelSubsystem;

@@ -3,8 +3,8 @@ package org.firstinspires.ftc.teamcode.Supers.OpModes.Auto;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.teamcode.Supers.Framework.ExplosiveAuto;
-import org.firstinspires.ftc.teamcode.Supers.Framework.Utils;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.ExplosiveAuto;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.Utils;
 import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
 
 /**

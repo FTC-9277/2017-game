@@ -10,8 +10,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
-import org.firstinspires.ftc.teamcode.Supers.Framework.ExplosiveAuto;
-import org.firstinspires.ftc.teamcode.Supers.Framework.Utils;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.ExplosiveAuto;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.Utils;
 import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
 
 /**

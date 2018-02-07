@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Supers.Commands.DriveCommand;
-import org.firstinspires.ftc.teamcode.Supers.Framework.Controller;
-import org.firstinspires.ftc.teamcode.Supers.Framework.ExplosiveTele;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.Controller;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.ExplosiveTele;
 import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
 
 /**

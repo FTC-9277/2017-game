@@ -3,9 +3,9 @@ package org.firstinspires.ftc.teamcode.Supers.Subsystems;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.Supers.Framework.TelemetryLog;
-import org.firstinspires.ftc.teamcode.Supers.Framework.MotorGroup;
-import org.firstinspires.ftc.teamcode.Supers.Framework.Subsystem;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.TelemetryLog;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.MotorGroup;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.Subsystem;
 
 /**
  * Created by Varun on 11/17/2017.
