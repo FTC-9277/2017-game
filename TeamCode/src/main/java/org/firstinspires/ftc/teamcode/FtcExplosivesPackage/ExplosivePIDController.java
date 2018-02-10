@@ -7,7 +7,7 @@ package org.firstinspires.ftc.teamcode.FtcExplosivesPackage;
 public class ExplosivePIDController implements Runnable{
     ExplosivePIDEnabledHardware gyro;
     public boolean PIDEnabled = false, isTurning = false, isMoving = false, close = false, wasTurning = false;
-    public double kP, currentAngle, expAngle, error, movingScalar, output, tolerance;
+    public double p, i, d, kP, kI, kD, currentAngle, expAngle, output, tolerance, lastP, lastTime, maxP;
 
     private Thread t;
 
@@ -21,10 +21,15 @@ public class ExplosivePIDController implements Runnable{
         kP = 0;
         currentAngle = 0;
         expAngle = 0;
-        error = 0;
-        movingScalar = 0;
+        p = 0;
+        i = 0;
+        d = 0;
+        lastP = 0;
+        lastTime = System.currentTimeMillis();
+        //movingScalar = 0;
         output = 0;
         tolerance = 0;
+        maxP = 180;
 
         PIDEnabled = false;
         t = new Thread(this);
@@ -41,11 +46,14 @@ public class ExplosivePIDController implements Runnable{
     /**
      * Enabled PID and set initial constants
      * @param kP Scalar constant for P
-     * @param movingScalar Scalar constant to reduce PID strength when moving
+     * @param kI Scalar constant for I
+     * @param kD Scalar constant for D
      */
-    public void enable(double kP, double movingScalar){
+    public void enable(double kP, double kI, double kD){
         this.kP = kP;
-        this.movingScalar = movingScalar;
+        this.kI = kI;
+        this.kD = kD;
+        //this.movingScalar = movingScalar;
         PIDEnabled = true;
     }
 
@@ -84,7 +92,9 @@ public class ExplosivePIDController implements Runnable{
      */
     public void resetPID(){
         expAngle = currentAngle;
-        error = 0;
+        p = 0;
+        i = 0;
+        d = 0;
         output = 0;
     }
 
@@ -130,22 +140,37 @@ public class ExplosivePIDController implements Runnable{
                         resetPID();
                     }
 
-                    error = currentAngle - expAngle;
+                    p = currentAngle - expAngle;
 
-                    if(error > 180){
-                        error -= 360;
-                    } else if(error < -180){
-                        error += 360;
+                    if(p > 180){
+                        p -= 360;
+                    } else if(p < -180){
+                        p += 360;
                     }
 
-                    if(Math.abs(error) < Math.abs(tolerance)){
+                    if(Math.abs(p) < maxP/10){
+                        i += p * (System.currentTimeMillis() - lastTime);
+                        d = ((p - lastP)/(System.currentTimeMillis() - lastTime));
+                    } else {
+                        i = 0;
+                        d = 0;
+                    }
+
+
+                    lastP = p;
+                    lastTime = System.currentTimeMillis();
+
+                    if(Utils.getSign(p) != Utils.getSign(i)) i = 0;
+
+                    if(Math.abs(p) < Math.abs(tolerance)){
                         output = 0;
                     } else{
-                        if(isMoving){
-                            output = error * kP * movingScalar;
+                        /*if(isMoving){
+                            output = p * kP * movingScalar;
                         } else{
-                            output = error * kP;
-                        }
+                            output = p * kP;
+                        }*/
+                        output = p * kP + i * kI + d * kD;
                     }
                 }
             } else{

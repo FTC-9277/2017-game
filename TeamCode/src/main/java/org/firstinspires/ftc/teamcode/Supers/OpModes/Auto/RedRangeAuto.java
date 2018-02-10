@@ -124,7 +124,7 @@ public class RedRangeAuto extends ExplosiveAuto {
         current = System.currentTimeMillis();
 
         robot.drive.setPIDTarget(180);
-        robot.drive.enablePID(true,0.014,0.5); //0.014
+        robot.drive.enablePID(true,0.014,0,0); //0.014
 
         while(System.currentTimeMillis() - current < 4000 && opModeIsActive() && !isStopRequested()){
             robot.drive.strafeArcadeDrive(0,0,0);

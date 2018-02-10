@@ -54,7 +54,7 @@ public class ServoTest extends ExplosiveTele {
         if(dController.x()){
             if(!xToggle){
                 xToggle = true;
-                armPos += 0.01;
+                armPos = 0.05;
             }
         } else{
             xToggle = false;
@@ -63,16 +63,16 @@ public class ServoTest extends ExplosiveTele {
         if(dController.y()){
             if(!yToggle){
                 yToggle = true;
-                armPos -= 0.01;
+                armPos = 0.85;
             }
         } else{
             yToggle = false;
         }
 
         if(dController.leftTrigger() > 0.1){
-            clawPos = 0.65;
+            clawPos = 0.56; //0.65
         } else if(dController.rightTrigger() > 0.1){
-            clawPos = 0.13;
+            clawPos = 0.04; //0.13
         }
 
         telemetry.addData("Arm Position", armPos);

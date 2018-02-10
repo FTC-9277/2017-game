@@ -29,7 +29,7 @@ public class DriveCommand extends Command {
 
     @Override
     public void start() {
-        drive.enablePID(true,0.014, 0.357);
+        drive.enablePID(true,0.01, 0.00001,0); //stationary: p = 0.01, i = 0.00004
         drive.setPIDTolerance(2);
     }
 

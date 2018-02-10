@@ -59,8 +59,8 @@ public class DriveSubsystem extends Subsystem {
         PIDEnabled = enabled;
     }
 
-    public void enablePID(boolean enabled, double kP, double movingScalar){
-        rc.enable(kP, movingScalar);
+    public void enablePID(boolean enabled, double kP, double kI, double kD){
+        rc.enable(kP, kI, kD);
         PIDEnabled = enabled;
     }
 
@@ -68,7 +68,6 @@ public class DriveSubsystem extends Subsystem {
         rc.resetPID();
         rc.close();
         rc.output = 0;
-        rc.error = 0;
         PIDoutput = 0;
     }
 

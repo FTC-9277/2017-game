@@ -36,4 +36,11 @@ public class Utils {
 
         return ((input)/(Math.abs(input)));
     }
+
+    public static double minMax(double input, double min, double max){
+        if(input > max) return max;
+        else if(input < min) return min;
+
+        return input;
+    }
 }
