@@ -12,28 +12,24 @@ import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.Subsystem;
 
 public class IntakeSubsystem extends Subsystem {
     private CRServoGroup ti, bi;
-    private CRServo ci;
 
-    public IntakeSubsystem(OpMode opmode, CRServoGroup ti, CRServoGroup bi, CRServo ci){
+    public IntakeSubsystem(OpMode opmode, CRServoGroup ti, CRServoGroup bi){
         super(opmode);
 
         this.ti = ti;
         this.bi = bi;
-        this.ci = ci;
     }
 
     @Override
     public void enable() {
         ti.set(0);
         bi.set(0);
-        ci.setPower(0);
     }
 
     @Override
     public void disable() {
         ti.set(0);
         bi.set(0);
-        ci.setPower(0);
     }
 
     @Override
@@ -47,9 +43,5 @@ public class IntakeSubsystem extends Subsystem {
 
     public void intakeBottom(double pow){
         bi.set(pow);
-    }
-
-    public void intakeLift(double pow){
-        ci.setPower(pow);
     }
 }

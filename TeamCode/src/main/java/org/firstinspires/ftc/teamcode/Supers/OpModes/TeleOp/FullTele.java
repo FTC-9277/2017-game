@@ -15,12 +15,13 @@ import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
 @TeleOp(name = "Full Tele")
 public class FullTele extends ExplosiveTele {
 
-    //TODO: Fix Strafe Wheel Slippage, Right: 0.17, Left: 0.1
-
     HazmatRobot robot;
     DriveCommand drive;
     LiftCommand lift;
     IntakeCommand intake;
+
+    long current, last = 0;
+    double lCurrent, rCurrent, lPrev = 0, rPrev = 0;
 
     @Override
     public void initHardware() {
@@ -59,6 +60,19 @@ public class FullTele extends ExplosiveTele {
         }
 
         //telemetry.addData("Latency",robot.imu.getLatency());
+
+        current = System.currentTimeMillis();
+        lCurrent = robot.left.getPosition();
+        rCurrent = robot.right.getPosition();
+
+        telemetry.addData("Left Clicks", lCurrent);
+        telemetry.addData("Right Clicks", rCurrent);
+        telemetry.addData("Left Speed", ((lCurrent-lPrev)/(current-last)));
+        telemetry.addData("Right Speed", ((rCurrent-rPrev)/(current-last)));
+
+        last = current;
+        lPrev = lCurrent;
+        rPrev = rCurrent;
     }
 
     @Override

@@ -33,7 +33,7 @@ public class HazmatRobot {
 
     public DcMotor fLeft, fRight, bLeft, bRight, lStrafe,rStrafe, lLift, rLift;
     public Servo ll,rl,horizontal,vertical, ls, rs;
-    public CRServo rt,lt,rb,lb,il;
+    public CRServo rt,lt,rb,lb;
     public AnalogInput pl,pr;
     public ColorSensor color;
     public DistanceSensor distance;
@@ -60,7 +60,7 @@ public class HazmatRobot {
         }
 
         if(intakeInitialized){
-            intake = new IntakeSubsystem(opmode, ti, bi, il);
+            intake = new IntakeSubsystem(opmode, ti, bi);
         }
 
         if(jewelInitialized){
@@ -144,7 +144,6 @@ public class HazmatRobot {
             lt = opmode.hardwareMap.get(CRServo.class, "lt");
             rb = opmode.hardwareMap.get(CRServo.class, "rb");
             lb = opmode.hardwareMap.get(CRServo.class, "lb");
-            il = opmode.hardwareMap.get(CRServo.class, "il");
 
             lb.setDirection(CRServo.Direction.REVERSE);
             lt.setDirection(CRServo.Direction.REVERSE);

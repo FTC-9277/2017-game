@@ -7,4 +7,5 @@ package org.firstinspires.ftc.teamcode.FtcExplosivesPackage;
 public interface ExplosivePIDEnabledHardware {
     double getOutput();
     double getLatency();
+    void close();
 }

@@ -40,6 +40,7 @@ public class ExplosiveBNO055 implements ExplosivePIDEnabledHardware{
         }
     }
 
+    @Override
     public void close(){
         imu = null;
         instance = null;

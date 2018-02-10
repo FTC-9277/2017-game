@@ -4,21 +4,18 @@ package org.firstinspires.ftc.teamcode.FtcExplosivesPackage;
  * Created by FTC 9277 on 12/9/2017.
  * Rotational PID Controller for the REV integrated BNO055 IMU
  */
-public class BNO055PIDController implements Runnable{
-    ExplosiveBNO055 gyro;
+public class ExplosivePIDController implements Runnable{
+    ExplosivePIDEnabledHardware gyro;
     public boolean PIDEnabled = false, isTurning = false, isMoving = false, close = false, wasTurning = false;
     public double kP, currentAngle, expAngle, error, movingScalar, output, tolerance;
 
-    /**
-     * Thread in which the PID Controller runs
-     */
     private Thread t;
 
     /**
      * Consructor for the PID controller
      * @param gyro ExplosiveBNO055 gyro(wrapped version of the integrated IMU)
      */
-    public BNO055PIDController(ExplosiveBNO055 gyro){
+    public ExplosivePIDController(ExplosivePIDEnabledHardware gyro){
         this.gyro = gyro;
 
         kP = 0;
@@ -112,7 +109,7 @@ public class BNO055PIDController implements Runnable{
     public void run(){
         while(!close){
             if(PIDEnabled){
-                currentAngle = gyro.getYaw();
+                currentAngle = gyro.getOutput();
 
                 if(isTurning){
                     resetPID();
@@ -121,7 +118,15 @@ public class BNO055PIDController implements Runnable{
                     if(wasTurning){
                         resetPID();
                         wasTurning = false;
-                        currentAngle = gyro.getUpdatedYaw();
+                        //currentAngle = gyro.getUpdatedYaw();
+                        while(gyro.getLatency() > 5){
+                            try {
+                                Thread.sleep(1);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        currentAngle = gyro.getOutput();
                         resetPID();
                     }
 

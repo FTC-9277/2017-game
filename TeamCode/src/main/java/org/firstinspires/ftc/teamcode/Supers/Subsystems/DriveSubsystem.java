@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.Supers.Subsystems;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.BNO055PIDController;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.ExplosivePIDController;
 import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.ExplosiveBNO055;
 import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.TelemetryLog;
 import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.MotorGroup;
@@ -20,7 +20,7 @@ public class DriveSubsystem extends Subsystem {
     private MotorGroup left, right, strafe;
     private Servo ls,rs;
     private ExplosiveBNO055 imu;
-    private BNO055PIDController rc;
+    private ExplosivePIDController rc;
     private boolean PIDEnabled = false, gyroEnabled = false;
     private double PIDoutput;
 
@@ -48,7 +48,7 @@ public class DriveSubsystem extends Subsystem {
         this.rs = rs;
 
         this.imu = imu;
-        this.rc = new BNO055PIDController(imu);
+        this.rc = new ExplosivePIDController(imu);
 
         gyroEnabled = true;
         driveLog = new TelemetryLog(opmode);

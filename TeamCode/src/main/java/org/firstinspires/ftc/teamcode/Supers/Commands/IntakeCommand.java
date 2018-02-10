@@ -48,13 +48,6 @@ public class IntakeCommand extends Command {
         } else{
             beltToggle = false;
         }
-
-        if(mController.ly() > 0 && useBelt){intake.intakeLift(mController.ly()/2); }
-        else if(mController.rightBumper()){
-            intake.intakeLift(-0.5);
-        } else{
-            intake.intakeLift(0);
-        }
     }
 
     @Override
