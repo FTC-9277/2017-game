@@ -12,8 +12,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.CRServoGroup;
 import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.ExplosiveBNO055;
-import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.TelemetryLog;
 import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.MotorGroup;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.TelemetryLog;
 import org.firstinspires.ftc.teamcode.Supers.Subsystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.Supers.Subsystems.IntakeSubsystem;
 import org.firstinspires.ftc.teamcode.Supers.Subsystems.JewelSubsystem;
@@ -46,6 +46,7 @@ public class HazmatRobot {
     public IntakeSubsystem intake;
     public JewelSubsystem jewel;
 
+    
     public HazmatRobot(OpMode opmode){
         RobotLog = new TelemetryLog(opmode);
 

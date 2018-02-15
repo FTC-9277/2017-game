@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.FtcExplosivesPackage;
 
 /**
  * Created by FTC 9277 on 12/9/2017.
- * Rotational PID Controller for the REV integrated BNO055 IMU
  */
 public class ExplosivePIDController implements Runnable{
     ExplosivePIDEnabledHardware gyro;
