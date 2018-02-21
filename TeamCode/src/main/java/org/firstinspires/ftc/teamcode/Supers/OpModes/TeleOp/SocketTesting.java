@@ -9,6 +9,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
@@ -17,6 +20,7 @@ import java.net.Socket;
 
 @TeleOp(name = "Socket Test")
 public class SocketTesting extends OpMode {
+    ServerSocket server = null;
     Socket client = null;
     InputStream stream = null;
     InputStreamReader reader = null;
@@ -26,7 +30,8 @@ public class SocketTesting extends OpMode {
     @Override
     public void init() {
         try {
-            client = new Socket("192.168.49.164", 4321);
+            server = new ServerSocket(4321);
+            client = server.accept(); //new Socket("127.0.0.1", 4321); //TODO: put this in its own thread to prevent timeouts
             stream = client.getInputStream();
             reader = new InputStreamReader(stream);
             in = new BufferedReader(reader);
@@ -53,6 +58,9 @@ public class SocketTesting extends OpMode {
                 Log.d("Robot", "Received Data: kI: " + kI);
                 Log.d("Robot", "Received Data: kD: " + kD);
             }
+            telemetry.addData("Address", InetAddress.getLocalHost());
+            //telemetry.addData("Socket", InetAddress.getByName("VarunUltrabook"));
+            //telemetry.addData("ALL", InetAddress.getAllByName())
         } catch (IOException e) {
             e.printStackTrace();
         }
