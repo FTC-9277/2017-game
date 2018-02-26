@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Supers.OpModes.TeleOp;
+package org.firstinspires.ftc.teamcode.Supers.OpModes.TeleOp.Utility;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;

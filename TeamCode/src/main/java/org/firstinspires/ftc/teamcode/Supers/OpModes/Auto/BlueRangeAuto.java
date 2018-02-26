@@ -1,8 +1,10 @@
 package org.firstinspires.ftc.teamcode.Supers.OpModes.Auto;
 
+import android.graphics.Camera;
 import android.util.Log;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.vuforia.CameraDevice;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;

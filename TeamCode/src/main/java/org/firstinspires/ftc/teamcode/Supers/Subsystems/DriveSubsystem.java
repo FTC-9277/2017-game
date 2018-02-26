@@ -64,6 +64,10 @@ public class DriveSubsystem extends Subsystem {
         PIDEnabled = enabled;
     }
 
+    public void retunePID(double kP, double kI, double kD){
+        rc.retune(kP,kI,kD);
+    }
+
     public void closePID(){
         rc.resetPID();
         rc.close();

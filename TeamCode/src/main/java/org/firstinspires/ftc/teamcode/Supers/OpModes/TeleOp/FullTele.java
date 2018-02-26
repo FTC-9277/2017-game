@@ -1,7 +1,11 @@
 package org.firstinspires.ftc.teamcode.Supers.OpModes.TeleOp;
 
+import android.hardware.camera2.CameraDevice;
+
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.robotcore.external.ClassFactory;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.teamcode.Supers.Commands.DriveCommand;
 import org.firstinspires.ftc.teamcode.Supers.Commands.IntakeCommand;
 import org.firstinspires.ftc.teamcode.Supers.Commands.LiftCommand;
@@ -14,11 +18,11 @@ import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
  */
 @TeleOp(name = "Full Tele")
 public class FullTele extends ExplosiveTele {
-
     HazmatRobot robot;
     DriveCommand drive;
     LiftCommand lift;
     IntakeCommand intake;
+    VuforiaLocalizer vuforia;
 
     long current, last = 0;
     double lCurrent, rCurrent, lPrev = 0, rPrev = 0;
@@ -30,6 +34,14 @@ public class FullTele extends ExplosiveTele {
         drive = new DriveCommand(this,robot.drive);
         lift = new LiftCommand(this, robot.lift);
         intake = new IntakeCommand(this, robot.intake);
+
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
+
+        parameters.vuforiaLicenseKey = "Ae1zrnj/////AAAAGav1yQVpZUSKniMroT7r6iABdn4S2dvC3kr8kHPXmGVTUv+TPviY2luSPOvIb3766OLU7oSCOdj3mv92vurqm8ijBYuzI0lnp51aYSsHH3y4GBTw77Kpvav2XNkHJ1TtcUtou0aZH2hw4N5RrYKXXf+ahVWuXvUMJqU3ccVWCMxNA76qQfRTexbnryWrFftMXgM5+1QTR6srigPms0lW86MFJJ9AzwdB2WVbZe6PoEeiEgoOjd1/AAbTCMML2O7vRaM8eXCL1NS8SDZ3a2bJ6jopy/ChNkjMuQboWGn2A29XDcANIM+y28S+o0jfCWg7eMlai5HFdU0IZnPJ/efMbLsnddFyuGQNzihNS2ocx2mZ";
+
+        parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
+        this.vuforia = ClassFactory.createVuforiaLocalizer(parameters);
     }
 
     @Override

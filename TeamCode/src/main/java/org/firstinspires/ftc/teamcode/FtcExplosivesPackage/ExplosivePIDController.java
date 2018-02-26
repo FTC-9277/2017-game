@@ -56,6 +56,12 @@ public class ExplosivePIDController implements Runnable{
         PIDEnabled = true;
     }
 
+    public void retune(double kP, double kI, double kD){
+        this.kP = kP;
+        this.kI = kI;
+        this.kD = kD;
+    }
+
     /**
      * Define whether robot is turning
      * @param isTurning True if turning, false if not
