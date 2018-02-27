@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
 /**
  * Created by robotics9277 on 11/18/2017.
  */
-@TeleOp(name = "Range Test", group = "Experimental")
+@TeleOp(name = "Range Test ", group = "Experimental")
 public class RangeTest extends ExplosiveTele {
     HazmatRobot robot;
 

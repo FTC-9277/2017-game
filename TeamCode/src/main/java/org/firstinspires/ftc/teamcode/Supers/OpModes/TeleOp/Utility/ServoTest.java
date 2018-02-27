@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
 /**
  * Created by robotics9277 on 12/15/2017.
  */
-@TeleOp(name = "Servo Test")
+@TeleOp(name = "Servo Test ")
 public class ServoTest extends ExplosiveTele {
     Servo claw, arm;
     double clawPos, armPos;

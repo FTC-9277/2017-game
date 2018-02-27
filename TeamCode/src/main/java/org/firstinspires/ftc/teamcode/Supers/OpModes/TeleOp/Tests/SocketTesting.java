@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Supers.OpModes.TeleOp;
+package org.firstinspires.ftc.teamcode.Supers.OpModes.TeleOp.Tests;
 
 import android.util.Log;
 
@@ -18,7 +18,7 @@ import java.net.Socket;
  * Created by robotics9277 on 2/15/2018.
  */
 
-@TeleOp(name = "Socket Test")
+@TeleOp(name = "Socket Testing")
 public class SocketTesting extends OpMode {
     ServerSocket server = null;
     Socket client = null;

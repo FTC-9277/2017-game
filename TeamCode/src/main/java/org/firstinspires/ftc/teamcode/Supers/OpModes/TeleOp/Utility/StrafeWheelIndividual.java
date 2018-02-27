@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Supers.OpModes.TeleOp;
+package org.firstinspires.ftc.teamcode.Supers.OpModes.TeleOp.Utility;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
 /**
  * Created by robotics9277 on 12/15/2017.
  */
-@TeleOp(name = "Strafe Wheel Individual")
+@TeleOp(name = "Strafe Height Individual")
 public class StrafeWheelIndividual extends ExplosiveTele {
     HazmatRobot robot;
 

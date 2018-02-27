@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
 /**
  * Created by robotics9277 on 1/6/2018.
  */
-@TeleOp(name="Intake Test")
+@TeleOp(name="Intake Test ")
 public class IntakeTest extends ExplosiveTele {
     HazmatRobot robot;
     IntakeCommand intake;
