@@ -38,10 +38,7 @@ public class DriveTele extends ExplosiveTele {
 
     @Override
     public void bodyLoop() {
-        telemetry.addData("lsRange", robot.lsRange.getDistance(DistanceUnit.CM));
-        telemetry.addData("lfRange", robot.lfRange.getDistance(DistanceUnit.CM));
-        telemetry.addData("rsRange", robot.rsRange.getDistance(DistanceUnit.CM));
-        telemetry.addData("rfRange", robot.rfRange.getDistance(DistanceUnit.CM));
+        telemetry.addData("Latency", robot.imu.getLatency());
     }
 
     @Override

@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.CRServoGroup;
 import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.ExplosiveBNO055;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.ExplosiveNavX;
 import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.MotorGroup;
 import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.TelemetryLog;
 import org.firstinspires.ftc.teamcode.Supers.Subsystems.DriveSubsystem;
@@ -26,15 +27,15 @@ import org.firstinspires.ftc.teamcode.Supers.Subsystems.LiftSubsystem;
 public class HazmatRobot {
     private final int NAVX_DIM_I2C_PORT = 0;
     public ExplosiveBNO055 imu;
+    //public ExplosiveNavX imu;
     private boolean gyroInitialized, driveInitialized, liftInitialized, intakeInitialized, jewelInitialized;
 
     public MotorGroup left, right, strafe, liftMotors;
     public CRServoGroup ti, bi;
 
     public DcMotor fLeft, fRight, bLeft, bRight, lStrafe,rStrafe, lLift, rLift;
-    public Servo ll,rl,horizontal,vertical, ls, rs;
+    public Servo rl,horizontal,vertical, ls, rs;
     public CRServo rt,lt,rb,lb;
-    public AnalogInput pl,pr;
     public ColorSensor color;
     public DistanceSensor distance;
     public ModernRoboticsI2cRangeSensor lsRange, lfRange, rsRange, rfRange;
@@ -57,7 +58,7 @@ public class HazmatRobot {
         }
 
         if(liftInitialized){
-            lift = new LiftSubsystem(opmode, liftMotors, ll, rl);
+            lift = new LiftSubsystem(opmode, liftMotors, rl);
         }
 
         if(intakeInitialized){
@@ -70,8 +71,6 @@ public class HazmatRobot {
     }
 
     private void getHardware(OpMode opmode){
-
-
         //BNO055IMU imu = opmode.hardwareMap.get(BNO055IMU.class, "heck");
 
         //navx = opmode.hardwareMap.get(NavxMicroNavigationSensor.class, "navx");
@@ -82,6 +81,7 @@ public class HazmatRobot {
          */
         try{
                 imu = ExplosiveBNO055.getInstance(opmode,"imu");
+                //imu = ExplosiveNavX.getInstance(opmode, "navX");
 
                 gyroInitialized = true;
             } catch (Exception e){
@@ -123,7 +123,6 @@ public class HazmatRobot {
         try{
             lLift = opmode.hardwareMap.get(DcMotor.class, "lLift");
             rLift = opmode.hardwareMap.get(DcMotor.class, "rLift");
-            ll = opmode.hardwareMap.get(Servo.class, "ll");
             rl = opmode.hardwareMap.get(Servo.class, "rl");
             //pl = opmode.hardwareMap.get(AnalogInput.class, "pl");
             //pr = opmode.hardwareMap.get(AnalogInput.class, "pr");

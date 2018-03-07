@@ -14,14 +14,13 @@ import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.Subsystem;
 public class LiftSubsystem extends Subsystem {
     TelemetryLog LiftLog;
     MotorGroup liftMotors;
-    Servo ll, rl;
+    Servo ratchet;
 
-    public LiftSubsystem(OpMode opmode, MotorGroup liftMotors, Servo ll, Servo rl){
+    public LiftSubsystem(OpMode opmode, MotorGroup liftMotors, Servo rl){
         super(opmode);
 
         this.liftMotors = liftMotors;
-        this.ll = ll;
-        this.rl = rl;
+        this.ratchet = rl;
         LiftLog = new TelemetryLog(opmode);
     }
 
@@ -42,11 +41,9 @@ public class LiftSubsystem extends Subsystem {
 
     public void setLock(boolean locked){
         if(locked){
-            ll.setPosition(0.45); //0.4
-            rl.setPosition(0.35); //0.6
+            ratchet.setPosition(0.6); //0.6
         } else{
-            ll.setPosition(1);
-            rl.setPosition(0);
+            ratchet.setPosition(0);
         }
     }
 

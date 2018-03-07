@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.Supers.Misc;
 
-import android.util.Log;
-
 import java.io.Serializable;
 
 /**
@@ -20,7 +18,7 @@ public class PIDTunable implements Serializable{
         try {
             return d[i];
         } catch(Exception e){
-            Log.d("Robot", "Attempting to pull unindexed dashboard values");
+            //System.out.println("Attempting to pull unindexed dashboard values");
         }
         return 0;
     }

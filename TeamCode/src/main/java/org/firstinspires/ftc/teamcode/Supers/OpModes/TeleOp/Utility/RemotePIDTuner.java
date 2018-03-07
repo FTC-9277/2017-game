@@ -53,6 +53,6 @@ public class RemotePIDTuner extends ExplosiveTele {
 
     @Override
     public void exit() {
-
+        dash.close();
     }
 }

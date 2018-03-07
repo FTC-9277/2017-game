@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.ExplosivePIDController;
 import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.ExplosiveBNO055;
+import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.ExplosivePIDEnabledHardware;
 import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.TelemetryLog;
 import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.MotorGroup;
 import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.Subsystem;
@@ -19,7 +20,7 @@ public class DriveSubsystem extends Subsystem {
     private TelemetryLog driveLog;
     private MotorGroup left, right, strafe;
     private Servo ls,rs;
-    private ExplosiveBNO055 imu;
+    private ExplosivePIDEnabledHardware imu;
     private ExplosivePIDController rc;
     private boolean PIDEnabled = false, gyroEnabled = false;
     private double PIDoutput;
@@ -38,7 +39,7 @@ public class DriveSubsystem extends Subsystem {
         driveLog = new TelemetryLog(opmode);
     }
 
-    public DriveSubsystem(OpMode opmode, MotorGroup left, MotorGroup right, MotorGroup strafe, Servo ls, Servo rs, ExplosiveBNO055 imu){
+    public DriveSubsystem(OpMode opmode, MotorGroup left, MotorGroup right, MotorGroup strafe, Servo ls, Servo rs, ExplosivePIDEnabledHardware imu){
         super(opmode);
 
         this.left = left;

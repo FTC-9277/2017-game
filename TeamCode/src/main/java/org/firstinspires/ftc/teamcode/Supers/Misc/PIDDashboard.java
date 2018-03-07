@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -31,6 +32,7 @@ public class PIDDashboard implements Runnable {
 
     public PIDDashboard(OpMode opMode){
         this.opMode = opMode;
+        tunable = new PIDTunable(0,0,0);
 
         t = new Thread(this);
         t.start();
@@ -53,7 +55,7 @@ public class PIDDashboard implements Runnable {
     public void run() {
         try {
             server = new ServerSocket(4321);
-            client = server.accept(); //new Socket("127.0.0.1", 4321); //TODO: put this in its own thread to prevent timeouts
+            client = server.accept(); //new Socket("127.0.0.1", 4321);
             stream = client.getInputStream();
             reader = new InputStreamReader(stream);
             in = new BufferedReader(reader);
@@ -63,7 +65,7 @@ public class PIDDashboard implements Runnable {
 
         while(!finished){
             try {
-                if(in.ready() && stream.available() > 0){
+                if(stream.available() > 0){
                     try{
                         kP = Double.parseDouble(in.readLine());
                         kI = Double.parseDouble(in.readLine());
@@ -76,16 +78,19 @@ public class PIDDashboard implements Runnable {
 //                    opMode.telemetry.addData("kP" ,kP);
 //                    opMode.telemetry.addData("kI", kI);
 //                    opMode.telemetry.addData("kD", kD);
-                    Log.d("Robot", "Received Data: kP: " + kP);
-                    Log.d("Robot", "Received Data: kI: " + kI);
-                    Log.d("Robot", "Received Data: kD: " + kD);
+                    Log.d("Robot", "Received Data: kP: " + tunable.get(0));
+                    Log.d("Robot", "Received Data: kI: " + tunable.get(1));
+                    Log.d("Robot", "Received Data: kD: " + tunable.get(2));
                 }
-                opMode.telemetry.addData("Address", InetAddress.getLocalHost());
-                //telemetry.addData("Socket", InetAddress.getByName("VarunUltrabook"));
-                //telemetry.addData("ALL", InetAddress.getAllByName())
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        try {
+            server.close();
+            client.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
