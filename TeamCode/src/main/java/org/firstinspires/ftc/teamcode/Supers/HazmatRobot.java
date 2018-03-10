@@ -15,10 +15,12 @@ import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.ExplosiveBNO055;
 import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.ExplosiveNavX;
 import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.MotorGroup;
 import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.TelemetryLog;
+import org.firstinspires.ftc.teamcode.R;
 import org.firstinspires.ftc.teamcode.Supers.Subsystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.Supers.Subsystems.IntakeSubsystem;
 import org.firstinspires.ftc.teamcode.Supers.Subsystems.JewelSubsystem;
 import org.firstinspires.ftc.teamcode.Supers.Subsystems.LiftSubsystem;
+import org.firstinspires.ftc.teamcode.Supers.Subsystems.RelicSubsystem;
 
 /**
  * Created by Varun on 11/17/2017.
@@ -28,14 +30,14 @@ public class HazmatRobot {
     private final int NAVX_DIM_I2C_PORT = 0;
     public ExplosiveBNO055 imu;
     //public ExplosiveNavX imu;
-    private boolean gyroInitialized, driveInitialized, liftInitialized, intakeInitialized, jewelInitialized;
+    private boolean gyroInitialized, driveInitialized, liftInitialized, intakeInitialized, jewelInitialized, relicInitialized;
 
     public MotorGroup left, right, strafe, liftMotors;
     public CRServoGroup ti, bi;
 
     public DcMotor fLeft, fRight, bLeft, bRight, lStrafe,rStrafe, lLift, rLift;
-    public Servo rl,horizontal,vertical, ls, rs;
-    public CRServo rt,lt,rb,lb;
+    public Servo rl,horizontal,vertical, ls, rs, claw, arm;
+    public CRServo rt,lt,rb,lb, slide;
     public ColorSensor color;
     public DistanceSensor distance;
     public ModernRoboticsI2cRangeSensor lsRange, lfRange, rsRange, rfRange;
@@ -46,6 +48,7 @@ public class HazmatRobot {
     public LiftSubsystem lift;
     public IntakeSubsystem intake;
     public JewelSubsystem jewel;
+    public RelicSubsystem relic;
 
     
     public HazmatRobot(OpMode opmode){
@@ -67,6 +70,10 @@ public class HazmatRobot {
 
         if(jewelInitialized){
             jewel = new JewelSubsystem(opmode, horizontal, vertical, color, distance);
+        }
+
+        if(relicInitialized){
+            relic = new RelicSubsystem(opmode, slide, arm, claw);
         }
     }
 
@@ -179,6 +186,20 @@ public class HazmatRobot {
             rfRange = opmode.hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "rfRange");
         } catch (Exception e){
             RobotLog.add("Range sensor initialization  failed: " + e.getMessage());
+        }
+
+        /**
+         * Initialize Relic
+         */
+        try{
+            claw = opmode.hardwareMap.get(Servo.class, "claw");
+            arm = opmode.hardwareMap.get(Servo.class, "arm");
+            slide = opmode.hardwareMap.get(CRServo.class, "ll");
+
+            relicInitialized = true;
+        } catch (Exception e){
+            RobotLog.add("Relic initialization failed: " + e.getMessage());
+            relicInitialized = false;
         }
     }
 }

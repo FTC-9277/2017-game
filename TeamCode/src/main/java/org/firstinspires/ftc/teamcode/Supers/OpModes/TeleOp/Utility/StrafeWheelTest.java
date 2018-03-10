@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Supers.OpModes.TeleOp.Utility;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.ExplosiveTele;
+import org.firstinspires.ftc.teamcode.Supers.Commands.DriveCommand;
 import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
 
 /**
@@ -11,6 +12,7 @@ import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
 @TeleOp(name = "Strafe Wheel Test ")
 public class StrafeWheelTest extends ExplosiveTele {
     HazmatRobot robot;
+    //DriveCommand drive;
 
     double lHeight = 0, rHeight = 0;
     boolean aToggle = false, bToggle = false, xToggle = false, yToggle = false;
@@ -18,6 +20,7 @@ public class StrafeWheelTest extends ExplosiveTele {
     @Override
     public void initHardware() {
         robot = new HazmatRobot(this);
+        //drive = new DriveCommand(this, robot.drive);
     }
 
     @Override
@@ -27,12 +30,12 @@ public class StrafeWheelTest extends ExplosiveTele {
 
     @Override
     public void firstLoop() {
-
+        //drive.enable();
     }
 
     @Override
     public void bodyLoop() {
-        if(dController.a()){
+        if(mController.a()){
             if(!aToggle){
                 aToggle = true;
                 rHeight += 0.01;
@@ -41,7 +44,7 @@ public class StrafeWheelTest extends ExplosiveTele {
             aToggle = false;
         }
 
-        if(dController.b()){
+        if(mController.b()){
             if(!bToggle){
                 bToggle = true;
                 rHeight -= 0.01;
@@ -50,7 +53,7 @@ public class StrafeWheelTest extends ExplosiveTele {
             bToggle = false;
         }
 
-        if(dController.x()){
+        if(mController.x()){
             if(!xToggle){
                 xToggle = true;
                 rHeight += 0.001;
@@ -59,7 +62,7 @@ public class StrafeWheelTest extends ExplosiveTele {
             xToggle = false;
         }
 
-        if(dController.y()){
+        if(mController.y()){
             if(!yToggle){
                 yToggle = true;
                 rHeight -= 0.001;

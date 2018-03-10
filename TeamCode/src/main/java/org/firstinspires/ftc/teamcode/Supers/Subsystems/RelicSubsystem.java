@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.Subsystem;
 public class RelicSubsystem extends Subsystem {
     CRServo slide;
     Servo arm, claw;
-    final double CLAW_OPEN = 0, CLAW_CLOSED = 0, ARM_DOWN = 0, ARM_UP = 0;
+    final double CLAW_OPEN = 0.56, CLAW_CLOSED = 0.04, ARM_DOWN = 0.172, ARM_UP = 0.9;
 
 
    public RelicSubsystem(OpMode opMode, CRServo slide, Servo arm, Servo claw){

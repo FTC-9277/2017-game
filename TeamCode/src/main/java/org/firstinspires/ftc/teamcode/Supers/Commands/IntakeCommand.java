@@ -39,15 +39,6 @@ public class IntakeCommand extends Command {
     public void loop() {
         intake.intakeTop(mController.ly()/2);
         intake.intakeBottom(mController.ry()/2);
-
-        if(mController.a()){
-            if(!beltToggle){
-                beltToggle = true;
-                useBelt = !useBelt;
-            }
-        } else{
-            beltToggle = false;
-        }
     }
 
     @Override

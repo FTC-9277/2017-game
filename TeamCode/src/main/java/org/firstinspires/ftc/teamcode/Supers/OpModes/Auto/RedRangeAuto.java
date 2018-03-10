@@ -111,7 +111,7 @@ public class RedRangeAuto extends ExplosiveAuto {
 
         Utils.sleep(100);
 
-        while(robot.left.getPosition() < 1000 && robot.right.getPosition() < 1000 && opModeIsActive() && !isStopRequested()){
+        while(robot.left.getPosition() < 750 && robot.right.getPosition() < 750 && opModeIsActive() && !isStopRequested()){
             robot.drive.strafeArcadeDrive(0,-0.3,0);
 
             telemetry.addData("Left", robot.left.getPosition());
@@ -124,7 +124,7 @@ public class RedRangeAuto extends ExplosiveAuto {
         current = System.currentTimeMillis();
 
         robot.drive.setPIDTarget(180);
-        robot.drive.enablePID(true,0.014,0,0); //0.014
+        robot.drive.enablePID(true,0.012,0,0); //0.014
 
         while(System.currentTimeMillis() - current < 4000 && opModeIsActive() && !isStopRequested()){
             robot.drive.strafeArcadeDrive(0,0,0);
@@ -149,12 +149,14 @@ public class RedRangeAuto extends ExplosiveAuto {
 
             robot.strafe.reset();
 
+            current = System.currentTimeMillis();
+
             /*while(robot.strafe.getPosition() < 150 && opModeIsActive() && !isStopRequested()){
                 robot.drive.strafeArcadeDrive(-0.1,0,0);
                 TelemetryLog.d("Robot", "Strafe: "+ + robot.strafe.getPosition());
             }*/
 
-            while(range < rTarget){
+            while(range < rTarget && System.currentTimeMillis() - current < 4000){
                 range = robot.rsRange.getDistance(DistanceUnit.CM);
                 robot.drive.strafeArcadeDrive(-0.1,0,0);
                 //TelemetryLog.d("Robot", "Strafe: "+ + robot.strafe.getPosition() + " Distance: " + robot.rsRange.getDistance(DistanceUnit.CM));
@@ -187,7 +189,9 @@ public class RedRangeAuto extends ExplosiveAuto {
                 TelemetryLog.d("Robot", "Strafe: "+ + robot.strafe.getPosition());
             }*/
 
-            while(range < cTarget){
+            current = System.currentTimeMillis();
+
+            while(range < cTarget && System.currentTimeMillis() - current < 4000){
                 range = robot.rsRange.getDistance(DistanceUnit.CM);
                 robot.drive.strafeArcadeDrive(-0.1,0,0);
                 //TelemetryLog.d("Robot", "Strafe: "+ + robot.strafe.getPosition() + " Distance: " + robot.rsRange.getDistance(DistanceUnit.CM));
@@ -221,7 +225,9 @@ public class RedRangeAuto extends ExplosiveAuto {
                 TelemetryLog.d("Robot", "Strafe: "+ + robot.strafe.getPosition());
             }*/
 
-            while(range < lTarget){
+            current = System.currentTimeMillis();
+
+            while(range < lTarget && System.currentTimeMillis() - current < 4000){
                 range = robot.rsRange.getDistance(DistanceUnit.CM);
                 robot.drive.strafeArcadeDrive(-0.1,0,0);
                 //TelemetryLog.d("Robot", "Strafe: "+ + robot.strafe.getPosition() + " Distance: " + robot.rsRange.getDistance(DistanceUnit.CM));
@@ -269,7 +275,7 @@ public class RedRangeAuto extends ExplosiveAuto {
 //            robot.drive.strafeArcadeDrive(0,-0.05,0);
 //        }
 
-        while(robot.rfRange.getDistance(DistanceUnit.CM) > target && robot.lfRange.getDistance(DistanceUnit.CM) > target && System.currentTimeMillis() - current < 3000  && opModeIsActive() && !isStopRequested()){
+        while(robot.lfRange.getDistance(DistanceUnit.CM) > target && System.currentTimeMillis() - current < 3000  && opModeIsActive() && !isStopRequested()){
           robot.drive.strafeArcadeDrive(0,-0.05,0);
        }
 

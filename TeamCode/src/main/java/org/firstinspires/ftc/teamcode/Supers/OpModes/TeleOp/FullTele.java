@@ -5,12 +5,14 @@ import android.hardware.camera2.CameraDevice;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.teamcode.Supers.Commands.DriveCommand;
 import org.firstinspires.ftc.teamcode.Supers.Commands.IntakeCommand;
 import org.firstinspires.ftc.teamcode.Supers.Commands.LiftCommand;
 import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.Controller;
 import org.firstinspires.ftc.teamcode.FtcExplosivesPackage.ExplosiveTele;
+import org.firstinspires.ftc.teamcode.Supers.Commands.RelicCommand;
 import org.firstinspires.ftc.teamcode.Supers.HazmatRobot;
 
 /**
@@ -22,6 +24,7 @@ public class FullTele extends ExplosiveTele {
     DriveCommand drive;
     LiftCommand lift;
     IntakeCommand intake;
+    RelicCommand relic;
     VuforiaLocalizer vuforia;
 
     long current, last = 0;
@@ -34,6 +37,7 @@ public class FullTele extends ExplosiveTele {
         drive = new DriveCommand(this,robot.drive);
         lift = new LiftCommand(this, robot.lift);
         intake = new IntakeCommand(this, robot.intake);
+        relic = new RelicCommand(this, robot.relic);
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
@@ -55,6 +59,7 @@ public class FullTele extends ExplosiveTele {
         drive.enable();
         lift.enable();
         intake.enable();
+        relic.enable();
     }
 
     @Override
@@ -71,9 +76,15 @@ public class FullTele extends ExplosiveTele {
             robot.rb.setPower(-0.5);
         }
 
+        if(robot.rfRange.getDistance(DistanceUnit.CM) < 10){
+            com.vuforia.CameraDevice.getInstance().setFlashTorchMode(true);
+        } else{
+            com.vuforia.CameraDevice.getInstance().setFlashTorchMode(false);
+        }
+
         //telemetry.addData("Latency",robot.imu.getLatency());
 
-        current = System.currentTimeMillis();
+        /*current = System.currentTimeMillis();
         lCurrent = robot.left.getPosition();
         rCurrent = robot.right.getPosition();
 
@@ -84,7 +95,7 @@ public class FullTele extends ExplosiveTele {
 
         last = current;
         lPrev = lCurrent;
-        rPrev = rCurrent;
+        rPrev = rCurrent;*/
     }
 
     @Override
