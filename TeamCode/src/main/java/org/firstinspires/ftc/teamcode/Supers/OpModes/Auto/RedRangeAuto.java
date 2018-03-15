@@ -37,7 +37,7 @@ public class RedRangeAuto extends ExplosiveAuto {
 
     @Override
     public void initAction() {
-        robot.drive.setStrafeHeight(-0.035 + 0.07);
+        robot.drive.setStrafeHeight(-0.035 + 0.07 + 0.045);
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
@@ -62,7 +62,7 @@ public class RedRangeAuto extends ExplosiveAuto {
 
             robot.vertical.setPosition(0.8);
 
-            Utils.sleep(1000);
+            Utils.sleep(1500);
 
             if(robot.distance.getDistance(DistanceUnit.CM) < 20){
                 if(robot.color.red() > robot.color.blue()){
@@ -102,7 +102,7 @@ public class RedRangeAuto extends ExplosiveAuto {
 
         robot.drive.arcadeDrive(0,0);
 
-        robot.drive.setStrafeHeight(0.05 + 0.07);
+        robot.drive.setStrafeHeight(0.05 + 0.07 + 0.045);
 
         Utils.sleep(500);
 
@@ -142,7 +142,7 @@ public class RedRangeAuto extends ExplosiveAuto {
         robot.drive.isMoving(true);
 
         if(vuMark == RelicRecoveryVuMark.RIGHT){
-            robot.drive.setStrafeHeight(-0.05 + 0.07);
+            robot.drive.setStrafeHeight(-0.05 + 0.07 + 0.045);
             current = System.currentTimeMillis();
             Utils.sleep(1000);
             Log.d("Robot", "Timeout: " + (System.currentTimeMillis() - current));
@@ -164,7 +164,7 @@ public class RedRangeAuto extends ExplosiveAuto {
             Log.d("Robot", "Final Distance: " + range);
             robot.drive.strafeArcadeDrive(0,0,0);
 
-            robot.drive.setStrafeHeight(0.05 + 0.07);
+            robot.drive.setStrafeHeight(0.05 + 0.07 + 0.045);
 
             current = System.currentTimeMillis();
             while(System.currentTimeMillis() - current < 1000){
@@ -177,7 +177,7 @@ public class RedRangeAuto extends ExplosiveAuto {
             Utils.sleep(250);
             score();
         } else if(vuMark == RelicRecoveryVuMark.CENTER || vuMark == RelicRecoveryVuMark.UNKNOWN){
-            robot.drive.setStrafeHeight(-0.05 + 0.07);
+            robot.drive.setStrafeHeight(-0.05 + 0.07 + 0.045);
             current = System.currentTimeMillis();
             Utils.sleep(1000);
             Log.d("Robot", "Timeout: " + (System.currentTimeMillis() - current));
@@ -199,7 +199,7 @@ public class RedRangeAuto extends ExplosiveAuto {
             Log.d("Robot", "Final Distance: " + range);
             robot.drive.strafeArcadeDrive(0,0,0);
 
-            robot.drive.setStrafeHeight(0.05 + 0.07);
+            robot.drive.setStrafeHeight(0.05 + 0.07 + 0.045);
 
             current = System.currentTimeMillis();
             while(System.currentTimeMillis() - current < 1000){
@@ -213,7 +213,7 @@ public class RedRangeAuto extends ExplosiveAuto {
             score();
         }
         else if(vuMark == RelicRecoveryVuMark.LEFT){
-            robot.drive.setStrafeHeight(-0.05 + 0.07);
+            robot.drive.setStrafeHeight(-0.05 + 0.07 + 0.045);
             current = System.currentTimeMillis();
             Utils.sleep(1000);
             Log.d("Robot", "Timeout: " + (System.currentTimeMillis() - current));
@@ -235,7 +235,7 @@ public class RedRangeAuto extends ExplosiveAuto {
             Log.d("Robot", "Final Distance: " + range);
             robot.drive.strafeArcadeDrive(0,0,0);
 
-            robot.drive.setStrafeHeight(0.05 + 0.07);
+            robot.drive.setStrafeHeight(0.05 + 0.07 + 0.045);
 
             current = System.currentTimeMillis();
             while(System.currentTimeMillis() - current < 1000){

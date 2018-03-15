@@ -46,17 +46,17 @@ public class DriveCommand extends Command {
 
 
         if(dController.rx() > 0.3){
-            drive.setStrafeHeight(0.045); //-0.05
+            drive.setStrafeHeight(0.1); //-0.05
             //TelemetryLog.d("Robot", "Strafe Height: 0.1");
         } else if(dController.rightTrigger() > 0.3){
-            drive.setStrafeHeight(0.04); //-0.04
+            drive.setStrafeHeight(0.08); //-0.04
             //TelemetryLog.d("Robot", "Strafe Height: 0.11");
         } else if(dController.leftTrigger() > 0.3){
-            drive.setStrafeHeight(0.14); //0.05
+            drive.setStrafeHeight(0.195); //0.05
             //TelemetryLog.d("Robot", "Strafe Height: 0.2");
         } else{
-            if(!balancingMode) drive.setStrafeHeight(0.05); //-0.03
-            else drive.setStrafeHeight(0.08); //0
+            if(!balancingMode) drive.setStrafeHeight(0.105); //-0.03
+            else drive.setStrafeHeight(0.135); //0
             //TelemetryLog.d("Robot", "Strafe Height: 0.12/0.13");
         }
 

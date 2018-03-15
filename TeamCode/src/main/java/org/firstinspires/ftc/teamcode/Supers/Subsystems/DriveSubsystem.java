@@ -25,7 +25,7 @@ public class DriveSubsystem extends Subsystem {
     private boolean PIDEnabled = false, gyroEnabled = false;
     private double PIDoutput;
 
-    private final double STRAFE_MAX_HEIGHT = 0.5, STRAFE_MIN_HEIGHT = -0.5, STRAFE_OFFSET = 0.095;
+    private final double STRAFE_MAX_HEIGHT = 0.5, STRAFE_MIN_HEIGHT = -0.5, STRAFE_OFFSET = 0.075;
 
     public DriveSubsystem(OpMode opmode, MotorGroup left, MotorGroup right, MotorGroup strafe, Servo ls, Servo rs){
         super(opmode);
